@@ -1,0 +1,28 @@
+{
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cSpell.words": [
+    "Authed",
+    "ckies",
+    "clsx",
+    "datetime",
+    "languagedetector",
+    "Lngs",
+    "lucide",
+    "nextjs",
+    "sonner",
+    "SQUEEZY",
+    "Supabase",
+    "superjson",
+    "tanstack",
+    "TRPC",
+    "UMAMI",
+    "xdevbase"
+  ],
+  "deno.enablePaths": [
+    "supabase/functions"
+  ],
+  "deno.lint": true,
+  "deno.unstable": true
+}

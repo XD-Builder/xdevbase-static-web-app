@@ -1,5 +1,4 @@
 import { unstable_noStore } from "next/cache";
-import Image from "next/image";
 import { CurrentTimeFromAPI } from "./components/currentTimeFromAPI";
 
 export default function Home() {
