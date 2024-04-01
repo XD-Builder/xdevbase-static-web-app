@@ -1,9 +1,64 @@
-import { ReactNode } from "react";
+"use client";
 
-export default function AuthLayout({ children }: { children: ReactNode }) {
+import Link from "next/link";
+import { type PropsWithChildren } from "react";
+import { useTranslation } from "react-i18next";
+import { Icons } from "@/components/Icons";
+import { Navbar } from "@/components/Navbar/Navbar";
+import { Button } from "@/components/ui/button";
+import { withPublicRoute } from "@/providers/AuthProvider/withPublicRoute";
+import { createClient } from "@/utils/supabase/client";
+
+const testAccounts = [
+  { email: "random@gmail.com", password: "testPassword" },
+  { email: "random2@gmail.com", password: "testPassword2" },
+];
+
+const Layout = ({ children }: PropsWithChildren) => {
+  const { t } = useTranslation();
+
   return (
-    <div className="flex min-h-screen flex-col justify-center py-12 sm:px-6 lg:px-8">
-      {children}
-    </div>
+    <>
+      <Navbar />
+      <div className="container relative flex h-full w-full grow flex-col items-center justify-center">
+        <Link href="/">
+          <Button
+            variant="ghost"
+            className="absolute left-4 top-4 md:left-8 md:top-8"
+          >
+            <>
+              <Icons.chevronLeft className="mr-2 h-4 w-4" />
+              {t("common.backButton")}
+            </>
+          </Button>
+        </Link>
+        {children}
+        {/* test account only shows up in development */}
+        {process.env.NEXT_PUBLIC_ENV !== "production" && (
+          <div className="flex flex-col gap-2">
+            {testAccounts.map((account, index) => (
+              <div key={index} className="flex flex-col items-start ">
+                <button className="hover:underline"
+                  onClick={() => {
+                    void createClient().auth.signInWithPassword(account);
+                  }}
+                >
+                  Login {account.email}
+                </button>
+                <button className="hover:underline"
+                  onClick={() => {
+                    void createClient().auth.signUp(account);
+                  }}
+                >
+                  Register {account.email}
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
-}
+};
+
+export default withPublicRoute(Layout);

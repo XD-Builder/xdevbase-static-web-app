@@ -14,9 +14,9 @@ export const env = createEnv({
     //     (str) => !str.includes("YOUR_MYSQL_URL_HERE"),
     //     "You forgot to change the default URL"
     //   ),
-    // NODE_ENV: z
-    //   .enum(["development", "test", "production"])
-    //   .default("development"),
+    NODE_ENV: z
+      .enum(["development", "test", "production"])
+      .default("development"),
     // SUPABASE_SERVICE_KEY: z.string().min(1),
     // DIRECT_URL: z.string().min(1),
     // LEMON_SQUEEZY_API_KEY: z.string().min(1),
@@ -36,6 +36,9 @@ export const env = createEnv({
     NEXT_PUBLIC_UMAMI_WEBSITE_ID: z.string().optional(),
     NEXT_PUBLIC_UMAMI_URL: z.string().optional(),
     NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: z.string().optional(),
+    NEXT_PUBLIC_ENV: z
+      .string()
+      .or(z.literal("production"), z.literal("development")),
   },
 
   /**
@@ -46,6 +49,7 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
     DIRECT_URL: process.env.DIRECT_URL,
+    NEXT_PUBLIC_ENV: process.env.NEXT_PUBLIC_ENV,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     SUPABASE_SERVICE_KEY: process.env.SUPABASE_SERVICE_KEY,
