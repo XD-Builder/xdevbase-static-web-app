@@ -45,16 +45,26 @@ export async function generateMetadata(): Promise<Metadata> {
   } satisfies Metadata;
 }
 
+/**
+ * The root layout component for the application.
+ * This component wraps several key providers to the children components. These include:
+ * {@link AuthProvider} sets and manages the state for the current user.
+ * {@link Providers} configures {@link I18NextProvider} for setting up the initial language 
+ * using browser language detection, {@link ThemeProvider} for setting up the theme and its 
+ * useTheme hook, and {@link AnalyticsProvider} for setting up the analytics provider.
+ * {@link Toaster} for creating useToast hook and displaying and dismissing toast messages.
+ * and {@link TailwindIndicator} to indicate tailwind is working and the screen size mapped.
+ */
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const initialLanguage = detectLanguage(); // Detect on server, pass to client
+  const initialLanguage = detectLanguage(); 
   const user = await getServerUser();
 
   return (
-      <html lang={initialLanguage}>
+      <html lang={initialLanguage} suppressHydrationWarning={true}>
         <head />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <body

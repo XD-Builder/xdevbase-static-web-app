@@ -35,6 +35,18 @@ const setCookies = (session: Session | null) => {
   }
 };
 
+/**
+ * Create a new AuthProvider component that uses the current user session.
+ * It will first set the user, session and loading state to the initial values.
+ * It will also refresh session and listen for state changes.
+ * For every re-render of this or its parent components due to props or states
+ * changes, the cleanup and set up code will provide a new user session.
+ * The Auth context provider will then provide those values to all children
+ * through useContext(AuthContext) call, which is convenient for wrapped
+ * through {@link useUser} hook.
+ *  
+ * For more, see https://react.dev/reference/react/useEffect
+ */
 export const AuthProvider = ({
   user: initialUser,
   session: initialSession,

@@ -52,6 +52,12 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        landing: {
+          primary: "#ECA34F",
+          secondary: "#797979",
+          text: "#1C1C1C",
+          accent: "#7824CC",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

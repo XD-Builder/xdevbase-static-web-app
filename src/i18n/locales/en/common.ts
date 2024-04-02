@@ -212,11 +212,11 @@ const messages = {
   landingPage: {
     backgroundAlt: "Landing background image",
     section1: {
-      header: "Innovative Online",
-      headerHighlight: "Menu",
-      headerSuffix: "for Your Restaurant",
+      header: "Real Estate Rental & Management",
+      headerHighlight: "MarketPlace",
+      headerSuffix: "For Everyone",
       description:
-        "Create and customize online menus and get your own QR codes to provide customers with convenience and quick ordering",
+        "Set up and manage your home, townhouse or apartment for free! Only pay for the services you need.",
       getStarted: "Get Started",
       learnMore: "Learn More",
       featuredOn: "Featured on",
@@ -226,30 +226,18 @@ const messages = {
     },
     section2: {
       showcaseAlt: "Showcase image",
-      featuresTitle: "Our Powerful Features...",
-      restaurantSuccess: "Your Restaurant Success!",
+      featuresTitle: "Our Innovative Solution...",
+      businessSuccess: "Your Investment Success!",
       discoverWhy:
-        "Discover why our project is the perfect solution for your restaurant",
-      createCustomize: "Create and customize",
-      onlineMenus: "online menus",
-      onlineMenusDescription:
-        "Create attractive online menus in a few easy steps. Customize them to your style and seasonal menu changes, without the need for technical knowledge.",
-      generateQR: "Generate",
-      qrCodes: "QR codes",
-      streamlinedOrders: "for streamlined orders",
-      qrCodesDescription:
-        "Generate unique QR codes that allow your customers to scan the menu and place touchless orders. This speeds up service and enhances safety.",
-      easyMenu: "Easy menu",
-      priceManagement: "and price management",
-      menuPriceManagementDescription:
-        "Control your menu and prices from anywhere. Update them in real-time, responding to market and seasonal changes.",
-      manageOnlineOrders: "Manage online orders",
-      manageOnlineOrdersDescription:
-        "By collecting data on orders and customer preferences, you can customize menus, promotional offers, and services to their needs, leading to loyalty and profits.",
-      enhanceCustomerService: "Enhance customer service",
-      enhanceCustomerServiceDescription:
-        "Improve the quality of service with an easier and more intuitive online menu. Your customers gain faster and more personalized access to dishes.",
-      showcaseMobileAlt: "Showcase mobile image",
+        "Discover why our platform is perfect for your real estate business.",
+      heading1: "Create and automate your",
+      heading1Suffix: "property management",
+      heading1Description:
+        "Create properties under our management app, use our automation tools, invite your teams or hire someone from our marketplace to streamline your business.",
+      heading2: "Track your finance and get paid ",
+      heading2Suffix: "on time",
+      heading2Description:
+        "Our payment processing system will facilitate transactions seamless so you can get paid on time. We are working to provide beautifully designed dashboards and invoices for tax purposes.",
     },
     section3: {
       pricingTitle: "Pricing plans",
@@ -263,23 +251,34 @@ const messages = {
         monthly: "Monthly",
         annually: "Yearly",
       },
-      standard: {
-        name: "Standard",
-        description: "Innovate your dining experience with online menus.",
-        feature1: "Create menu for your restaurant",
-        feature2: "Show macronutrients, allergens, and more",
-        feature3: "Menu Translations",
+      basic: {
+        name: "Basic",
+        description: "Automate real estate management.",
+        feature1: "Create and manage 1 property with automation",
+        feature2: "Connect up to three managers to your property",
+        feature3: "Use Free Automation and Management Marketplace",
+      },
+      pro: {
+        name: "Pro",
+        price: "$5.99",
+        yearlyPrice: "$49.99",
+        description:
+          "Enhance your real estate management ",
+        feature1: "Create and manage up to 5 properties with automation",
+        feature2: "Connect up to 10 managers to your property",
+        feature3: "24/7 Customer Support",
+        extraBenefits: "Everything in Basic plan, plus",
       },
       enterprise: {
         name: "Enterprise",
         price: "Contact Us",
         yearlyPrice: "Contact Us",
         description:
-          "Manage all restaurants restaurant with our powerful features and integrations.",
-        feature1: "Custom domain",
-        feature2: "Personalized branding",
-        feature3: "24/7 Support",
-        extraBenefits: "Everything in free plan, plus",
+          "Manage all your properties with ease",
+        feature1: "Higher limit on properties and managers",
+        feature2: "AI powered analytics and insights",
+        feature3: "Dedicated 24/7 support",
+        extraBenefits: "Everything in Pro plan, plus",
       },
     },
   },
@@ -426,9 +425,9 @@ const messages = {
     },
   },
   contactUsCard: {
-    title: `Provide us with your current menu, and we'll handle everything—from design and integration to setup.`,
+    title: `Set up your properties or join a property group now.`,
     subtitle:
-      "Our team stands ready to assist you. Trust in our Menu QR Creator service; we'll do it all for you, crafting the ultimate menu experience with seamless QR integration and real-time updates.",
+      "We offer a comprehensive solution for streamlined real estate rental management, providing a one-stop shop experience. Additionally, we're developing a marketplace to cater to all your property needs. Our dedicated team is available to assist with any inquiries you may have. Don't hesitate to get in touch with us.",
     contactUs: "Contact us:",
   },
   affiliates: {

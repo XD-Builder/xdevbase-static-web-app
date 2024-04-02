@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Poppins } from "next/font/google";
 import heroImage from "@/assets/hero.png";
 import showcase from "@/assets/showcase.png";
-import showcaseMobile from "@/assets/showcaseMobile.png";
 import Link from "next/link";
 import { Footer } from "./molecules/Footer";
 import { PricingSection } from "./molecules/PricingSection";
@@ -21,9 +20,9 @@ export const LandingPage = async () => {
   return (
     <>
       <Navbar />
-      <div className="fixed -z-10 h-full w-screen opacity-20">
+      <div className="fixed -z-10 h-full w-screen opacity-30">
         <Image
-          src="/images/landing-bg.jpeg"
+          src="/landing-bg.png"
           alt={t("landingPage.backgroundAlt")}
           fill
           sizes="100vw"
@@ -52,7 +51,7 @@ export const LandingPage = async () => {
                   {t("landingPage.section1.getStarted")}
                 </Button>
               </Link>
-              <Link href="/login">
+              <Link href="https://xdevbase.com/">
                 <Button variant="outline">
                   {t("landingPage.section1.learnMore")}
                 </Button>
@@ -60,7 +59,7 @@ export const LandingPage = async () => {
             </div>
             <div className="flex flex-col  gap-2 lg:flex-row">
               <a
-                href="https://www.producthunt.com/posts/feastqr?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-feastqr"
+                href="https://www.producthunt.com/posts/xdevbase?utm_source=badge-featured&utm_medium=badge&utm_souce=xdevbase"
                 target="_blank"
                 className="group flex w-fit items-center gap-3 rounded-xl bg-landing-text py-3 pl-4 pr-8 text-white hover:bg-black"
               >
@@ -77,7 +76,7 @@ export const LandingPage = async () => {
                 </div>
               </a>
               <a
-                href="https://tryhards.space/"
+                href="https://xdevbase.com/"
                 target="_blank"
                 className="group flex w-fit items-center gap-3 rounded-xl bg-landing-text py-3 pl-4 pr-8 text-white hover:bg-black"
               >
@@ -88,7 +87,7 @@ export const LandingPage = async () => {
                   <span className="text-xs uppercase">
                     {t("landingPage.section1.credit")}
                   </span>
-                  <span className="leading-tight">Tryhards Inc</span>
+                  <span className="leading-tight">XDevBase LLC</span>
                 </div>
               </a>
             </div>
@@ -111,7 +110,7 @@ export const LandingPage = async () => {
           <div className=" text-center lg:w-[37%] lg:text-left">
             <h1 className="text-5xl font-bold text-landing-text lg:text-6xl">
               {t("landingPage.section2.featuresTitle")} <br />
-              {t("landingPage.section2.restaurantSuccess")}
+              {t("landingPage.section2.businessSuccess")}
             </h1>
           </div>
         </section>
@@ -122,68 +121,28 @@ export const LandingPage = async () => {
           <ul className="mx-auto flex w-[80%] flex-col items-center gap-8 lg:mx-0 lg:w-full lg:flex-row lg:items-start">
             <li className="flex-1">
               <h3 className="mb-4 text-center text-3xl text-landing-text">
-                {t("landingPage.section2.createCustomize")}{" "}
+                {t("landingPage.section2.heading1")}{" "}
                 <span className="underline decoration-landing-primary underline-offset-0">
-                  {t("landingPage.section2.onlineMenus")}
+                  {t("landingPage.section2.heading1Suffix")}
                 </span>
               </h3>
               <p className="text-justify font-light text-landing-secondary">
-                {t("landingPage.section2.onlineMenusDescription")}
+                {t("landingPage.section2.heading1Description")}
               </p>
             </li>
-            <li className="flex-1">
+          <li className="flex-1">
               <h3 className="mb-4 text-center text-3xl text-landing-text">
-                {t("landingPage.section2.generateQR")}{" "}
-                <span className="underline decoration-landing-accent underline-offset-0">
-                  {t("landingPage.section2.qrCodes")}
-                </span>{" "}
-                {t("landingPage.section2.streamlinedOrders")}
-              </h3>
-              <p className="text-justify font-light text-landing-secondary">
-                {t("landingPage.section2.qrCodesDescription")}
-              </p>
-            </li>
-            <li className="flex-1">
-              <h3 className="mb-4 text-center text-3xl text-landing-text">
+                {t("landingPage.section2.heading2")}
                 <span className="underline decoration-landing-primary underline-offset-0">
-                  {t("landingPage.section2.easyMenu")}
+                  {t("landingPage.section2.heading2Suffix")}
                 </span>{" "}
-                {t("landingPage.section2.priceManagement")}
               </h3>
               <p className="text-justify font-light text-landing-secondary">
-                {t("landingPage.section2.menuPriceManagementDescription")}
+                {t("landingPage.section2.heading2Description")}
               </p>
             </li>
           </ul>
           <hr className="border-landing-secondary" />
-          <div className="flex flex-col-reverse items-center justify-between gap-8 lg:flex-row lg:gap-0">
-            <ul className="w-[80%] space-y-16 lg:w-1/2">
-              <li>
-                <h3 className="mb-2 text-center text-3xl text-landing-text underline decoration-landing-accent underline-offset-2 lg:text-left">
-                  {t("landingPage.section2.manageOnlineOrders")}
-                </h3>
-                <p className="mx-auto w-3/4 text-justify  font-light text-landing-secondary lg:mx-0">
-                  {t("landingPage.section2.manageOnlineOrdersDescription")}
-                </p>
-              </li>
-              <li>
-                <h3 className="mb-2 text-center text-3xl text-landing-text underline decoration-landing-primary underline-offset-2 lg:text-left">
-                  {t("landingPage.section2.enhanceCustomerService")}
-                </h3>
-                <p className="mx-auto w-3/4 text-justify font-light  text-landing-secondary lg:mx-0">
-                  {t("landingPage.section2.enhanceCustomerServiceDescription")}
-                </p>
-              </li>
-            </ul>
-            <Image
-              src={showcaseMobile}
-              alt={t("landingPage.section2.showcaseMobileAlt")}
-              sizes="100%"
-              height={485}
-              width={330}
-              className=""
-            />
-          </div>
         </section>
         <PricingSection />
       </main>

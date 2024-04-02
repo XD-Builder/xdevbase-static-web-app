@@ -12,14 +12,14 @@ export function PricingSection() {
   const { t } = useTranslation();
   const pricingOptions = [
     {
-      price: "$6.99",
-      yearlyPrice: "$59.99",
-      name: t("landingPage.pricing.standard.name"),
-      description: t("landingPage.pricing.standard.description"),
+      price: "Free",
+      yearlyPrice: "Free",
+      name: t("landingPage.pricing.basic.name"),
+      description: t("landingPage.pricing.basic.description"),
       features: [
-        t("landingPage.pricing.standard.feature1"),
-        t("landingPage.pricing.standard.feature2"),
-        t("landingPage.pricing.standard.feature3"),
+        t("landingPage.pricing.basic.feature1"),
+        t("landingPage.pricing.basic.feature2"),
+        t("landingPage.pricing.basic.feature3"),
       ],
       backgroundColor: "#FFFFFF",
       buttonColor: "bg-[F2B53C]/10",
@@ -27,7 +27,24 @@ export function PricingSection() {
       tagColor: "bg-gray-200",
       tagTextColor: "text-black",
     },
-
+    {
+      name: t("landingPage.pricing.pro.name"),
+      price: t("landingPage.pricing.pro.price"),
+      yearlyPrice: t("landingPage.pricing.pro.yearlyPrice"),
+      description: t("landingPage.pricing.pro.description"),
+      features: [
+        t("landingPage.pricing.pro.feature1"),
+        t("landingPage.pricing.pro.feature2"),
+        t("landingPage.pricing.pro.feature3"),
+      ],
+      extraBenefits: t("landingPage.pricing.pro.extraBenefits"),
+      backgroundColor: "#ffffff",
+      borderColor: "#00FF00",
+      buttonColor: "bg-[#00FF00]",
+      buttonTextColor: "text-white",
+      tagColor: "bg-gray-200",
+      tagTextColor: "text-black",
+    },
     {
       name: t("landingPage.pricing.enterprise.name"),
       price: t("landingPage.pricing.enterprise.price"),
@@ -62,7 +79,7 @@ export function PricingSection() {
         <div className="mt-8 flex justify-center">
           <PricingToggle enabled={enabled} setEnabled={setEnabled} />
         </div>
-        <div className="pricing-card mx-auto grid w-full max-w-3xl gap-6 px-10 py-8 md:grid-cols-2 lg:px-14 lg:py-12 lg:pb-20 lg:pt-8 xl:px-2">
+        <div className="pricing-card mx-auto grid w-full max-w-3xl gap-6 px-10 py-8 md:grid-cols-3 lg:px-14 lg:py-12 lg:pb-20 lg:pt-8 xl:px-2">
           {pricingOptions.map((option, index) => (
             <div
               key={index}
