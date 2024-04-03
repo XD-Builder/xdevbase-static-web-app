@@ -3,6 +3,7 @@ import React from "react";
 
 import { UserAuthForm } from "./molecules/UserAuthForm";
 import { useServerTranslation } from "@/i18n";
+import { Separator } from "@/components/ui/separator";
 
 const ContactUsCard = async () => {
   const { t } = await useServerTranslation();
@@ -18,18 +19,22 @@ const ContactUsCard = async () => {
   );
 };
 
+/**
+ * The login page has the login form along with links to register and reset-password.
+ */
 export const Login = async () => {
   const { t } = await useServerTranslation();
 
   return (
     <div className="mx-auto flex w-full flex-col items-center justify-center gap-4 lg:flex-row lg:gap-40">
-      <div className=" flex  flex-col justify-center gap-6 sm:w-[350px]">
+      <div className="flex flex-col justify-center gap-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">
             {t("login.title")}
           </h1>
         </div>
         <UserAuthForm />
+        <Separator />
         <div className="flex flex-col items-center justify-center gap-2">
           <Link
             className="text-sm font-medium text-secondary-foreground hover:underline"

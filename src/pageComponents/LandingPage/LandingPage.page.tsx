@@ -14,6 +14,12 @@ const poppins = Poppins({
   subsets: ["latin-ext"],
 });
 
+/**
+ * LandingPage component that displays the landing page of the application.
+ * This component includes the Navbar, hero section, features section, and pricing section.
+*
+ * @returns rendered LandingPage component
+ */
 export const LandingPage = async () => {
   const { t } = await useServerTranslation();
 

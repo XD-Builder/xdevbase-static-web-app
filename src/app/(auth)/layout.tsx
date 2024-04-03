@@ -7,7 +7,7 @@ import { Icons } from "@/components/Icons";
 import { Navbar } from "@/components/Navbar/Navbar";
 import { Button } from "@/components/ui/button";
 import { withPublicRoute } from "@/providers/AuthProvider/withPublicRoute";
-import { createClient } from "@/utils/supabase/client";
+import { supabase } from "@/utils/supabase/supabaseClient";
 
 const testAccounts = [
   { email: "random@gmail.com", password: "testPassword" },
@@ -20,7 +20,7 @@ const Layout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <Navbar />
-      <div className="container relative flex h-full w-full grow flex-col items-center justify-center">
+      <div className="container relative flex h-full w-full grow-1/2 flex-col items-center justify-center">
         <Link href="/">
           <Button
             variant="ghost"
@@ -40,14 +40,14 @@ const Layout = ({ children }: PropsWithChildren) => {
               <div key={index} className="flex flex-col items-start ">
                 <button className="hover:underline"
                   onClick={() => {
-                    void createClient().auth.signInWithPassword(account);
+                    void supabase().auth.signInWithPassword(account);
                   }}
                 >
                   Login {account.email}
                 </button>
                 <button className="hover:underline"
                   onClick={() => {
-                    void createClient().auth.signUp(account);
+                    void supabase().auth.signUp(account);
                   }}
                 >
                   Register {account.email}

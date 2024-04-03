@@ -3,7 +3,7 @@ import { Inter, Roboto } from "next/font/google";
 import { detectLanguage, useServerTranslation } from "@/i18n";
 import "./globals.css";
 import { getServerUser } from "@/utils/auth";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 import { AuthProvider } from "@/providers/AuthProvider/AuthProvider";
 import { Providers } from "@/providers";
 import { Toaster } from "@/components/ui/toaster";
@@ -61,6 +61,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const initialLanguage = detectLanguage(); 
+  // Retrieve server side cookie set for the current user.
+  // If the user is already signed in and has a cookie, then the user is returned.
   const user = await getServerUser();
 
   return (

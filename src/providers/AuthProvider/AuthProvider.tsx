@@ -9,7 +9,7 @@ import React, {
 } from "react";
 
 import { type Session, type User } from "@supabase/supabase-js";
-import { createClient } from '@/utils/supabase/client'
+import { supabase } from '@/utils/supabase/supabaseClient'
 
 export const AuthContext = createContext<{
   user: User | null;
@@ -46,6 +46,10 @@ const setCookies = (session: Session | null) => {
  * through {@link useUser} hook.
  *  
  * For more, see https://react.dev/reference/react/useEffect
+ * Note: all of the below code are executed on the client side. The sessions are passed
+ * in for the first time when the server renders and the auth state changes are listened.
+ * This means that if a user is logged, the auth state will change and the listener will
+ * execute, leading to a new session, cookie and user being set. 
  */
 export const AuthProvider = ({
   user: initialUser,
@@ -63,8 +67,9 @@ export const AuthProvider = ({
   const [isLoading, setIsLoading] = useState(!initialUser);
 
   useEffect(() => {
-    const client = createClient();
+    const client = supabase();
 
+    // If the 
     void client 
       .auth.getSession()
       .then(({ data: { session } }) => {

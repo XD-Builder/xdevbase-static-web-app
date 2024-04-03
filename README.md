@@ -20,6 +20,11 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+
+## Folder Structures
+* src/assets
+  * This folder is for statically imported local images. Next.js will automatically determing the width and height of the image based on the imported file. These values are used to prevent Cumulative Layout Shift while the image is loading. See more detail [here](https://nextjs.org/docs/app/building-your-application/optimizing/images#local-images).
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

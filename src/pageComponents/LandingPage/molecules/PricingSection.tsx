@@ -7,6 +7,15 @@ import { PricingToggle } from "./PricingToggle";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 
+/**
+ * Defines pricing options for the pricing section.
+ * It renders the pricing section using the definitions. The enabled
+ * state variable is managed by the pricing toggle component to 
+ * switch between monthly and yearly pricing, allowing this
+ * component to re-render based on the enabled variable.
+ * 
+ * @returns 
+ */
 export function PricingSection() {
   const [enabled, setEnabled] = useState(false);
   const { t } = useTranslation();

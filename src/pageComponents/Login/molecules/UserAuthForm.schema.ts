@@ -2,6 +2,12 @@ import { type TFunction } from "i18next";
 import { z } from "zod";
 import { type ZodReturnType } from "@/utils/types";
 
+/**
+ * Login form validation schema
+ * 
+ * @param translate translate function from i18next
+ * @returns 
+ */
 export const loginValidationSchema = (translate: TFunction) =>
   z.object({
     email: z.string().email(),

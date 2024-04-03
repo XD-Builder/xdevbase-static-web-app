@@ -38,6 +38,7 @@ const messages = {
     passwordLengthValidation: "Password must be at least 8 characters long",
     passwordUppercaseValidation: "Password must contain an uppercase letter",
     passwordLowercaseValidation: "Password must contain a lowercase letter",
+    passwordNumberValidation: "Password must contain a number",
     passwordConfirmationValidation: "Passwords must match",
     confirmYourEmail: "Confirm your email",
   },

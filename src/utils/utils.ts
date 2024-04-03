@@ -7,11 +7,11 @@ export function asOptionalField<T extends z.ZodTypeAny>(schema: T) {
 }
 
 enum ErrorMessages {
-  imageWidthTooSmall = "Image width is not sufficent",
-  imageHeightTooSmall = "Image height is not sufficent",
+  imageWidthTooSmall = "Image width is not sufficient",
+  imageHeightTooSmall = "Image height is not sufficient",
   fileSizeTooSmall = "File size is too small!",
-  fileSizeToolarge = "File size is too large!",
-  readerError = "Problem occured while reading file!",
+  fileSizeTooLarge = "File size is too large!",
+  readerError = "Problem occurred while reading file!",
   maxLimitExceeded = "Too many files",
   minLimitNotReached = "Not enough files",
 }
@@ -30,7 +30,7 @@ export function notEmpty<TValue>(
 }
 
 export const getBaseUrl = () => {
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`; // SSR should use vercel url
+  if (process.env.VERCEL_URL) return `https://${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`; // SSR should use vercel url
 
   return `http://localhost:${process.env.PORT ?? 3000}`; // dev SSR should use localhost
 };

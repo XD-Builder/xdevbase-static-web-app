@@ -12,20 +12,30 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { createClient } from "@/utils/supabase/client";
-import { cn } from "@/lib/utils";
+import { supabase } from "@/utils/supabase/supabaseClient";
+import { cn } from "@/utils/cn";
 import {
   type LoginFormValues,
   loginValidationSchema,
 } from "./UserAuthForm.schema";
+import { Separator } from "@/components/ui/separator";
 
+/**
+ * Successful login will be automatically redirected to the dashboard.
+ */
 const signInWithOauth = (provider: Provider) => {
-  void createClient().auth.signInWithOAuth({
+  void supabase().auth.signInWithOAuth({
     provider: provider,
     options: { redirectTo: `${window.location.origin}/dashboard` },
   });
 };
 
+/**
+ * Provides a form for user authentication. The form includes email and password fields.
+ * It also includes buttons for signing in with Google and GitHub.
+ * 
+ * @returns User authentication form with email and password fields.
+ */
 export function UserAuthForm() {
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -37,7 +47,7 @@ export function UserAuthForm() {
     },
   });
   const onSubmit = async (data: LoginFormValues) => {
-    const { error } = await createClient().auth.signInWithPassword(data);
+    const { error } = await supabase().auth.signInWithPassword(data);
 
     if (error) {
       toast({
@@ -79,6 +89,7 @@ export function UserAuthForm() {
           {t("login.submitButton")}
         </Button>
       </form>
+      <Separator className="mt-3" />
       <button
         type="button"
         className={cn(buttonVariants({ variant: "outline" }), "flex gap-2")}
@@ -87,7 +98,27 @@ export function UserAuthForm() {
         }}
       >
         <Icons.google width={16} />
-        Google
+        Continue with Google
+      </button>
+      <button
+        type="button"
+        className={cn(buttonVariants({ variant: "outline" }), "flex gap-2")}
+        onClick={() => {
+          signInWithOauth("facebook");
+        }}
+      >
+        <Icons.facebook width={16} />
+        Continue with Facebook
+      </button>
+      <button
+        type="button"
+        className={cn(buttonVariants({ variant: "outline" }), "flex gap-2")}
+        onClick={() => {
+          signInWithOauth("github");
+        }}
+      >
+        <Icons.gitHub width={16} />
+        Continue with GitHub
       </button>
     </Form>
   );

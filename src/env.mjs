@@ -17,7 +17,7 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
-    // SUPABASE_SERVICE_KEY: z.string().min(1),
+    SUPABASE_SERVICE_KEY: z.string().min(1),
     // DIRECT_URL: z.string().min(1),
     // LEMON_SQUEEZY_API_KEY: z.string().min(1),
     // LEMONS_SQUEEZY_SIGNATURE_SECRET: z.string().min(1),

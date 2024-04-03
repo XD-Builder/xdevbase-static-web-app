@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      flexGrow: {
+        '1/2': '0.5',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

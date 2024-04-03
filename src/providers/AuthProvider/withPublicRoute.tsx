@@ -6,6 +6,9 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@/providers/AuthProvider/AuthProvider";
 import { LoadingScreen } from "@/components/Loading";
 
+/**
+ * If a user is already logged in, redirect to the home page.
+ */
 export const withPublicRoute = <T extends object>(
   WrappedComponent: React.FunctionComponent<T>,
 ) => {
@@ -20,6 +23,7 @@ export const withPublicRoute = <T extends object>(
       }
     }, [user, isUserDataLoaded, router]);
 
+    // if the user is not set and the data is not loaded, show the loading screen
     if (user ?? !isUserDataLoaded) return <LoadingScreen />;
 
     return <WrappedComponent {...props} />;

@@ -39,6 +39,7 @@ const messages: Resources["common"] = {
     passwordLengthValidation: "密码长度至少为8个字符",
     passwordUppercaseValidation: "密码必须包含大写字母",
     passwordLowercaseValidation: "密码必须包含小写字母",
+    passwordNumberValidation: "密码必须包含一个数字",
     passwordConfirmationValidation: "密码必须匹配",
     confirmYourEmail: "确认您的电子邮件",
   },
@@ -400,9 +401,9 @@ const messages: Resources["common"] = {
     },
   },
   contactUsCard: {
-    title: "提供给我们您当前的菜单，我们将处理一切——从设计和集成到设置",
+    title: `立即设置您的物业或加入物业组。`,
     subtitle:
-      "我们的团队随时准备帮助您。信赖我们的菜单 QR 制作服务；我们将为您完成所有工作，为您打造无缝的QR整合和实时更新的终极菜单体验",
+      "我们提供全面的解决方案，以简化房地产租赁管理，提供一站式购物体验。此外，我们正在开发一个市场，以满足您所有的物业需求。我们的专业团队随时准备协助您解答任何疑问。请随时与我们联系。",
     contactUs: "联系我们：",
   },
   affiliates: {

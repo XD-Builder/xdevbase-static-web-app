@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 import { Icons } from "@/components/Icons";
 import { MobileNav } from "./MobileNav";
 import { type Route } from "next";

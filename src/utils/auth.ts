@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { createClient } from "./supabase/server";
+import { supabase } from "./supabase/supabaseClient";
 
 export const getServerUser = async () => {
   const ckies = cookies();
@@ -14,7 +14,7 @@ export const getServerUser = async () => {
     };
   }
 
-  const { error, data } = await createClient().auth.setSession({
+  const { error, data } = await supabase().auth.setSession({
     access_token: accessToken,
     refresh_token: refreshToken,
   });

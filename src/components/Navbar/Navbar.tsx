@@ -3,7 +3,7 @@
 import React from "react";
 import { UserAccountNav } from "./molecules/UserAccountNav";
 import { MainNav, type NavItem } from "./molecules/MainNav";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 import { buttonVariants } from "../ui/button";
 import Link from "next/link";
 import { useUser } from "@/providers/AuthProvider/AuthProvider";

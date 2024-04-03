@@ -8,8 +8,16 @@ import { initReactI18next } from "react-i18next/initReactI18next";
 
 import { getOptions, languages, fallbackLng, type Language } from "./settings";
 
+/**
+ * Initializes the i18next instance with the given language, namespace as well as user request
+ * and session information to better detect the user's language.
+ * 
+ * @param language default language
+ * @param namespace default namespace
+ * @returns 
+ */
 const initI18next = async (language: Language, namespace?: Namespace) => {
-  // on server side we create a new instance for each render, because during compilation everything seems to be executed in parallel
+  // On server side we create a new instance for each render, because during compilation everything seems to be executed in parallel
   const i18nInstance = createInstance();
 
   await i18nInstance
@@ -25,28 +33,9 @@ const initI18next = async (language: Language, namespace?: Namespace) => {
   return i18nInstance;
 };
 
+// A list of server-side accept-language headers.
 acceptLanguage.languages(languages as unknown as string[]);
 const cookieName = "i18next";
-
-const getLanguageFromHeaders = (reqHeaders: Headers) => {
-  const nextUrlHeader =
-    reqHeaders.has("next-url") && reqHeaders.get("next-url");
-  const hasLanguageInHeader =
-    nextUrlHeader && nextUrlHeader.indexOf(`"lng":"`) > -1;
-
-  if (!hasLanguageInHeader) {
-    return null;
-  }
-
-  const qsObj = JSON.parse(
-    nextUrlHeader.substring(
-      nextUrlHeader.indexOf("{"),
-      nextUrlHeader.indexOf(`}`) + 1,
-    ),
-  ) as { lng: string };
-
-  return qsObj.lng as Language;
-};
 
 export function getLanguageFromCookie(
   requestCookies: RequestCookies | ReadonlyRequestCookies,
@@ -62,21 +51,27 @@ export function getLanguageFromAcceptHeader(requestHeaders: Headers) {
   ) as Language | null;
 }
 
+// Detect language from the cookies, headers or fallback language with
+// priority in that order.
 export function detectLanguage() {
   const ckies = cookies();
   const hders = headers();
-  const languageFromHeaders = getLanguageFromHeaders(hders);
   const languageFromCookie = getLanguageFromCookie(ckies);
   const languageFromAcceptHeader = getLanguageFromAcceptHeader(hders);
   const language =
     languageFromCookie ||
-    languageFromHeaders ||
     languageFromAcceptHeader ||
     fallbackLng;
-
   return language;
 }
 
+/**
+ * Use the server translation with the given namespace.
+ * If no namespace is provided, it will use the default common namespace.
+ * 
+ * @param namespace not required default namespace
+ * @returns 
+ */
 export async function useServerTranslation(namespace?: Namespace) {
   const language = detectLanguage();
   const i18nextInstance = await initI18next(language, namespace);

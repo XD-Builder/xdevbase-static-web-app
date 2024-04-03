@@ -13,9 +13,14 @@ import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { createClient } from "@/utils/supabase/client";
+import { supabase } from "@/utils/supabase/supabaseClient";
 import { type ZodReturnType } from "@/utils/types";
 
+/**
+ * Register via email requires the user to provide an email and password.
+ * The password must be at least 8 characters long and contain at least one uppercase letter,
+ * one lowercase letter, and one special character. The password and password confirmation must match.
+ */
 const registerValidationSchema = (translate: TFunction) =>
   z
     .object({
@@ -25,9 +30,10 @@ const registerValidationSchema = (translate: TFunction) =>
         .min(8, translate("common.passwordLengthValidation"))
         .regex(/[A-Z]/, translate("common.passwordUppercaseValidation"))
         .regex(/[a-z]/, translate("common.passwordLowercaseValidation"))
+        .regex(/[0-9]/, translate("common.passwordNumberValidation"))
         .regex(
           /[^A-Za-z0-9]/,
-          translate("common.passwordSpecialCharacterValidation"),
+          translate("common.passwordSpecialCharacterValidation")
         ),
       passwordConfirmation: z.string(),
     })
@@ -50,14 +56,15 @@ const translations = {
     buttonText: "Continue",
     orCopyAndPaste: "or copy and paste this URL into your browser:",
   },
-  pl: {
-    hello: "Witaj",
-    confirmYourEmailAddress: "Potwierdź swój adres email.",
-    resetYourEmail: "Zresetuj Adres Email.",
+  "zh-CN": {
+    hello: "你好",
+    confirmYourEmailAddress: "确认您的电子邮件地址。",
+    resetYourEmail: "重置您的电子邮件。",
     confirmYourEmailAddressDescription:
-      "Potwierdź swój adres email klikając w przycisk poniżej.",
-    buttonText: "Kontynuuj",
-    orCopyAndPaste: "lub skopiuj i wklej ten adres URL do przeglądarki:",
+      "请点击下面的按钮确认您的电子邮件地址。",
+    resetYourEmailDescription: "点击下面的按钮以重置您的电子邮件地址。",
+    buttonText: "继续",
+    orCopyAndPaste: "或者复制并粘贴此URL到您的浏览器: ",
   },
 };
 
@@ -75,19 +82,28 @@ export function UserAuthForm() {
 
   const onSubmit = async (data: RegisterFormValues) => {
     try {
-      await createClient().auth.signUp({
+      const { error } = await supabase().auth.signUp({
         ...data,
         options: {
-          data: translations[i18n.language as "en" | "pl"],
+          data: translations[i18n.language as "en" | "zh-CN"],
         },
       });
 
-      toast({
-        title: t("register.checkYourEmailForConfirmation"),
-        description: t("common.confirmYourEmail"),
-        variant: "default",
-        duration: 9000,
-      });
+      if (error) {
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+          duration: 9000,
+        });
+      } else {
+        toast({
+          title: t("register.checkYourEmailForConfirmation"),
+          description: t("common.confirmYourEmail"),
+          variant: "default",
+          duration: 9000,
+        });
+      }
     } catch (e) {
       if (isAuthError(e)) {
         toast({

@@ -1,5 +1,9 @@
 import Image from "next/image";
-
+import Icon from "@/assets/icon.png";
+/**
+ * Footer component includes statically rendered footer content.
+ * This component includes the footer content with links to the about us, follow us, and legal sections.
+ */
 export const Footer = () => {
   return (
     <footer>
@@ -8,11 +12,10 @@ export const Footer = () => {
           <div className="mb-6 md:mb-0">
             <a href="https://xdevbase.com/" className="flex items-center">
               <Image
-                src="/logo.png"
+                src={Icon}
                 className="me-3 "
-                width={32}
                 height={32}
-                alt="Feastqr Logo"
+                alt="XDevBase Logo"
               />
               <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
                 XDevBase

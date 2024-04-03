@@ -3,7 +3,7 @@
 import * as React from "react";
 import * as SwitchPrimitives from "@radix-ui/react-switch";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 import { type Path, type Control } from "react-hook-form";
 import { FormField } from "./form";
 

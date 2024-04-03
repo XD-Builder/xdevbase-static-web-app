@@ -10,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { createClient } from "@/utils/supabase/client";
+import { supabase } from "@/utils/supabase/supabaseClient";
 // TODO: Fix this
 // import { api } from "@/trpc/react";
 
@@ -48,7 +48,7 @@ export function UserAccountNav() {
           className="cursor-pointer"
           onSelect={(event) => {
             event.preventDefault();
-            void createClient().auth.signOut();
+            void supabase().auth.signOut();
           }}
         >
           {t("userAccountNav.logout")}

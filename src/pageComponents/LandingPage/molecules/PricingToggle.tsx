@@ -1,6 +1,14 @@
 import React from "react";
 import { Switch } from "@headlessui/react";
 
+/**
+ * A toggle component that switches between monthly and yearly pricing.
+ * The toggle manages color of the toggle by setting enabled variable.
+ * Other components re-renders based on the enabled variable.
+ * 
+ * @param enabled The current state of the toggle.
+ * @param setEnabled The function to set the state of the toggle.
+ */
 export function PricingToggle({
   enabled,
   setEnabled,

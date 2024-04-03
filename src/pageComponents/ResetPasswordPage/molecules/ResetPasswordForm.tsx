@@ -10,7 +10,7 @@ import { Form, FormField } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { getBaseUrl } from "@/utils/utils";
-import { createClient } from "@/utils/supabase/client";
+import { supabase } from "@/utils/supabase/supabaseClient";
 import {
   type RegisterFormValues,
   resetPasswordValidationSchema,
@@ -28,7 +28,7 @@ export function ResetPasswordForm() {
 
   const onSubmit = async (data: RegisterFormValues) => {
     try {
-      await createClient().auth.resetPasswordForEmail(data.email, {
+      await supabase().auth.resetPasswordForEmail(data.email, {
         redirectTo: `${getBaseUrl()}/dashboard/settings`,
       });
       toast({

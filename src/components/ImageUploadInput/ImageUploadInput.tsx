@@ -15,7 +15,7 @@ import {
   getErrorMessagesFromFilePicker,
 } from "@/utils/utils";
 import { type ImageDimensionRestrictionsConfig } from "use-file-picker/types";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 import { Button } from "../ui/button";
 import { Icons } from "../Icons";
 import { AspectRatio } from "../ui/aspect-ratio";

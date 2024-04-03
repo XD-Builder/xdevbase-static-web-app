@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 import { Icons } from "@/components/Icons";
 import { type NavItem } from "@/components/Navbar/molecules/MainNav";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 
 export type SidebarNavItem = NavItem & {
   icon?: keyof typeof Icons;

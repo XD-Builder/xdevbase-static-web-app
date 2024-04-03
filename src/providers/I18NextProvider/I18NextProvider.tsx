@@ -15,6 +15,12 @@ import messagesEn from "@/i18n/locales/en/common";
 
 export const languageCookieExpirationTimeMs = 1000 * 60 * 60 * 24 * 365;
 
+/**
+ * Initialize the i18next instance with the resources and the language detector.
+ * The resources are loaded from the locales folder and the language detector
+ * is set to cookie, querystring, htmlTag and navigator. The cookie is set to
+ * expire in 1 year.
+ */
 void i18next
   .use(initReactI18next)
   .use(LanguageDetector)
@@ -36,7 +42,6 @@ void i18next
         common: messagesEn,
       },
     },
-    lng: undefined,
     detection: {
       order: ["cookie", "querystring", "htmlTag", "navigator"],
       caches: ["cookie"],
@@ -48,6 +53,10 @@ void i18next
 
 z.setErrorMap(zodI18nMap);
 
+/**
+ * I18NextProvider is a provider that initializes the i18next instance with the
+ * resources and the language detector. 
+ */
 export const I18NextProvider = ({
   children,
   initialLanguage,
