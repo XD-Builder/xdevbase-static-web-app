@@ -248,6 +248,7 @@ const messages: Resources["common"] = {
             feature1: "使用自动化创建和管理1个物业",
             feature2: "将最多三名经理连接到您的物业",
             feature3: "使用免费自动化和管理市场",
+            extraBenefits: "基础计划包括",
         },
         pro: {
             name: "专业版",

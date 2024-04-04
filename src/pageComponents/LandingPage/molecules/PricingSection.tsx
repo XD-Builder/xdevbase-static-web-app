@@ -30,6 +30,7 @@ export function PricingSection() {
         t("landingPage.pricing.basic.feature2"),
         t("landingPage.pricing.basic.feature3"),
       ],
+      extraBenefits: t("landingPage.pricing.basic.extraBenefits"),
       backgroundColor: "#FFFFFF",
       buttonColor: "bg-[F2B53C]/10",
       buttonTextColor: "text-black",
@@ -51,7 +52,7 @@ export function PricingSection() {
       borderColor: "#00FF00",
       buttonColor: "bg-[#00FF00]",
       buttonTextColor: "text-white",
-      tagColor: "bg-gray-200",
+      tagColor: "bg-gray-100",
       tagTextColor: "text-black",
     },
     {
@@ -81,14 +82,14 @@ export function PricingSection() {
           <h3 className="mx-auto max-w-xs text-center text-3xl font-bold leading-[1.15] text-black sm:text-4xl md:mx-0 md:max-w-full">
             Ready to start with us?
           </h3>
-          <p className="text-sm text-slate-700/70">
+          <p className="text-sm text-slate-800">
             Choose the best package that suits you
           </p>
         </div>
         <div className="mt-8 flex justify-center">
           <PricingToggle enabled={enabled} setEnabled={setEnabled} />
         </div>
-        <div className="pricing-card mx-auto grid w-full max-w-3xl gap-6 px-10 py-8 md:grid-cols-3 lg:px-14 lg:py-12 lg:pb-20 lg:pt-8 xl:px-2">
+        <div className="pricing-card mx-auto grid w-full max-w-5xl gap-6 px-10 py-8 md:grid-cols-3 lg:px-14 lg:py-12 lg:pb-20 lg:pt-8 xl:px-2">
           {pricingOptions.map((option, index) => (
             <div
               key={index}
@@ -100,14 +101,14 @@ export function PricingSection() {
                   <p className={` text-2xl font-semibold text-[#295D4E]`}>
                     {option.name}
                   </p>
-                  <p className="text-xs font-medium text-zinc-500">
+                  <p className="text-xs font-medium text-zinc-900">
                     {option.description}
                   </p>
                   <h3 className="mt-5 text-sm font-medium text-slate-500/70">
                     <span className="text-3xl font-[620] text-slate-800">
                       {enabled ? option.yearlyPrice : option.price}
-                      <span className="text-sm font-medium text-zinc-500">
-                        {enabled ? "/year" : "/month"}
+                      <span className="text-sm font-medium text-zinc-700">
+                        { index != 2 ? (enabled ? "/year" : "/month") : ""}
                       </span>
                     </span>
                   </h3>
@@ -116,14 +117,14 @@ export function PricingSection() {
 
               <div className="pricing-features flex flex-col gap-y-5 p-5">
                 {option.extraBenefits && (
-                  <p className="text-sm font-[400] text-[#7D7D82]">
+                  <p className="text-sm font-[400] text-[#295D4E]">
                     {option.extraBenefits}
                   </p>
                 )}
                 {option.features.map((feature, idx) => (
                   <div key={idx} className="flex gap-x-3">
                     <Icons.check className="text-xl text-[#295D4E]" />
-                    <p className="text-sm text-[#486581]">{feature}</p>
+                    <p className="text-sm text-zinc-700">{feature}</p>
                   </div>
                 ))}
                 <Link

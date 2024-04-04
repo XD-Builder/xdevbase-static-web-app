@@ -258,6 +258,7 @@ const messages = {
         feature1: "Create and manage 1 property with automation",
         feature2: "Connect up to three managers to your property",
         feature3: "Use Free Automation and Management Marketplace",
+        extraBenefits: "Basic plan includes",
       },
       pro: {
         name: "Pro",
