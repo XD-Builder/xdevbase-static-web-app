@@ -7,12 +7,6 @@ import { Icons } from "@/components/Icons";
 import { Navbar } from "@/components/Navbar/Navbar";
 import { Button } from "@/components/ui/button";
 import { withPublicRoute } from "@/providers/AuthProvider/withPublicRoute";
-import { supabase } from "@/utils/supabase/supabaseClient";
-
-const testAccounts = [
-  { email: "random@gmail.com", password: "testPassword" },
-  { email: "random2@gmail.com", password: "testPassword2" },
-];
 
 const Layout = ({ children }: PropsWithChildren) => {
   const { t } = useTranslation();
@@ -33,29 +27,6 @@ const Layout = ({ children }: PropsWithChildren) => {
           </Button>
         </Link>
         {children}
-        {/* test account only shows up in development */}
-        {process.env.NEXT_PUBLIC_ENV !== "production" && (
-          <div className="flex flex-col gap-2">
-            {testAccounts.map((account, index) => (
-              <div key={index} className="flex flex-col items-start ">
-                <button className="hover:underline"
-                  onClick={() => {
-                    void supabase().auth.signInWithPassword(account);
-                  }}
-                >
-                  Login {account.email}
-                </button>
-                <button className="hover:underline"
-                  onClick={() => {
-                    void supabase().auth.signUp(account);
-                  }}
-                >
-                  Register {account.email}
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     </>
   );
