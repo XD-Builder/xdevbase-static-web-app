@@ -7,18 +7,12 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
-    // DATABASE_URL: z
-    //   .string()
-    //   .url()
-    //   .refine(
-    //     (str) => !str.includes("YOUR_MYSQL_URL_HERE"),
-    //     "You forgot to change the default URL"
-    //   ),
+    DATABASE_URL: z.string().url().min(1),
+    DIRECT_URL: z.string().min(1),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
     SUPABASE_SERVICE_KEY: z.string().min(1),
-    // DIRECT_URL: z.string().min(1),
     // LEMON_SQUEEZY_API_KEY: z.string().min(1),
     // LEMONS_SQUEEZY_SIGNATURE_SECRET: z.string().min(1),
     // LEMON_SQUEEZY_STORE_ID: z.string().min(1),
@@ -39,6 +33,7 @@ export const env = createEnv({
     NEXT_PUBLIC_ENV: z
       .string()
       .or(z.literal("production"), z.literal("development")),
+    NEXT_PUBLIC_ROOT_DOMAIN: z.string().optional(),
   },
 
   /**
@@ -47,9 +42,11 @@ export const env = createEnv({
    */
   runtimeEnv: {
     DATABASE_URL: process.env.DATABASE_URL,
+    DIRECT_URL: process.env.DIRECT_URL,
     NODE_ENV: process.env.NODE_ENV,
     DIRECT_URL: process.env.DIRECT_URL,
     NEXT_PUBLIC_ENV: process.env.NEXT_PUBLIC_ENV,
+    NEXT_PUBLIC_ROOT_DOMAIN: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     SUPABASE_SERVICE_KEY: process.env.SUPABASE_SERVICE_KEY,
