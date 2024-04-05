@@ -2,6 +2,7 @@ create table "public"."profiles" (
     "id" uuid not null,
     "updated_at" timestamp with time zone,
     "email" text,
+    "username" text,
     "full_name" text,
     "avatar_url" text
 );

@@ -3,13 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "db:push": "prisma db push",
     "dev": "next dev",
     "postinstall": "prisma generate",
-    "build": "next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
     "update-types-local": "supabase gen types typescript --local > src/server/supabase/supabaseTypes.ts",
-    "update-types-remote": "supabase gen types typescript --project-id \"izrwqrxvegrajxtlvafn\" --schema public > src/server/supabase/supabaseTypes.ts",
     "prepare:local": "pnpm update-types-local && pnpm prisma db pull && pnpm prisma generate && pnpm prisma-case-format --file prisma/schema.prisma  && pnpm prisma generate",
+    "build": "next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
     "start": "next start",
     "lint": "next lint"
   },
@@ -75,6 +73,8 @@
     "eslint": "^8.57.0",
     "eslint-config-next": "14.1.4",
     "postcss": "^8.4.38",
+    "prisma": "^5.12.1",
+    "prisma-case-format": "^2.2.1",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.3"
   },
