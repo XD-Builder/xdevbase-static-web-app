@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { supabase } from "@/utils/supabase/supabaseClient";
+import { supabase } from "@/server/supabase/supabaseClient";
 import { type ZodReturnType } from "@/utils/types";
 
 /**

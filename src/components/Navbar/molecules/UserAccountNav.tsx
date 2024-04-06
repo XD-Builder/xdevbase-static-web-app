@@ -10,16 +10,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { supabase } from "@/utils/supabase/supabaseClient";
+import { supabase } from "@/server/supabase/supabaseClient";
+import { api } from "@/trpc/react";
 // TODO: Fix this
 // import { api } from "@/trpc/react";
 
 export function UserAccountNav() {
-  // const { data: user } = api.auth.getProfile.useQuery();
-  const user = {
-    fullName: "John Doe",
-    email: "213",
-  };
+  const { data: user } = api.auth.getProfile.useQuery();
   const { t } = useTranslation();
 
   return (

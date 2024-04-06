@@ -1,7 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-
 import { type Database } from "./supabaseTypes";
-
 import { env } from "@/env.mjs";
 
 /**

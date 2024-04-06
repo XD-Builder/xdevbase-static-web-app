@@ -28,7 +28,7 @@ export default function ErrorPage({
           <p className="text-2xl font-medium text-gray-800">
             {t("errorPage.description")}
           </p>
-          <p className="text-lg">support@feastqr.com</p>
+          <p className="text-lg">support@xdevbase.com</p>
           <div className="flex flex-row justify-between">
             <Button onClick={() => reset()}>{t("errorPage.tryAgain")}</Button>
           </div>

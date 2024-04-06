@@ -6,8 +6,12 @@ import { useState } from "react";
 
 import { type AppRouter } from "@/server/api/root";
 import { getUrl, transformer } from "./shared";
-import { supabase } from "@/utils/supabase/supabaseClient";
+import { supabase } from "@/server/supabase/supabaseClient";
 
+/**
+ * Create a new TRPC React API used to create clients and provider for
+ * trpc client and query client.
+ */
 export const api = createTRPCReact<AppRouter>({
   overrides: {
     useMutation: {
@@ -29,16 +33,18 @@ export const api = createTRPCReact<AppRouter>({
   },
 });
 
+/**
+ * Provides query client and trpc client. The wrapped children 
+ * will have access to both clients with correct authorization on trpc.
+ */
 export function TRPCReactProvider(props: {
   children: React.ReactNode;
   headers: Headers;
 }) {
   const [queryClient] = useState(() => new QueryClient());
-
   const [trpcClient] = useState(() =>
     api.createClient({
       transformer,
-
       links: [
         loggerLink({
           enabled: (op) =>
@@ -47,16 +53,14 @@ export function TRPCReactProvider(props: {
         }),
         unstable_httpBatchStreamLink({
           url: getUrl(),
+          // set authorization for the trpc request in the headers.
           async headers() {
             const heads = new Map(props.headers);
             const { data } = await supabase().auth.getSession();
-
             if (data.session) {
               heads.set("authorization", data.session.access_token);
             }
-
             heads.set("x-trpc-source", "react");
-
             return Object.fromEntries(heads);
           },
         }),

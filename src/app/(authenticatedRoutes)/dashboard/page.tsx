@@ -1,12 +1,11 @@
-import { api } from "@/trpc/server";
+import { DashboardPage } from "@/pageComponents/Dashboard/Dashboard.page";
 
 // Simple dashboard page
-export default async function DashboardPage() {
-  // const data = await api.example.find({ text: "world" });
-  return <div>
-    <h1>Dashboard</h1>
-    <p>
+export default async function Page() {
 
-    </p>
-  </div>;
+  return (<div>
+    <h1>Dashboard</h1>
+    <DashboardPage />
+  </div>);
 }
+export const dynamic = 'force-dynamic'

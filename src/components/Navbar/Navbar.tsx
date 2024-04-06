@@ -22,6 +22,9 @@ const navbarItems: NavItem[] = [
   },
 ];
 
+/**
+ * Navigation bar with the user information
+ */
 export const Navbar = () => {
   const { user } = useUser();
   const userLoggedIn = !!user;

@@ -10,7 +10,7 @@ import { Form, FormField } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 import { getBaseUrl } from "@/utils/utils";
-import { supabase } from "@/utils/supabase/supabaseClient";
+import { supabase } from "@/server/supabase/supabaseClient";
 import {
   type RegisterFormValues,
   resetPasswordValidationSchema,

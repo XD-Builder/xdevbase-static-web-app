@@ -8,6 +8,8 @@ import { AuthProvider } from "@/providers/AuthProvider/AuthProvider";
 import { Providers } from "@/providers";
 import { Toaster } from "@/components/ui/toaster";
 import { TailwindIndicator } from "@/components/TailwindIndicator";
+import { TRPCReactProvider } from "@/trpc/react";
+import { headers } from "next/headers";
 
 const font = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -75,6 +77,7 @@ export default async function RootLayout({
             font.className,
           )}
         >
+          <TRPCReactProvider headers={headers()}>
             <AuthProvider {...user}>
               <Providers initialLanguage={initialLanguage}>
                 <div className="flex min-h-screen flex-col gap-6">
@@ -84,6 +87,7 @@ export default async function RootLayout({
                 <Toaster />
               </Providers>
             </AuthProvider>
+          </TRPCReactProvider>
         </body>
       </html>
   );

@@ -3,7 +3,7 @@ import superjson from "superjson";
 import { ZodError } from "zod";
 
 import { db } from "@/server/db";
-import { getUserAsAdmin } from "@/utils/supabase/supabaseClient";
+import { getUserAsAdmin } from "@/server/supabase/supabaseClient";
 
 /**
  * 1. DEFINITION

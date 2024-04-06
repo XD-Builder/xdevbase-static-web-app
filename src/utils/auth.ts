@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { supabase } from "./supabase/supabaseClient";
+import { supabase } from "@/server/supabase/supabaseClient";
 
 export const getServerUser = async () => {
   const ckies = cookies();

@@ -14,7 +14,6 @@ export const withPrivateRoute = <T extends object>(
 ) => {
   const ComponentWithPrivateRoute = (props: T) => {
     const router = useRouter();
-
     const { user, isLoading } = useUser();
 
     useEffect(() => {

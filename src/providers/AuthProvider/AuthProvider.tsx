@@ -9,7 +9,7 @@ import React, {
 } from "react";
 
 import { type Session, type User } from "@supabase/supabase-js";
-import { supabase } from '@/utils/supabase/supabaseClient'
+import { supabase } from '@/server/supabase/supabaseClient'
 
 export const AuthContext = createContext<{
   user: User | null;
