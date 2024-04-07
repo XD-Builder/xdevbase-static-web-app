@@ -30,9 +30,6 @@ export const env = createEnv({
     NEXT_PUBLIC_UMAMI_WEBSITE_ID: z.string().optional(),
     NEXT_PUBLIC_UMAMI_URL: z.string().optional(),
     NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: z.string().optional(),
-    NEXT_PUBLIC_ENV: z
-      .string()
-      .or(z.literal("production"), z.literal("development")),
     NEXT_PUBLIC_ROOT_DOMAIN: z.string().optional(),
   },
 
@@ -45,7 +42,6 @@ export const env = createEnv({
     DIRECT_URL: process.env.DIRECT_URL,
     NODE_ENV: process.env.NODE_ENV,
     DIRECT_URL: process.env.DIRECT_URL,
-    NEXT_PUBLIC_ENV: process.env.NEXT_PUBLIC_ENV,
     NEXT_PUBLIC_ROOT_DOMAIN: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,

@@ -7,7 +7,8 @@
     "postinstall": "prisma generate",
     "update-types-local": "supabase gen types typescript --local > src/server/supabase/supabaseTypes.ts",
     "prepare:local": "pnpm update-types-local && pnpm prisma db pull && pnpm prisma generate && pnpm prisma-case-format --file prisma/schema.prisma  && pnpm prisma generate",
-    "build": "next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
+    "build:dev": "cp .env.development .env.local && next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
+    "build:prod": "cp .env.production .env.local && next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
     "start": "next start",
     "lint": "next lint"
   },
