@@ -19,6 +19,14 @@ function useServerTranslation(namespace?: Namespace): Promise<{
 ## Database
 Supabase provides a web ui and a CLI tool for managing authentication and database. You can get started at https://supabase.com/docs/reference/cli/introduction
 
+### Local Setup
+Perform the following steps to start developing database locally. See https://supabase.com/docs/guides/cli/local-development for more detailed information.
+1. `supabase start --local` to start the supabase service in docker container.
+2. `supabase link --local` to link to an existing supabase project. Use a supabase development account project for testing.
+3. `supabase start --local` to start the local supabase service.
+4. `supabase db reset --local` to clear the local database to a clean state if you have applied some changes. It will also apply migration by default.
+5. `supabase db push --local` to push the migrations to local database.
+
 ### Database Actions
 Supabase commands starting with `supabase db` provides database management functions. Notable commands are 
 1. `supabase db pull`  which pulls schema changes from a remote database.

@@ -40,7 +40,8 @@ export const paymentsRouter = createTRPCRouter({
       const translations = checkoutTranslations[language];
       const newCheckout = await client.createCheckout({
         checkout_data: {
-          custom: {
+          custom: {            
+            // @ts-ignore
             userId: ctx.user.id,
           },
           name: ctx.user.email || "",
@@ -70,6 +71,7 @@ export const paymentsRouter = createTRPCRouter({
         message: "Subscription not found or not active",
       });
     }
+    // @ts-ignore
     const updateResult = await client.updateSubscription({
       id: subscription.lemonSqueezyId,
       cancelled: true,
@@ -118,6 +120,7 @@ export const paymentsRouter = createTRPCRouter({
       id: subscription.lemonSqueezyId,
     });
 
+    // @ts-ignore
     return subscriptionResult.data.attributes.urls.customer_portal as string;
   }),
 });

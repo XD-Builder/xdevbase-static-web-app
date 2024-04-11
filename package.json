@@ -11,18 +11,24 @@
     "db:start": "supabase start",
     "db:stop": "supabase stop",
     "db:diff": "supabase db diff -f",
-    "update-types-local": "supabase gen types typescript --local > src/server/supabase/supabaseTypes.ts",
     "build:dev": "cp .env.development .env.local && next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
-    "build:prod": "cp .env.production .env.local && next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
-    "prisma:build:local": "pnpm prisma:prepare:dev && pnpm update-types-local && pnpm prisma db pull && pnpm prisma generate && pnpm prisma-case-format --file prisma/schema.prisma  && pnpm prisma generate ; pnpm prisma:restore:env",
-    "prisma:build:remote": "pnpm prisma:prepare:prod && pnpm update-types-remote && pnpm prisma db pull && pnpm prisma generate && pnpm prisma-case-format --file prisma/schema.prisma  && pnpm prisma generate ; pnpm prisma:restore:env",
+    "build:prod": "cp .env.prod .env.local && next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
+
+    "supabase:update:types:local": "supabase gen types typescript --local > src/server/supabase/supabaseTypes.ts",
+    "supabase:update:types:dev": "supabase gen types typescript --project-id \"xkhymhrwtcxlvgpmqsya\" --schema public > src/server/supabase/supabaseTypes.ts",
+    "supabase:update:types:prod": "supabase gen types typescript --project-id \"calvxwwdqgtmsoqolaor\" --schema public > src/server/supabase/supabaseTypes.ts",
+
+    "prisma:build:local": "pnpm supabase:update:types:local && pnpm prisma db pull && pnpm prisma generate && pnpm prisma-case-format --file prisma/schema.prisma  && pnpm prisma generate",
+    "prisma:build:dev": "pnpm prisma:prepare:dev && pnpm supabase:update:types:dev && pnpm prisma db pull && pnpm prisma generate && pnpm prisma-case-format --file prisma/schema.prisma  && pnpm prisma generate ; pnpm prisma:restore:env",
+    "prisma:build:prod": "pnpm prisma:prepare:prod && pnpm supabase:update:types:prod && pnpm prisma db pull && pnpm prisma generate && pnpm prisma-case-format --file prisma/schema.prisma  && pnpm prisma generate ; pnpm prisma:restore:env",
+
     "prisma:prepare:dev": "pnpm backup:env && pnpm cp:dev2env",
     "prisma:prepare:prod": "pnpm backup:env && pnpm cp:prod2env",
     "prisma:restore:env": "pnpm unbackup:env",
     "backup:env": "cp .env .env.backup",
     "unbackup:env": "mv .env.backup .env",
     "cp:dev2env": "cp .env.development.local .env",
-    "cp:prod2env": "cp .env.production.local .env"
+    "cp:prod2env": "cp .env.prod.local .env"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",

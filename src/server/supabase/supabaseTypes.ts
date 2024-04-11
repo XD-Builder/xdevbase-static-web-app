@@ -34,7 +34,82 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string | null
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          email?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string | null
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string | null
+          username?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subscriptions: {
+        Row: {
+          created_at: string | null
+          ends_at: string | null
+          json_data: Json
+          lemon_squeezy_id: string
+          profile_id: string
+          renews_at: string
+          status: string
+          update_payment_url: string
+        }
+        Insert: {
+          created_at?: string | null
+          ends_at?: string | null
+          json_data: Json
+          lemon_squeezy_id: string
+          profile_id: string
+          renews_at: string
+          status: string
+          update_payment_url: string
+        }
+        Update: {
+          created_at?: string | null
+          ends_at?: string | null
+          json_data?: Json
+          lemon_squeezy_id?: string
+          profile_id?: string
+          renews_at?: string
+          status?: string
+          update_payment_url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscriptions_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
