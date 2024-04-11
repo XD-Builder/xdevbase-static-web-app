@@ -230,13 +230,6 @@ const messages: Resources["common"] = {
         heading2Suffix: "",
         heading2Description: "我们的支付处理系统将使交易无缝进行，让您及时收到款项。我们致力于提供设计精美的仪表板和发票，以备税务目的。",
     },
-    section3: {
-        pricingTitle: "定价计划",
-        planPro: "专业版",
-        oneMonthFree: "(1个月免费试用)",
-        enterprise: "企业",
-        contactUs: "(联系我们)",
-    },
     pricing: {
         toggle: {
             monthly: "每月",
@@ -321,10 +314,8 @@ const messages: Resources["common"] = {
       title: "XDevBase",
       description: "设置您的家庭管理系统，轻松管理您的家。",
       type: "网站",
-      url: "https://www.xdevbase.com/",
-      image: "https://www.xdevbase.com/og-image.png",
       siteName: "XDevBase - 设置您的家庭管理系统",
-      locale: "en",
+      locale: "zh-CN",
     },
     twitter: {
       title: "XDevBase",
@@ -393,7 +384,7 @@ const messages: Resources["common"] = {
     youAreCurrentlyOn: {
       firstPart: "您的计划：",
       premium: "高级",
-      free: "免费",
+      basic: "基础",
     },
     customerPortal: {
       goTo: "转到您的客户门户以管理订阅",

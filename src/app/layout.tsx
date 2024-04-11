@@ -10,6 +10,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TailwindIndicator } from "@/components/TailwindIndicator";
 import { TRPCReactProvider } from "@/trpc/react";
 import { headers } from "next/headers";
+import { env } from "@/env.mjs";
 
 const font = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -25,12 +26,12 @@ export async function generateMetadata(): Promise<Metadata> {
     description: t("globalMetadata.description"),
     keywords: (t("globalMetadata.keywords") as string).split(","),
     category: "home & rental management solution",
-    metadataBase: new URL("https://www.xdevbase.com/"),
+    metadataBase: new URL(env.NEXT_PUBLIC_ROOT_URL),
     openGraph: {
-      type: "website",
+      url: "/",
+      type: t("globalMetadata.openGraph.type"),
       locale: t("globalMetadata.openGraph.locale"),
       title: t("globalMetadata.openGraph.title"),
-      url: "https://www.xdevbase.com/",
       description: t("globalMetadata.openGraph.description"),
       siteName: t("globalMetadata.openGraph.siteName"),
     },

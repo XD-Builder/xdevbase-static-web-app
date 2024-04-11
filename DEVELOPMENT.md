@@ -22,7 +22,7 @@ Supabase provides a web ui and a CLI tool for managing authentication and databa
 ### Database Actions
 Supabase commands starting with `supabase db` provides database management functions. Notable commands are 
 1. `supabase db pull`  which pulls schema changes from a remote database.
-2. `supabsae db push` which pushes **ALL** local migrations to a remote database. This is very useful when setting up a new database using the existing migration sql scripts so that the database is up to date with the latest development.
+2. `supabsae db push` which pushes **ALL** local migrations to a remote database. This is very useful when setting up a new database using the existing migration sql scripts so that the database is up to date with the latest development. Use this for development environment to keep the database schema up to date.
 3. `supabase db reset` reset the local db to a clean state.
 4. `supabase db dump` dumps contents from a remote database. This is useful for debugging how the remote schema is defined.
 5. `supabase db diff` diffs schema changes made to the local or remote database.

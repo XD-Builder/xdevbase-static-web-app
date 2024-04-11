@@ -13,10 +13,10 @@ export const env = createEnv({
       .enum(["development", "test", "production"])
       .default("development"),
     SUPABASE_SERVICE_KEY: z.string().min(1),
-    // LEMON_SQUEEZY_API_KEY: z.string().min(1),
-    // LEMONS_SQUEEZY_SIGNATURE_SECRET: z.string().min(1),
-    // LEMON_SQUEEZY_STORE_ID: z.string().min(1),
-    // LEMON_SQUEEZY_SUBSCRIPTION_VARIANT_ID: z.string().min(1),
+    LEMON_SQUEEZY_API_KEY: z.string().min(1),
+    LEMONS_SQUEEZY_SIGNATURE_SECRET: z.string().min(1),
+    LEMON_SQUEEZY_STORE_ID: z.string().min(1),
+    LEMON_SQUEEZY_SUBSCRIPTION_VARIANT_ID: z.string().min(1),
   },
 
   /**
@@ -30,7 +30,7 @@ export const env = createEnv({
     NEXT_PUBLIC_UMAMI_WEBSITE_ID: z.string().optional(),
     NEXT_PUBLIC_UMAMI_URL: z.string().optional(),
     NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: z.string().optional(),
-    NEXT_PUBLIC_ROOT_DOMAIN: z.string().optional(),
+    NEXT_PUBLIC_ROOT_URL: z.string().min(1),
   },
 
   /**
@@ -42,7 +42,7 @@ export const env = createEnv({
     DIRECT_URL: process.env.DIRECT_URL,
     NODE_ENV: process.env.NODE_ENV,
     DIRECT_URL: process.env.DIRECT_URL,
-    NEXT_PUBLIC_ROOT_DOMAIN: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
+    NEXT_PUBLIC_ROOT_URL: process.env.NEXT_PUBLIC_ROOT_URL,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     SUPABASE_SERVICE_KEY: process.env.SUPABASE_SERVICE_KEY,

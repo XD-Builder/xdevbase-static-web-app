@@ -8,4 +8,3 @@ export default async function Page() {
     <DashboardPage />
   </div>);
 }
-export const dynamic = 'force-dynamic'

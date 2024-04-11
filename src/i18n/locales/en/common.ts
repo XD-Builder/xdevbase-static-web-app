@@ -240,13 +240,6 @@ const messages = {
       heading2Description:
         "Our payment processing system will facilitate transactions seamless so you can get paid on time. We are working to provide beautifully designed dashboards and invoices for tax purposes.",
     },
-    section3: {
-      pricingTitle: "Pricing plans",
-      planPro: "Plan Pro",
-      oneMonthFree: "(1 month free trial)",
-      enterprise: "Enterprise",
-      contactUs: "(Contact us)",
-    },
     pricing: {
       toggle: {
         monthly: "Monthly",
@@ -336,8 +329,6 @@ const messages = {
       description:
         "Set up your home management system and start managing your home with ease.",
       type: "website",
-      url: "https://www.xdevbase.com/",
-      image: "https://www.xdevbase.com/og-image.png",
       siteName: "XDevBase - Set up your home management system",
       locale: "en",
     },
@@ -413,11 +404,11 @@ const messages = {
     continue: "Continue",
     subscriptionPlan: "Subscription Plan",
     subscriptionDescription:
-      "Online menu and QR Code for your customers to scan.",
+      "Allowing customers ",
     youAreCurrentlyOn: {
       firstPart: "Your plan: ",
       premium: "premium",
-      free: "free",
+      basic: "basic",
     },
     customerPortal: {
       goTo: "Go to your customer portal to manage your subscription.",
