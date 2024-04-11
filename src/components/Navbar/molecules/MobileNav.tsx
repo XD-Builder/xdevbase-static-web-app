@@ -4,6 +4,7 @@ import { cn } from "@/utils/cn";
 // TODO: Fix
 // import { useLockBody } from "@/shared/hooks/useLockBody";
 import { type NavItem } from "./MainNav";
+import { useLockBody } from "@/shared/hooks/useLockBody";
 
 interface MobileNavProps {
   items: NavItem[];
@@ -11,7 +12,7 @@ interface MobileNavProps {
 }
 
 export function MobileNav({ items, children }: MobileNavProps) {
-  // useLockBody();
+  useLockBody();
 
   return (
     <div

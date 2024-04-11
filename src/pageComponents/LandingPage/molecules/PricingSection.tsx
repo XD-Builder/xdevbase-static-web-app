@@ -79,10 +79,10 @@ export function PricingSection() {
     <section className="pricing__section mx-auto max-w-5xl py-20">
       <div className="pricing-headline flex flex-col gap-y-2">
         <div className="flex flex-col items-center justify-center gap-y-3">
-          <h3 className="mx-auto max-w-xs text-center text-3xl font-bold leading-[1.15] text-black sm:text-4xl md:mx-0 md:max-w-full">
+          <h3 className="mx-auto max-w-xs text-center text-3xl font-bold leading-[1.15] text-black sm:text-4xl md:mx-0 md:max-w-full dark:text-primary dark:opacity-95">
             Ready to start with us?
           </h3>
-          <p className="text-sm text-slate-800">
+          <p className="text-sm text-slate-800 dark:text-primary dark:opacity-85">
             Choose the best package that suits you
           </p>
         </div>
@@ -98,16 +98,16 @@ export function PricingSection() {
             >
               <div className="">
                 <div className="flex flex-col gap-y-2 p-5">
-                  <p className={` text-2xl font-semibold text-[#295D4E]`}>
+                  <p className={`text-2xl font-semibold text-[#295D4E] dark:text-[#6bc9a5] dark:opacity-95`}>
                     {option.name}
                   </p>
-                  <p className="text-xs font-medium text-zinc-900">
+                  <p className="text-xs font-medium text-zinc-900 dark:text-primary dark:opacity-85">
                     {option.description}
                   </p>
                   <h3 className="mt-5 text-sm font-medium text-slate-500/70">
-                    <span className="text-3xl font-[620] text-slate-800">
+                    <span className="text-3xl font-[620] text-slate-800 dark:text-primary dark:opacity-95">
                       {enabled ? option.yearlyPrice : option.price}
-                      <span className="text-sm font-medium text-zinc-700">
+                      <span className="text-sm font-medium text-zinc-700 dark:text-primary dark:opacity-85">
                         { index != 2 ? (enabled ? "/year" : "/month") : ""}
                       </span>
                     </span>
@@ -115,16 +115,16 @@ export function PricingSection() {
                 </div>
               </div>
 
-              <div className="pricing-features flex flex-col gap-y-5 p-5">
+              <div className="pricing-features flex flex-col gap-y-5 p-5 ">
                 {option.extraBenefits && (
-                  <p className="text-sm font-[400] text-[#295D4E]">
+                  <p className="text-sm font-[400] text-[#4bc9a5] dark:text-[#6bc9a5]">
                     {option.extraBenefits}
                   </p>
                 )}
                 {option.features.map((feature, idx) => (
                   <div key={idx} className="flex gap-x-3">
-                    <Icons.check className="text-xl text-[#295D4E]" />
-                    <p className="text-sm text-zinc-700">{feature}</p>
+                    <Icons.check className="text-xl text-[#295D4E] dark:text-[#6bc9a5]" />
+                    <p className="text-sm text-zinc-700 dark:text-primary dark:opacity-95">{feature}</p>
                   </div>
                 ))}
                 <Link

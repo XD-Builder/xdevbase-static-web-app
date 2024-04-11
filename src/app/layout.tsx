@@ -66,8 +66,7 @@ export default async function RootLayout({
   const initialLanguage = detectLanguage(); 
   // Retrieve server side cookie set for the current user.
   // If the user is already signed in and has a cookie, then the user is returned.
-  const user = await getServerUser();
-
+  const serverUser = await getServerUser();
   return (
       <html lang={initialLanguage} suppressHydrationWarning={true}>
         <head />
@@ -79,7 +78,7 @@ export default async function RootLayout({
           )}
         >
           <TRPCReactProvider headers={headers()}>
-            <AuthProvider {...user}>
+            <AuthProvider {...serverUser}>
               <Providers initialLanguage={initialLanguage}>
                 <div className="flex min-h-screen flex-col gap-6">
                   {children}

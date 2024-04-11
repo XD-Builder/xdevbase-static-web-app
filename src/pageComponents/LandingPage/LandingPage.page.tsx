@@ -8,6 +8,9 @@ import showcase from "@/assets/showcase.png";
 import Link from "next/link";
 import { Footer } from "./molecules/Footer";
 import { PricingSection } from "./molecules/PricingSection";
+import { redirect } from "next/navigation";
+import { getServerUser } from "@/utils/auth";
+import { useTheme } from "next-themes";
 
 const poppins = Poppins({
   weight: ["300", "400", "700"],
@@ -17,12 +20,19 @@ const poppins = Poppins({
 /**
  * LandingPage component that displays the landing page of the application.
  * This component includes the Navbar, hero section, features section, and pricing section.
-*
+ *
  * @returns rendered LandingPage component
  */
 export const LandingPage = async () => {
-  const { t } = await useServerTranslation();
+  const { user } = await getServerUser();
+  const userLoggedIn = !!user;
 
+  // If the user is logged in, redirect to the /home page
+  if (userLoggedIn) {
+    redirect("/home");
+  }
+
+  const { t } = await useServerTranslation();
   return (
     <>
       <Navbar />
@@ -41,7 +51,7 @@ export const LandingPage = async () => {
       >
         <section className="container flex flex-col items-center justify-between p-0 lg:flex-row lg:gap-32">
           <div className="flex flex-1 flex-col items-center gap-12  lg:items-start">
-            <h1 className="text-center text-5xl font-bold text-landing-text lg:text-left lg:text-6xl">
+            <h1 className="text-center text-5xl font-bold text-landing-text dark:text-primary dark:opacity-95 lg:text-left lg:text-6xl">
               {t("landingPage.section1.header")}{" "}
               <span className="bg-gradient-to-b from-landing-primary via-landing-primary to-landing-secondary bg-clip-text text-transparent">
                 {t("landingPage.section1.headerHighlight")}
@@ -114,36 +124,36 @@ export const LandingPage = async () => {
             className="scale-90 lg:scale-100"
           />
           <div className=" text-center lg:w-[37%] lg:text-left">
-            <h1 className="text-5xl font-bold text-landing-text lg:text-6xl">
+            <h1 className="text-5xl font-bold text-landing-text lg:text-6xl dark:text-primary dark:opacity-95">
               {t("landingPage.section2.featuresTitle")} <br />
               {t("landingPage.section2.businessSuccess")}
             </h1>
           </div>
         </section>
         <section className="mt-8 space-y-8 px-4 lg:mt-0 lg:max-w-[60%] lg:space-y-16 lg:px-0">
-          <h2 className="text-center text-5xl font-bold text-landing-text">
+          <h2 className="text-center text-5xl font-bold text-landing-text dark:text-primary dark:opacity-95">
             {t("landingPage.section2.discoverWhy")}
           </h2>
           <ul className="mx-auto flex w-[80%] flex-col items-center gap-8 lg:mx-0 lg:w-full lg:flex-row lg:items-start">
             <li className="flex-1">
-              <h3 className="mb-4 text-center text-3xl text-landing-text">
+              <h3 className="mb-4 text-center text-3xl text-landing-text dark:text-primary dark:opacity-95">
                 {t("landingPage.section2.heading1")}{" "}
-                <span className="underline decoration-landing-primary underline-offset-0">
+                <span className="underline decoration-landing-primary underline-offset-0 dark:text-primary dark:opacity-95">
                   {t("landingPage.section2.heading1Suffix")}
                 </span>
               </h3>
-              <p className="text-justify font-light text-landing-secondary">
+              <p className="text-justify font-light text-landing-secondary dark:text-primary dark:opacity-85">
                 {t("landingPage.section2.heading1Description")}
               </p>
             </li>
-          <li className="flex-1">
-              <h3 className="mb-4 text-center text-3xl text-landing-text">
+            <li className="flex-1">
+              <h3 className="mb-4 text-center text-3xl text-landing-text dark:text-primary dark:opacity-95">
                 {t("landingPage.section2.heading2")}
-                <span className="underline decoration-landing-primary underline-offset-0">
+                <span className="underline decoration-landing-primary underline-offset-0 dark:text-primary dark:opacity-95">
                   {t("landingPage.section2.heading2Suffix")}
                 </span>{" "}
               </h3>
-              <p className="text-justify font-light text-landing-secondary">
+              <p className="text-justify font-light text-landing-secondary dark:text-primary dark:opacity-85">
                 {t("landingPage.section2.heading2Description")}
               </p>
             </li>

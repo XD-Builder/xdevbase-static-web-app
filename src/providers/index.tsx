@@ -22,7 +22,7 @@ type ProvidersProps = {
 export function Providers({ children, initialLanguage }: ProvidersProps) {
   return (
     <I18NextProvider initialLanguage={initialLanguage}>
-      <ThemeProvider attribute="class" forcedTheme="light">
+      <ThemeProvider attribute="class">
         {children}
       </ThemeProvider>
       <AnalyticsProvider />

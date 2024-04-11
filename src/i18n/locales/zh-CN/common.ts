@@ -313,7 +313,7 @@ const messages: Resources["common"] = {
     openGraph: {
       title: "XDevBase",
       description: "设置您的家庭管理系统，轻松管理您的家。",
-      type: "网站",
+      type: "website",
       siteName: "XDevBase - 设置您的家庭管理系统",
       locale: "zh-CN",
     },

@@ -10,11 +10,12 @@ import { useUser } from "@/providers/AuthProvider/AuthProvider";
 import { LanguageToggle } from "../LanguageToggle/LanguageToggle";
 import { useTranslation } from "react-i18next";
 import { TranslatedText } from "../TranslatedText";
+import { ModeToggle } from "./molecules/ModeToggle";
 
 const navbarItems: NavItem[] = [
   {
     title: <TranslatedText id="navbar.home"></TranslatedText>,
-    href: "/",
+    href: "/home",
   },
   {
     title: <TranslatedText id="navbar.dashboard"></TranslatedText>,
@@ -27,6 +28,7 @@ const navbarItems: NavItem[] = [
  */
 export const Navbar = () => {
   const { user } = useUser();
+  // log something
   const userLoggedIn = !!user;
   const { t } = useTranslation();
 
@@ -35,6 +37,7 @@ export const Navbar = () => {
       <div className="container flex h-16 items-center justify-between py-4">
         <MainNav items={navbarItems} />
         <div className="flex items-center justify-center gap-4">
+          <ModeToggle />
           <LanguageToggle />
           {userLoggedIn ? (
             <UserAccountNav />
