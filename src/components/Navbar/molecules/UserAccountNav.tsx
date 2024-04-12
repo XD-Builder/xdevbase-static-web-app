@@ -12,8 +12,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { supabase } from "@/server/supabase/supabaseClient";
 import { api } from "@/trpc/react";
-// TODO: Fix this
-// import { api } from "@/trpc/react";
+import Image from "next/image";
+import { CircleUser } from "lucide-react";
 
 export function UserAccountNav() {
   const { data: user } = api.auth.getProfile.useQuery();
@@ -21,7 +21,18 @@ export function UserAccountNav() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>{t("userAccountNav.settings")}</DropdownMenuTrigger>
+      <DropdownMenuTrigger>
+        <div className="flex items-center gap-2">
+          {user?.avatarUrl ? (
+            <Image src={user?.avatarUrl} alt="User avatar" />
+          ) : (
+            <CircleUser className="h-5 w-5" />
+          )}
+          {user?.fullName
+            ? `Hi, ${user?.fullName}`
+            : t("userAccountNav.settings")}
+        </div>
+      </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-1 leading-none">
@@ -35,10 +46,13 @@ export function UserAccountNav() {
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
+          <Link href="/settings">{t("userAccountNav.settings")}</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
           <Link href="/dashboard">{t("userAccountNav.dashboard")}</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/dashboard/billing">{t("userAccountNav.billing")}</Link>
+          <Link href="/billing">{t("userAccountNav.billing")}</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem

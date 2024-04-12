@@ -1,9 +1,9 @@
 import { useServerTranslation } from "@/i18n";
-import { DashboardHeader } from "../Dashboard/molecules/Header";
-import { DashboardShell } from "../Dashboard/molecules/Shell";
+import { DashboardHeader } from "../../Dashboard/molecules/Header";
+import { DashboardShell } from "../../Dashboard/molecules/Shell";
 import { ResetPasswordSettingsForm } from "./molecules/ResetPasswordSettingsForm";
 
-const SettingsPage = async () => {
+export const ResetPasswordPage = async () => {
   const { t } = await useServerTranslation();
 
   return (
@@ -18,5 +18,3 @@ const SettingsPage = async () => {
     </DashboardShell>
   );
 };
-
-export default SettingsPage;

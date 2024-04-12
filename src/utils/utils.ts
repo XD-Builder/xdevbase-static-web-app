@@ -30,6 +30,5 @@ export function notEmpty<TValue>(
 }
 
 export const getBaseUrl = () => {
-  if (process.env.NEXT_PUBLIC_ROOT_DOMAIN) return `https://${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`;
-  return `http://localhost:${process.env.PORT ?? 3000}`; // dev SSR should use localhost
+  return process.env.NEXT_PUBLIC_ROOT_URL; 
 };

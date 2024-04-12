@@ -29,7 +29,7 @@ export function ResetPasswordForm() {
   const onSubmit = async (data: RegisterFormValues) => {
     try {
       await supabase().auth.resetPasswordForEmail(data.email, {
-        redirectTo: `${getBaseUrl()}/dashboard/settings`,
+        redirectTo: `${getBaseUrl()}/settings/reset-password`,
       });
       toast({
         title: t("resetPassword.checkYourEmailToReset"),

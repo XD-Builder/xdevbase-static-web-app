@@ -26,7 +26,7 @@ import { Separator } from "@/components/ui/separator";
 const signInWithOauth = (provider: Provider) => {
   void supabase().auth.signInWithOAuth({
     provider: provider,
-    options: { redirectTo: `${window.location.origin}/dashboard` },
+    options: { redirectTo: `${window.location.origin}/home` },
   });
 };
 

@@ -3,7 +3,6 @@
 import { EmptyPlaceholder } from "@/components/EmptyPlaceholder";
 import { DashboardHeader } from "./molecules/Header";
 import { DashboardShell } from "./molecules/Shell";
-import { api } from "@/trpc/react";
 import { LoadingScreen } from "@/components/Loading";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -23,7 +22,7 @@ export function DashboardPage() {
         >
           <Link href="/menu/create">
             <Button className="w-full" variant="outline">
-              {t("dashboard.createMenu")}
+              {t("dashboard.createDashboard")}
             </Button>
           </Link>
         </DashboardHeader>
@@ -31,13 +30,13 @@ export function DashboardPage() {
             <EmptyPlaceholder>
               <EmptyPlaceholder.Icon name="menu" />
               <EmptyPlaceholder.Title>
-                {t("dashboard.noMenusCreated")}
+                {t("dashboard.noDashboardCreated")}
               </EmptyPlaceholder.Title>
               <EmptyPlaceholder.Description>
-                {t("dashboard.noMenusCreatedDescription")}
+                {t("dashboard.noDashboardCreatedDescription")}
               </EmptyPlaceholder.Description>
               <Link href="/menu/create">
-                <Button variant="outline">{t("dashboard.createMenu")}</Button>
+                <Button variant="outline">{t("dashboard.createDashboard")}</Button>
               </Link>
             </EmptyPlaceholder>
         </div>

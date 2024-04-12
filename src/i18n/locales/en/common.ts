@@ -43,11 +43,11 @@ const messages = {
     confirmYourEmail: "Confirm your email",
   },
   dashboard: {
-    title: "Menu",
-    headingText: "Create and manage your menus.",
-    createMenu: "Create Menu",
-    noMenusCreated: "No Menus Created",
-    noMenusCreatedDescription: "You haven't created any menus yet",
+    title: "Dashboard",
+    headingText: "Create or view your properties dashboards and metrics",
+    createDashboard: "Create Dashboard",
+    noDashboardCreated: "No Dashboards Created",
+    noDashboardCreatedDescription: "You haven't created any dashboard yet",
   },
   dashboardSidenav: {
     menus: "Menu",
@@ -139,8 +139,10 @@ const messages = {
   },
   navbar: {
     login: "Login",
-    home: "Home",
-    dashboard: "Dashboard",
+    inbox: "Inbox",
+    properties: "Properties",
+    automation: "Automation",
+    marketplace: "Marketplace",
   },
   menuCreator: {
     changeLanguage: "Change Language",

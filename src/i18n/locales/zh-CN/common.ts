@@ -44,11 +44,11 @@ const messages: Resources["common"] = {
     confirmYourEmail: "确认您的电子邮件",
   },
   dashboard: {
-    title: "菜单",
-    headingText: "创建和管理您的菜单。",
-    createMenu: "创建菜单",
-    noMenusCreated: "未创建菜单",
-    noMenusCreatedDescription: "您尚未创建任何菜单",
+    title: "仪表板",
+    headingText: "创建或查看您的属性仪表板和指标",
+    createDashboard: "创建仪表板",
+    noDashboardCreated: "未创建仪表板",
+    noDashboardCreatedDescription: "您还没有创建任何仪表板",
   },
   dashboardSidenav: {
     menus: "菜单",
@@ -136,8 +136,10 @@ const messages: Resources["common"] = {
   },
   navbar: {
     login: "登录",
-    home: "首页",
-    dashboard: "仪表板",
+    inbox: "收件箱",
+    properties: "房产",
+    automation: "自动化",
+    marketplace: "市场"
   },
   menuCreator: {
     changeLanguage: "更改语言",

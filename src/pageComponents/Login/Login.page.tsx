@@ -8,7 +8,7 @@ import { Namespace, TFunction } from "i18next";
 
 const ContactUsCard = ({t}: {t: TFunction<Namespace, undefined>}) => {
   return (
-    <div className="max-w-xs rounded-md bg-slate-200 p-10 dark:bg-slate-50 dark:text-black">
+    <div className="max-w-xs rounded-md  p-10 dark:bg-foreground dark:text-black">
       <p className="mb-3 text-lg font-bold">{t("contactUsCard.title")}</p>
       <p className="mb-2 text-base">{t("contactUsCard.subtitle")}</p>
       <p>
