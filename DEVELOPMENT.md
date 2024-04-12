@@ -27,6 +27,14 @@ Perform the following steps to start developing database locally. See https://su
 4. `supabase db reset --local` to clear the local database to a clean state if you have applied some changes. It will also apply migration by default.
 5. `supabase db push --local` to push the migrations to local database.
 
+### Set up remote supabase db via CLI
+Perform the following steps to be connected to a remote supabase instance.
+1. `supabase login` to login to the Supabase instance.
+2. `supabase link --project-ref xyz` to link your project under the logged in account.
+3. `supabase db pull` to pull the remote db migrations
+4. `supabase db push` to push the migrations by running missing sql migrations in the remote db.
+5. `supabase migration list` to list the migrations from local and remote.
+
 ### Database Actions
 Supabase commands starting with `supabase db` provides database management functions. Notable commands are 
 1. `supabase db pull`  which pulls schema changes from a remote database.
