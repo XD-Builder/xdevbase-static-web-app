@@ -53,11 +53,19 @@ import {
   QrCode,
   ExternalLink,
   Wifi,
+  MessageCircle,
+  Home,
+  Workflow,
+  Store,
 } from "lucide-react";
 
 export type Icon = LucideIcon;
 
 export const Icons = {
+  message: MessageCircle,
+  home: Home,
+  workflow: Workflow,
+  store: Store,
   wifi: Wifi,
   languages: Languages,
   logo: Command,

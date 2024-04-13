@@ -13,6 +13,7 @@ import { buttonVariants } from "@/components/ui/button";
 export type NavItem = {
   title: string | React.ReactNode;
   href: Route<string>;
+  icon: keyof typeof Icons;
   disabled?: boolean;
   mobileOnly?: boolean;
 };
@@ -38,8 +39,10 @@ export function MainNav({ items, userLoggedIn, children }: MainNavProps) {
       {userLoggedIn ? (
         <>
           {items?.length ? (
-            <nav className="hidden gap-6 md:flex">
-              {items?.map((item, index) => (
+            <nav className="hidden gap-1 md:flex">
+              {items?.map((item, index) => { 
+                const Icon = Icons[item.icon || "arrowRight"];
+                return (
                 <Link
                   key={index}
                   href={item.disabled ? ("#" as Route) : item.href}
@@ -53,9 +56,11 @@ export function MainNav({ items, userLoggedIn, children }: MainNavProps) {
                     item.mobileOnly && "md:hidden"
                   )}
                 >
+                  <Icon className="mr-2 h-4 w-4"/>
                   {item.title}
                 </Link>
-              ))}
+               );
+              })}
             </nav>
           ) : null}
           <button

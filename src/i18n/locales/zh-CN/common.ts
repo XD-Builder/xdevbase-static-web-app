@@ -51,13 +51,17 @@ const messages: Resources["common"] = {
     noDashboardCreatedDescription: "您还没有创建任何仪表板",
   },
   dashboardSidenav: {
-    menus: "菜单",
     billing: "账单",
-    affiliates: "联盟",
+    affiliates: "附属机构",
     settings: "设置",
+    profile: "个人资料",
+    passwordReset: "重置密码",
   },
   settingsPage: {
-    headerDescription: "管理您的帐户设置",
+    headerDescription: "管理您的账户设置",
+  },
+  profilePage: {
+    headerDescription: "管理您的个人资料设置",
   },
   createMenu: {
     header: "创建",

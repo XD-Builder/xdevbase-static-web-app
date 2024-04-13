@@ -1,3 +1,5 @@
+import { profile } from "console";
+
 // TODO: Fix messages
 const messages = {
   login: {
@@ -50,13 +52,17 @@ const messages = {
     noDashboardCreatedDescription: "You haven't created any dashboard yet",
   },
   dashboardSidenav: {
-    menus: "Menu",
     billing: "Billing",
     affiliates: "Affiliates",
     settings: "Settings",
+    profile: "Profile",
+    passwordReset: "Password Reset",
   },
   settingsPage: {
     headerDescription: "Manage your account settings",
+  },
+  profilePage: {
+    headerDescription: "Manage your profile settings",
   },
   createMenu: {
     header: "Create",

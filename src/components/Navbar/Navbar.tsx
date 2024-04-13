@@ -16,18 +16,22 @@ const navbarItems: NavItem[] = [
   {
     title: <TranslatedText id="navbar.inbox"></TranslatedText>,
     href: "/inbox",
+    icon: "message"
   },
   {
     title: <TranslatedText id="navbar.properties"></TranslatedText>,
     href: "/properties",
+    icon: "home"
   },
   {
     title: <TranslatedText id="navbar.automation"></TranslatedText>,
     href: "/automation",
+    icon: "workflow"
   },
   {
     title: <TranslatedText id="navbar.marketplace"></TranslatedText>,
     href: "/marketplace",
+    icon: "store"
   }
 ];
 
