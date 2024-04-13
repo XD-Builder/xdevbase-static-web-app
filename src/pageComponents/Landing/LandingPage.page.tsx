@@ -10,7 +10,6 @@ import { Footer } from "./molecules/Footer";
 import { PricingSection } from "./molecules/PricingSection";
 import { redirect } from "next/navigation";
 import { getServerUser } from "@/utils/auth";
-import { useTheme } from "next-themes";
 
 const poppins = Poppins({
   weight: ["300", "400", "700"],
