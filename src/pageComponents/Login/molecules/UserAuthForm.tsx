@@ -51,7 +51,7 @@ export function UserAuthForm() {
 
     if (error) {
       toast({
-        title: "Error",
+        title: t("toastCommon.errorTitle"),
         description: error.message,
         variant: "destructive",
         duration: 9000,

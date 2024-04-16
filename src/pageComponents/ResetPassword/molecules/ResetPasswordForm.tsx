@@ -29,7 +29,7 @@ export function ResetPasswordForm() {
   const onSubmit = async (data: RegisterFormValues) => {
     try {
       await supabase().auth.resetPasswordForEmail(data.email, {
-        redirectTo: `${getBaseUrl()}/settings/reset-password`,
+        redirectTo: `${getBaseUrl()}/settings/account`,
       });
       toast({
         title: t("resetPassword.checkYourEmailToReset"),
@@ -39,7 +39,7 @@ export function ResetPasswordForm() {
     } catch (e) {
       if (isAuthError(e)) {
         toast({
-          title: "Error",
+          title: t("toastCommon.errorTitle"),
           description: e.message,
           variant: "destructive",
           duration: 9000,

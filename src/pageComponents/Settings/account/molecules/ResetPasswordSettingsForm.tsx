@@ -65,7 +65,7 @@ export function ResetPasswordSettingsForm() {
     } catch (e) {
       if (isAuthError(e)) {
         toast({
-          title: "Error",
+          title: t("toastCommon.errorTitle"),
           description: e.message,
           variant: "destructive",
           duration: 9000,

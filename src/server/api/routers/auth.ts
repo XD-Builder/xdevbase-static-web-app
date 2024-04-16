@@ -1,4 +1,7 @@
+import { useServerTranslation } from "@/i18n";
 import { createTRPCRouter, privateProcedure } from "@/server/api/trpc";
+import { TRPCError } from "@trpc/server";
+import { z } from "zod";
 
 export const authRouter = createTRPCRouter({
   getProfile: privateProcedure.query(({ ctx }) => {
@@ -8,4 +11,36 @@ export const authRouter = createTRPCRouter({
       },
     });
   }),
+  updateProfile: privateProcedure
+    .input(
+      z.object({
+        username: z.string().optional(),
+        fullName: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { t } = await useServerTranslation();
+
+      if (!!input.username) {
+        const existingUsername = await ctx.db.profiles.findUnique({
+          where: { username: input.username },
+        });
+
+        if (existingUsername) {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: t("trpcError.usernameAlreadyExists"),
+          });
+        }
+      }
+
+      return ctx.db.profiles.update({
+        where: {
+          id: ctx.user.id,
+        },
+        data: {
+          ...input,
+        },
+      });
+    }),
 });

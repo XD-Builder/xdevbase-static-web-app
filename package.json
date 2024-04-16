@@ -12,18 +12,14 @@
     "db:stop": "supabase stop",
     "db:diff": "supabase db diff -f",
     "supabase:db:pull:push": "supabase db pull && supabase db push",
-
     "build:dev": "cp .env.development .env.local && next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
     "build:prod": "cp .env.prod .env.local && next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
-
     "supabase:update:types:local": "supabase gen types typescript --local > src/server/supabase/supabaseTypes.ts",
     "supabase:update:types:dev": "supabase gen types typescript --project-id \"xkhymhrwtcxlvgpmqsya\" --schema public > src/server/supabase/supabaseTypes.ts",
     "supabase:update:types:prod": "supabase gen types typescript --project-id \"calvxwwdqgtmsoqolaor\" --schema public > src/server/supabase/supabaseTypes.ts",
-
     "prisma:build:local": "pnpm supabase:update:types:local && pnpm prisma db pull && pnpm prisma generate && pnpm prisma-case-format --file prisma/schema.prisma  && pnpm prisma generate",
     "prisma:build:dev": "pnpm backup:env && pnpm cp:devLocal2env && pnpm supabase:update:types:dev && pnpm prisma db pull && pnpm prisma generate && pnpm prisma-case-format --file prisma/schema.prisma  && pnpm prisma generate ; pnpm unbackup:env",
     "prisma:build:prod": "pnpm backup:env && pnpm cp:prodLocal2env && pnpm supabase:update:types:prod && pnpm prisma db pull && pnpm prisma generate && pnpm prisma-case-format --file prisma/schema.prisma  && pnpm prisma generate ; pnpm unbackup:env",
-
     "backup:env": "cp .env .env.backup",
     "unbackup:env": "mv .env.backup .env",
     "cp:dev2envLocal": "cp .env.development .env.local",

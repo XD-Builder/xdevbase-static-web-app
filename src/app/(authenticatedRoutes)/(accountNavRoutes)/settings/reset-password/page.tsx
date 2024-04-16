@@ -1,1 +1,0 @@
-export { ResetPasswordPage as default } from "@/pageComponents/Settings/reset-password/reset-password.page";

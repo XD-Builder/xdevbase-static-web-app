@@ -5,14 +5,14 @@ import { TranslatedText } from "@/components/TranslatedText";
 
 const sidebarNavItems = [
   {
-    title: <TranslatedText id="dashboardSidenav.settings" />,
+    title: <TranslatedText id="dashboardSidenav.profile" />,
     href: "/settings/profile",
     icon: "user",
   },
   {
-    title: <TranslatedText id="dashboardSidenav.passwordReset" />,
-    href: "/settings/reset-password",
-    icon: "lock",
+    title: <TranslatedText id="dashboardSidenav.account" />,
+    href: "/settings/account",
+    icon: "cog",
   },
   {
     title: <TranslatedText id="dashboardSidenav.billing" />,

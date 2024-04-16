@@ -57,11 +57,13 @@ import {
   Home,
   Workflow,
   Store,
+  Cog,
 } from "lucide-react";
 
 export type Icon = LucideIcon;
 
 export const Icons = {
+  cog: Cog,
   message: MessageCircle,
   home: Home,
   workflow: Workflow,

@@ -153,7 +153,7 @@ export function BillingForm() {
                     openLemonSqueezy(checkoutUrl);
                   } else {
                     toast({
-                      title: "Error",
+                      title: t("toastCommon.errorTitle"),
                       description: t("notifications.somethingWentWrong"),
                       variant: "destructive",
                     });

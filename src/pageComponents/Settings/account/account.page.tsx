@@ -3,7 +3,7 @@ import { DashboardHeader } from "../../Dashboard/molecules/Header";
 import { DashboardShell } from "../../Dashboard/molecules/Shell";
 import { ResetPasswordSettingsForm } from "./molecules/ResetPasswordSettingsForm";
 
-export const ResetPasswordPage = async () => {
+export const AccountPage = async () => {
   const { t } = await useServerTranslation();
 
   return (
@@ -12,7 +12,7 @@ export const ResetPasswordPage = async () => {
         heading={t("dashboardSidenav.settings")}
         text={t("settingsPage.headerDescription")}
       />
-      <div className="flex justify-center ">
+      <div className="flex justify-center">
         <ResetPasswordSettingsForm></ResetPasswordSettingsForm>
       </div>
     </DashboardShell>
