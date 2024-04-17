@@ -1,8 +1,5 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { type TFunction } from "i18next";
-import * as React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
@@ -23,21 +20,39 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { isError } from "@tanstack/react-query";
+import { ImageUploadInput } from "@/components/ImageUploadInput/ImageUploadInput";
+import { IMAGE_FILE_NAMES, SUPPORTED_IMAGE_FORMATS } from "@/utils/constant";
+import { uploadUserFiles } from "@/utils/uploadFile";
+import { assert } from "@/utils/assert";
+import { generateUserImagePath } from "@/server/supabase/storagePath";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { TFunction } from "i18next";
 
-export const profileSchema = (translate: TFunction) =>
+export const profileSchema = (t: TFunction) =>
   z.object({
     username: z
       .string()
-      .min(6, translate("profileValidation.usernameLengthValidation"))
-      .max(20, translate("profileValidation.usernameLengthValidation"))
+      .min(6, t("profileValidation.usernameLengthValidation"))
+      .max(20, t("profileValidation.usernameLengthValidation"))
       .regex(
         /^[a-zA-Z0-9]*$/,
-        translate("profileValidation.usernameAlphaNumericValidation")
+        t("profileValidation.usernameAlphaNumericValidation")
       ),
     fullName: z
       .string()
-      .min(6, translate("profileValidation.fullNameLengthValidation"))
-      .max(40, translate("profileValidation.fullNameLengthValidation")),
+      .min(6, t("profileValidation.fullNameLengthValidation"))
+      .max(40, t("profileValidation.fullNameLengthValidation")),
+    avatarToUpload: z
+      .custom<Blob>((val) => val instanceof Blob)
+      .refine(
+        (files) => files?.size <= 1 * 1024 * 1024,
+        t("profileValidation.avatarFileSizeValidation")
+      )
+      .refine(
+        (files) => SUPPORTED_IMAGE_FORMATS.has(files?.type),
+        t("profileValidation.avatarFileTypeValidation")
+      )
+      .optional(),
   });
 
 type RegisterFormValues = ZodReturnType<typeof profileSchema>;
@@ -57,20 +72,42 @@ export function ProfileSettingsForm() {
 
   const { toast } = useToast();
   const { t } = useTranslation();
-  const form = useForm<RegisterFormValues>({
+  const methods = useForm<RegisterFormValues>({
     resolver: zodResolver(profileSchema(t)),
     defaultValues: {
       username: user?.username ?? "",
       fullName: user?.fullName ?? "",
+      avatarToUpload: undefined,
     },
   });
 
-  const onSubmit = async ({ username, fullName }: RegisterFormValues) => {
+  const onSubmit = async ({
+    avatarToUpload,
+    username,
+    fullName,
+  }: RegisterFormValues) => {
+    let avatarUrl: string | undefined | null;
     try {
+      if (avatarToUpload) {
+        assert(!!user, t("commonValidation.userMustBeLoggedIn"));
+        const { url, error } = await uploadUserFiles(
+          generateUserImagePath({
+            userId: user.id,
+            imageFileName: IMAGE_FILE_NAMES.AVATAR,
+          }),
+          avatarToUpload
+        );
+        if (error) throw error;
+
+        avatarUrl = url;
+      } else if (avatarToUpload === null) {
+        avatarUrl = null;
+      }
+
       if (username == user?.username) {
-        await mutateAsync({ fullName });
+        await mutateAsync({ fullName, avatarUrl });
       } else {
-        await mutateAsync({ username, fullName });
+        await mutateAsync({ username, fullName, avatarUrl });
       }
     } catch (e) {
       if (isError(e)) {
@@ -83,21 +120,40 @@ export function ProfileSettingsForm() {
       }
     }
   };
-
   return (
-    <Card x-chunk="dashboard-04-chunk-1">
-      <Form {...form}>
+    <Card>
+      <Form {...methods}>
         <form
           className="grid w-[400px] gap-0"
-          onSubmit={(e) => void form.handleSubmit(onSubmit)(e)}
+          onSubmit={(e) => void methods.handleSubmit(onSubmit)(e)}
         >
           <CardHeader>
             <CardTitle>{t("updateProfile.title")}</CardTitle>
             <CardDescription>{t("updateProfile.description")}</CardDescription>
           </CardHeader>
           <CardContent>
+            <FormInput label={t("common.avatarLabel")}>
+              <div className="h-[200px] w-[200px]">
+                <ImageUploadInput
+                  name="avatarToUpload"
+                  control={methods.control}
+                  defaultImageUrl={user?.avatarUrl ?? undefined}
+                  aspectRatio={1 / 1}
+                  cropImageAspectRatio={1 / 1}
+                  dimensionsRestrictions={{
+                    maxHeight: 200,
+                    minHeight: 50,
+                    maxWidth: 200,
+                    minWidth: 50,
+                  }}
+                  restoreButton={false}
+                  circleCrop={true}
+                />
+              </div>
+            </FormInput>
+            <br />
             <FormField
-              control={form.control}
+              control={methods.control}
               name="username"
               render={({ field }) => (
                 <FormInput label={t("common.userNameLabel")}>
@@ -106,7 +162,7 @@ export function ProfileSettingsForm() {
               )}
             />
             <FormField
-              control={form.control}
+              control={methods.control}
               name="fullName"
               render={({ field }) => (
                 <FormInput label={t("common.fullNameLabel")}>
@@ -116,7 +172,7 @@ export function ProfileSettingsForm() {
             />
           </CardContent>
           <CardFooter className="border-t px-6 py-4">
-            <Button loading={form.formState.isSubmitting} type="submit">
+            <Button loading={methods.formState.isSubmitting} type="submit">
               {t("common.submitButton")}
             </Button>
           </CardFooter>

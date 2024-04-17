@@ -47,3 +47,7 @@ export const getUserAsAdmin = async (token: string) => {
 
   return data;
 };
+
+export const storageBucketsNames = {
+  userFiles: "user-files",
+} as const;

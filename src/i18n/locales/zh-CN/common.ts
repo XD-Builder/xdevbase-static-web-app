@@ -27,8 +27,10 @@ const messages: Resources["common"] = {
     required: "此字段为必填项",
     email: "此字段必须是有效的电子邮件地址",
     passwordConfirm: "密码必须匹配",
+    userMustBeLoggedIn: "用户未登录"
   },
   common: {
+    avatarLabel: "头像",
     userNameLabel: "用户名",
     fullNameLabel: "全名",
     avatarUrlLabel: "头像URL",
@@ -56,6 +58,8 @@ const messages: Resources["common"] = {
     usernameAlphaNumericValidation: "用户名必须为字母数字",
     avatarUrlValidation: "头像URL必须是有效的URL",
     fullNameLengthValidation: "全名必须在6到40个字符之间",
+    avatarFileSizeValidation: "头像文件大小必须小于1MB",
+    avatarFileTypeValidation: "头像文件类型必须是 JPG、JPEG、PNG 或 WEBP 扩展名"
   },
   trpcError: {
     usernameAlreadyExists: "用户名已存在",

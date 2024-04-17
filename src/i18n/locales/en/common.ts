@@ -21,12 +21,8 @@ const messages = {
     checkYourEmail: "Check your email",
     passwordChangedSuccessfully: "Password changed successfully",
   },
-  commonValidation: {
-    required: "This field is required",
-    email: "This field must be a valid email address",
-    passwordConfirm: "Passwords must match",
-  },
   common: {
+    avatarLabel: "Avatar",
     userNameLabel: "Username",
     fullNameLabel: "Full Name",
     avatarUrlLabel: "Avatar URL",
@@ -44,6 +40,12 @@ const messages = {
     passwordConfirmationValidation: "Passwords must match",
     confirmYourEmail: "Confirm your email",
   },
+  commonValidation: {
+    required: "This field is required",
+    email: "This field must be a valid email address",
+    passwordConfirm: "Passwords must match",
+    userMustBeLoggedIn: "User is not logged in."
+  },
   updateProfile: {
     title: "Update Profile",
     description: "Update your public profile information",
@@ -54,6 +56,8 @@ const messages = {
     usernameAlphaNumericValidation: "Username must be alphanumeric",
     avatarUrlValidation: "Avatar URL must be a valid URL",
     fullNameLengthValidation: "Full name must be between 6 and 40 characters",
+    avatarFileSizeValidation: "Avatar file size must be less than 1MB",
+    avatarFileTypeValidation: "Avatar file type must be JPG, JPEG, PNG or WEBP extensions",
   },
   trpcError: {
     usernameAlreadyExists: "Username already exists"

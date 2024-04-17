@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+"use client";
 import { useEffect, useRef, useState } from "react";
 import {
   type FieldPath,
@@ -21,10 +21,11 @@ import { Icons } from "../Icons";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { CropImageModal } from "../CropImageModal/CropImageModal";
 import { useTranslation } from "react-i18next";
+import { toast } from "../ui/use-toast";
 
 export type ImageUploadProps<
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 > = UseControllerProps<TFieldValues, TName> & {
   imageProps?: ImageProps;
   defaultImageUrl?: string;
@@ -40,7 +41,7 @@ export type ImageUploadProps<
 
 export const ImageUploadInput = <
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >({
   name,
   dimensionsRestrictions,
@@ -52,7 +53,7 @@ export const ImageUploadInput = <
   helperText,
   restoreButton = true,
 }: ImageUploadProps<TFieldValues, TName>) => {
-  const { filesContent, errors, clear, plainFiles, openFilePicker } =
+  const { errors, clear, plainFiles, filesContent, openFilePicker } =
     useFilePicker({
       readAs: "DataURL",
       accept: "image/*",
@@ -70,46 +71,32 @@ export const ImageUploadInput = <
   } = useFormContext();
 
   const {
-    field: { onChange, onBlur, value },
+    field: { value, onChange, onBlur },
     fieldState: { error },
   } = useController({
     name,
     control,
   });
 
+  const objectUrl = useRef<string | null>(
+    value ? URL.createObjectURL(value) : null
+  );
+  const [imageSource, setImageSource] = useState<string | undefined>(
+    objectUrl.current ?? defaultImageUrl
+  );
+  const previousErrors = useRef({ errors, error });
+
+  const previousFiles = useRef({ filesContent, plainFiles });
+
   const handleSetError = (reason: string | undefined) => {
     if (reason) {
       setValidationError(name, {
         message: reason,
       });
-
       return;
     }
-
     clearErrors(name);
   };
-
-  const objectUrl = useRef<string | null>(
-    value ? URL.createObjectURL(value) : null,
-  );
-  const [imageSource, setImageSource] = useState(
-    objectUrl.current ?? defaultImageUrl,
-  );
-  const previousErrors = useRef(errors);
-  const fileErrorMessage =
-    errors.length > 0
-      ? getErrorMessagesFromFilePicker(errors[0] as FilePickerError).join("\n")
-      : undefined;
-
-  if (
-    previousErrors.current !== errors &&
-    error?.message !== fileErrorMessage
-  ) {
-    previousErrors.current = errors;
-    handleSetError(fileErrorMessage);
-  }
-
-  const previousFiles = useRef({ filesContent, plainFiles });
 
   if (
     filesContent.length > 0 &&
@@ -135,7 +122,7 @@ export const ImageUploadInput = <
     handleSetError(undefined);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     openFilePicker();
     onBlur();
   };
@@ -149,14 +136,37 @@ export const ImageUploadInput = <
       setImageSource(imageObjectUrl);
     }
 
+    const fileErrorMessage =
+      errors.length > 0
+        ? getErrorMessagesFromFilePicker(errors[0] as FilePickerError).join(
+            "\n"
+          )
+        : undefined;
+    if (
+      previousErrors.current.errors !== errors &&
+      previousErrors.current.error !== error &&
+      error?.message !== fileErrorMessage
+    ) {
+      previousErrors.current.errors = errors;
+      previousErrors.current.error = error;
+      const description = fileErrorMessage ?? error?.message;
+      toast({
+        title: t("toastCommon.errorTitle"),
+        description,
+        variant: "destructive",
+        duration: 9000,
+      });
+      setImageSource(defaultImageUrl);
+      onChange(undefined);
+    }
+
     return () => {
       if (imageObjectUrl) {
         URL.revokeObjectURL(imageObjectUrl); // avoid memory leaks
         objectUrl.current = null;
       }
     };
-  }, [value]);
-
+  }, [value, errors, error, t, defaultImageUrl, onChange]);
   return (
     <>
       <CropImageModal
@@ -170,7 +180,7 @@ export const ImageUploadInput = <
       <AspectRatio
         ratio={aspectRatio}
         className={cn(
-          "flex w-full items-center justify-center overflow-hidden rounded-lg border-2 border-gray-400",
+          "flex w-full items-center justify-center overflow-hidden rounded-lg border-2 border-gray-400"
         )}
       >
         <div
@@ -180,20 +190,19 @@ export const ImageUploadInput = <
           }
         >
           {imageSource ? (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
+              alt="Upload Image"
               className={cn(
-                "h-full w-full border-2 border-gray-400 object-contain dark:border-gray-600",
+                "h-full w-full border-2 border-gray-400 object-contain dark:border-gray-600"
               )}
-              // @ts-ignore
               src={imageSource}
-              alt="Image"
-              {...imageProps}
             />
           ) : (
             <div className="flex h-full w-full flex-col items-center justify-center">
               <Icons.image
                 style={{
-                  height: "30%",
+                  height: "100%",
                 }}
               />
             </div>
@@ -205,7 +214,7 @@ export const ImageUploadInput = <
               handleSubmit();
             }}
             className={cn(
-              "absolute left-0 top-0 h-full w-full  min-w-[20px] border-2 border-gray-500 bg-gray-200 opacity-0 transition-opacity duration-200 ease-in-out hover:opacity-90 focus:bg-gray-200",
+              "absolute left-0 top-0 h-full w-full  min-w-[20px] border-2 border-gray-500 bg-gray-200 opacity-0 transition-opacity duration-200 ease-in-out hover:opacity-90 focus:bg-gray-200"
             )}
             variant="outline"
           >

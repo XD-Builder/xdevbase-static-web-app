@@ -14,6 +14,8 @@ import { supabase } from "@/server/supabase/supabaseClient";
 import { api } from "@/trpc/react";
 import Image from "next/image";
 import { CircleUser } from "lucide-react";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { AvatarImage } from "@radix-ui/react-avatar";
 
 export function UserAccountNav() {
   const { data: user } = api.auth.getProfile.useQuery();
@@ -24,7 +26,10 @@ export function UserAccountNav() {
       <DropdownMenuTrigger>
         <div className="flex items-center gap-2">
           {user?.avatarUrl ? (
-            <Image src={user?.avatarUrl} alt="User avatar" />
+            <Avatar>
+            <AvatarImage src={user?.avatarUrl} alt="User avatar" />
+            <AvatarFallback><CircleUser className="h-5 w-5" /></AvatarFallback>
+          </Avatar>
           ) : (
             <CircleUser className="h-5 w-5" />
           )}

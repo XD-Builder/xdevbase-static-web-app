@@ -1,5 +1,9 @@
-export const HomePage = async () => {
+"use client";
+
+export const HomePage = () => {
   return (
-    <>home page</>
-  )
+    <div>
+      <p>Home Page coming soon...</p>
+    </div>
+  );
 };
