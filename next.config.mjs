@@ -6,6 +6,9 @@ const nextConfig = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  /**
+   * Redirect to xdevbase.com policy page as it's better managed there.
+   */
   redirects: async () => {
     return [
       {
@@ -19,6 +22,17 @@ const nextConfig = {
         permanent: true,
       },
     ];
+  },
+  /**
+   * Allowed remote image domains
+   */
+  images: {
+    remotePatterns: [
+      { hostname: "avatars.githubusercontent.com" },
+      { hostname: "illustrations.popsy.co" },
+      { hostname: "lh3.googleusercontent.com" },
+      { hostname: "platform-lookaside.fbsbx.com" },
+    ],
   },
 };
 
