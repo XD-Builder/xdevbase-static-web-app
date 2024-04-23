@@ -13,8 +13,8 @@
     "db:diff": "supabase db diff -f",
     "db:pull": "supabase db pull",
     "db:push": "supabase db push",
-    "build:dev": "cp .env.development .env.local && next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
-    "build:prod": "cp .env.prod .env.local && next build && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/",
+    "build:dev": "cp .env.development .env.local && next build",
+    "build:prod": "cp .env.prod .env.local && next build",
     "supabase:update:types:local": "supabase gen types typescript --local > src/server/supabase/supabaseTypes.ts",
     "supabase:update:types:dev": "supabase gen types typescript --project-id \"xkhymhrwtcxlvgpmqsya\" --schema public > src/server/supabase/supabaseTypes.ts",
     "supabase:update:types:prod": "supabase gen types typescript --project-id \"calvxwwdqgtmsoqolaor\" --schema public > src/server/supabase/supabaseTypes.ts",
@@ -97,8 +97,5 @@
     "prisma-case-format": "^2.2.1",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.3"
-  },
-  "engines": {
-    "node": "18.17.1"
   }
 }
