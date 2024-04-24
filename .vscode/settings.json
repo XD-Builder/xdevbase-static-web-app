@@ -1,6 +1,6 @@
 {
   "[typescript]": {
-    "editor.defaultFormatter": "denoland.vscode-deno"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "cSpell.words": [
     "Authed",
@@ -12,6 +12,7 @@
     "lemonsqueezy",
     "Lngs",
     "lucide",
+    "maplibregl",
     "nextjs",
     "sonner",
     "SQUEEZY",

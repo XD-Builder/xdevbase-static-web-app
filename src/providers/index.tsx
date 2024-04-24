@@ -2,8 +2,9 @@
 
 import { ThemeProvider } from "next-themes";
 import {
-  AnalyticsProvider,
+  GoogleAnalyticsProvider,
   UmamiAnalyticsProvider,
+  VercelAnalyticsProvider,
 } from "./AnalyticsProvider/AnalyticsProvider";
 import React from "react";
 import { type Language } from "@/i18n/settings";
@@ -25,7 +26,8 @@ export function Providers({ children, initialLanguage }: ProvidersProps) {
       <ThemeProvider attribute="class">
         {children}
       </ThemeProvider>
-      <AnalyticsProvider />
+      <GoogleAnalyticsProvider />
+      <VercelAnalyticsProvider />
       <UmamiAnalyticsProvider />
     </I18NextProvider>
   );

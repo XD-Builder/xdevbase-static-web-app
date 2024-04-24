@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { useSelectedLayoutSegment } from "next/navigation";
+import { usePathname, useSelectedLayoutSegment } from "next/navigation";
 import { cn } from "@/utils/cn";
 import { Icons } from "@/components/Icons";
 import { MobileNav } from "./MobileNav";
@@ -25,6 +25,7 @@ interface MainNavProps {
 }
 
 export function MainNav({ items, userLoggedIn, children }: MainNavProps) {
+  const path = usePathname();
   const segment = useSelectedLayoutSegment();
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
 
@@ -53,7 +54,8 @@ export function MainNav({ items, userLoggedIn, children }: MainNavProps) {
                       ? "text-foreground"
                       : "text-foreground/60",
                     item.disabled && "cursor-not-allowed opacity-80",
-                    item.mobileOnly && "md:hidden"
+                    item.mobileOnly && "md:hidden",
+                    item.href === path ? "bg-accent" : "transparent"
                   )}
                 >
                   <Icon className="mr-2 h-4 w-4"/>

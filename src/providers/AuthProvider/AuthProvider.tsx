@@ -69,7 +69,6 @@ export const AuthProvider = ({
   useEffect(() => {
     const client = supabase();
 
-    // If the 
     void client 
       .auth.getSession()
       .then(({ data: { session } }) => {

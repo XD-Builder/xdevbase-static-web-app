@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { supabase } from "@/server/supabase/supabaseClient";
 import { api } from "@/trpc/react";
-import Image from "next/image";
 import { CircleUser } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
