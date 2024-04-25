@@ -73,6 +73,7 @@ const messages: Resources["common"] = {
   },
   trpcError: {
     usernameAlreadyExists: "用户名已存在",
+    invalidGeocodingResponse: "地理编码服务无效响应"
   },
   dashboard: {
     title: "仪表板",

@@ -4,6 +4,7 @@ import { ZodError } from "zod";
 
 import { db } from "@/server/db";
 import { getUserAsAdmin } from "@/server/supabase/supabaseClient";
+import { mapRatelimiter } from "@/utils/rateLimiter";
 
 /**
  * 1. DEFINITION
@@ -88,3 +89,32 @@ const enforceUserIsAuthed = t.middleware(async ({ ctx, next }) => {
  * Private (authenticated) procedure
  */
 export const privateProcedure = t.procedure.use(enforceUserIsAuthed);
+
+export const enforceIsAuthedIsRateLimited = t.middleware(async ({ ctx, next }) => {
+  if (!ctx.user) {
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+    });
+  }
+
+  let key = `${ctx.user.id}-map-request`;
+  const phoneOrEmail = ctx.user.phone || ctx.user.email;
+
+  if (phoneOrEmail) {
+    key = `${key}-${phoneOrEmail}`
+  }
+  const { success } = await mapRatelimiter.limit(key);
+  if (!success) {
+    throw new TRPCError({
+      code: "TOO_MANY_REQUESTS",
+    });
+  }
+
+  return next({
+    ctx: {
+      user: ctx.user,
+    },
+  });
+});
+
+export const privateRateLimitedMapProcedure = privateProcedure.use(enforceIsAuthedIsRateLimited);

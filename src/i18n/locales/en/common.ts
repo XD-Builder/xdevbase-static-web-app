@@ -141,7 +141,8 @@ const messages = {
     avatarFileTypeValidation: "Avatar file type must be JPG, JPEG, PNG or WEBP extensions",
   },
   trpcError: {
-    usernameAlreadyExists: "Username already exists"
+    usernameAlreadyExists: "Username already exists",
+    invalidGeocodingResponse: "Invalid response from geocoding service"
   },
   dashboard: {
     title: "Dashboard",
