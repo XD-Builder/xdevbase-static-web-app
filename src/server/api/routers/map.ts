@@ -1,8 +1,6 @@
 import { z } from "zod";
 
 import { createTRPCRouter, privateRateLimitedMapProcedure } from "@/server/api/trpc";
-import { TRPCError } from "@trpc/server";
-import { t } from "i18next";
 import { mapboxGeocodingResponseSchema } from "@/components/Map/MapBoxGeoCodingResponse.schema";
 
 export const mapRouter = createTRPCRouter({
