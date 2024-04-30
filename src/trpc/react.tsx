@@ -41,7 +41,14 @@ export function TRPCReactProvider(props: {
   children: React.ReactNode;
   headers: Headers;
 }) {
-  const [queryClient] = useState(() => new QueryClient());
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        /* 24 hours */
+        staleTime: 1000 * 60 * 60 * 24,
+      },
+    },
+  }));
   const [trpcClient] = useState(() =>
     api.createClient({
       transformer,

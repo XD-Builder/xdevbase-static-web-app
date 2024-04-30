@@ -26,7 +26,7 @@ export function UserAccountNav() {
         <div className="flex items-center gap-2">
           {user?.avatarUrl ? (
             <Avatar>
-            <AvatarImage src={user?.avatarUrl} alt="User avatar" />
+            <AvatarImage src={user?.avatarUrl} alt="User Avatar" />
             <AvatarFallback><CircleUser className="h-5 w-5" /></AvatarFallback>
           </Avatar>
           ) : (
