@@ -14,7 +14,7 @@ import {
   type AddressFormValues,
 } from "./AddressForm.schema";
 import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator"
+import { Separator } from "@/components/ui/separator";
 import { Option } from "@/components/Search/Autocomplete";
 import { AutoComplete } from "@/components/Search/Autocomplete";
 import { MiniMap, MiniMapProps } from "@/components/Map/Minimap";
@@ -73,7 +73,7 @@ export function AddressForm() {
 
       const formFieldMapping = {
         addressLine1: context.address?.name,
-        city: context.neighborhood?.name?.split(" ")[0],
+        city: context.neighborhood?.name?.split(" ")[0] || context.place?.name,
         state: context.region?.region_code,
         zip: context.postcode?.name,
         country: context.country?.name,
@@ -86,6 +86,7 @@ export function AddressForm() {
           latitude,
           zoom: 14,
         });
+        console.log(minimapProps)
       }
 
       for (const [field, value] of Object.entries(formFieldMapping)) {
@@ -113,90 +114,92 @@ export function AddressForm() {
 
   return (
     <Form {...form}>
-      <form
-        className="mx-auto flex w-full flex-row flex-1 items-center justify-center gap-4"
-        onSubmit={(e) => void form.handleSubmit(onSubmit)(e)}
-      >
-        <div className="w-[400px] mr-10">
-          <div className="my-8" >
-            <AutoComplete
-              options={options}
-              emptyMessage="No results."
-              placeholder="Type to autofill your address"
-              isLoading={false}
-              onValueComplete={(value) => {
-                updateForm(value.value);
-              }}
-              value={autofillValue}
-              onValueChange={(value) => {
-                setAutofillValue(value);
-              }}
-              disabled={false}
+      <form onSubmit={(e) => void form.handleSubmit(onSubmit)(e)}>
+        <div className="mx-auto flex w-full lg:flex-row flex-col flex-1 items-center justify-left gap-4">
+          <div className="flex-grow min-w-[450px] mr-10">
+            <div className="mt-6 mb-10">
+              <AutoComplete
+                options={options}
+                emptyMessage="No results."
+                placeholder="Type to autofill your address"
+                isLoading={false}
+                onValueComplete={(value) => {
+                  updateForm(value.value);
+                }}
+                value={autofillValue}
+                onValueChange={(value) => {
+                  setAutofillValue(value);
+                }}
+                disabled={false}
+              />
+            </div>
+
+            <FormField
+              control={form.control}
+              name="addressLine1"
+              render={({ field }) => (
+                <FormInput label={t("address.addressLine1")}>
+                  <Input {...field} autoComplete="address-line1" />
+                </FormInput>
+              )}
             />
+            <FormField
+              control={form.control}
+              name="addressLine2"
+              render={({ field }) => (
+                <FormInput label={t("address.addressLine2")}>
+                  <Input {...field} autoComplete="address-line2" />
+                </FormInput>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="city"
+              render={({ field }) => (
+                <FormInput label={t("address.city")}>
+                  <Input {...field} autoComplete="address-level2" />
+                </FormInput>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="state"
+              render={({ field }) => (
+                <FormInput label={t("address.state")}>
+                  <Input {...field} autoComplete="address-level1" />
+                </FormInput>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="zip"
+              render={({ field }) => (
+                <FormInput label={t("address.zip")}>
+                  <Input {...field} autoComplete="postal-code" />
+                </FormInput>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="country"
+              render={({ field }) => (
+                <FormInput label={t("address.country")}>
+                  <Input {...field} autoComplete="country-name" />
+                </FormInput>
+              )}
+            />
+            <Separator className="my-5" />
           </div>
-          <FormField
-            control={form.control}
-            name="addressLine1"
-            render={({ field }) => (
-              <FormInput label={t("address.addressLine1")}>
-                <Input {...field} autoComplete="address-line1" />
-              </FormInput>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="addressLine2"
-            render={({ field }) => (
-              <FormInput label={t("address.addressLine2")}>
-                <Input {...field} autoComplete="address-line2" />
-              </FormInput>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="city"
-            render={({ field }) => (
-              <FormInput label={t("address.city")}>
-                <Input {...field} autoComplete="address-level2" />
-              </FormInput>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="state"
-            render={({ field }) => (
-              <FormInput label={t("address.state")}>
-                <Input {...field} autoComplete="address-level1" />
-              </FormInput>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="zip"
-            render={({ field }) => (
-              <FormInput label={t("address.zip")}>
-                <Input {...field} autoComplete="postal-code" />
-              </FormInput>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="country"
-            render={({ field }) => (
-              <FormInput label={t("address.country")}>
-                <Input {...field} autoComplete="country-name" />
-              </FormInput>
-            )}
-          />
-          <Separator className="my-5" />
-          <Button loading={form.formState.isSubmitting} type="submit">
-            {t("common.continueButton")}
-          </Button>
+
+          <div className="w-[500px]">
+            {minimapProps && <MiniMap {...minimapProps} />}
+          </div>
         </div>
 
-        <div className="w-[300px]">
-          {minimapProps && <MiniMap {...minimapProps} />}
-        </div>
+        <Button loading={form.formState.isSubmitting} type="submit">
+          {t("common.continueButton")}
+        </Button>
+        <div className="mx-auto flex w-full flex-1 items-center justify-left gap-4"></div>
       </form>
     </Form>
   );

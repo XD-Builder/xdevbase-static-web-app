@@ -3,15 +3,12 @@
 import { EmptyPlaceholder } from "@/components/EmptyPlaceholder";
 import { DashboardHeader } from "./molecules/Header";
 import { DashboardShell } from "./molecules/Shell";
-import { LoadingScreen } from "@/components/Loading";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 
 export function DashboardPage() {
   const { t } = useTranslation();
-
-  if (false) return <LoadingScreen />;
 
   return  <>
     <main className="flex w-full flex-1 flex-col overflow-hidden">

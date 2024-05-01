@@ -118,7 +118,17 @@ const messages = {
     },
   },
 
+  
   // Authenticated Page
+  propertiesPage: {
+    createProperties: "Create Properties",
+    enterAddress: "Autofill address and verify via the minimap.",
+    properties: "Properties",
+    propertiesList: "Properties List",
+    propertiesListDescription: "List of properties",
+    propertiesListEmpty: "No properties found",
+    propertiesListEmptyDescription: "You haven't created any properties yet",
+  },
   address: {
     addressLine1: "Address",
     addressLine2: "Address Line 2",

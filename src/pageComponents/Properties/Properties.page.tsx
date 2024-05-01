@@ -1,10 +1,28 @@
 "use client";
 import React from "react";
-import {AddressForm} from "./molecules/AddressFormServer";
+import { EmptyPlaceholder } from "@/components/EmptyPlaceholder";
+import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 /**
- * The login page has the login form along with links to register and reset-password.
+ * The properties page allows the user to view properties.
  */
 export function Properties() {
-  return <AddressForm />;
+  const { t } = useTranslation();
+
+  return (
+    <EmptyPlaceholder>
+      <EmptyPlaceholder.Icon name="home" />
+      <EmptyPlaceholder.Title>
+        {t("propertiesPage.propertiesListEmpty")}
+      </EmptyPlaceholder.Title>
+      <EmptyPlaceholder.Description>
+        {t("propertiesPage.propertiesListEmptyDescription")}
+      </EmptyPlaceholder.Description>
+      <Link href="/properties/create">
+        <Button variant="outline">{t("propertiesPage.createProperties")}</Button>
+      </Link>
+    </EmptyPlaceholder>
+  );
 }

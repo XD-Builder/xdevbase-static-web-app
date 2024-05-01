@@ -1,8 +1,7 @@
 "use client";
 import * as React from "react";
-
 import Map, {Marker, ScaleControl} from "react-map-gl/maplibre";
-import "maplibre-gl/dist/maplibre-gl.css";
+import 'maplibre-gl/dist/maplibre-gl.css';
 
 export type MiniMapProps = {
   longitude: number;
@@ -11,11 +10,11 @@ export type MiniMapProps = {
 };
 
 export function MiniMap(miniMapProps: MiniMapProps) {
+  console.log(miniMapProps);
   return (
     <Map
-      initialViewState={miniMapProps}
-      style={{ width: 500, height: 500 }}
-      attributionControl={false}
+      {...miniMapProps}
+      style={{ width: 400, height: 400 }}
       mapStyle={`https://api.maptiler.com/maps/bright-v2/style.json?key=${process.env.NEXT_PUBLIC_REACT_APP_MAPTILER_API_KEY}`}
     >
       <Marker
@@ -24,9 +23,9 @@ export function MiniMap(miniMapProps: MiniMapProps) {
         anchor="bottom"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="map/pin.png" alt="Map Pin Icon" />
+        <img src="/map/pin.png" alt="Map Pin Icon" />
       </Marker>
-      <ScaleControl />
+      <ScaleControl position="bottom-right" />
     </Map>
   );
 }

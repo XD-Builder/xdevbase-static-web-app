@@ -3,8 +3,17 @@ CREATE TABLE properties (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL,
   description TEXT,
+  full_address TEXT,
+
+  -- Address Sections
+  address_line1 TEXT NOT NULL,
+  address_line2 TEXT,
+  city TEXT NOT NULL,
+  state TEXT NOT NULL,
+  zip_code TEXT NOT NULL,
+
+  -- References
   owner_id INTEGER NOT NULL REFERENCES users(id),
-  address TEXT
 );
 
 -- Chats table

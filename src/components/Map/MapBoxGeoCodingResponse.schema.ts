@@ -13,7 +13,11 @@ export const mapboxGeocodingResponseSchema = z.object({
           address: z.object({
             name: z.string().optional(),
           }).optional(),
+          // both can be the city
           neighborhood: z.object({
+            name: z.string().optional(),
+          }).optional(),
+          place: z.object({
             name: z.string().optional(),
           }).optional(),
           // County
