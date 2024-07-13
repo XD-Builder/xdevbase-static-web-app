@@ -45,7 +45,7 @@ export const profileSchema = (t: TFunction) =>
     avatarToUpload: z
       .custom<Blob>((val) => val instanceof Blob)
       .refine(
-        (files) => files?.size <= 1 * 1024 * 1024,
+        (files) => files?.size <= 1 * 1024 * 5024,
         t("profileValidation.avatarFileSizeValidation")
       )
       .refine(

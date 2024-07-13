@@ -14,7 +14,7 @@ export function MiniMap(miniMapProps: MiniMapProps) {
   return (
     <Map
       {...miniMapProps}
-      style={{ width: 400, height: 400 }}
+      style={{ width: 500, height: 500 }}
       mapStyle={`https://api.maptiler.com/maps/bright-v2/style.json?key=${process.env.NEXT_PUBLIC_REACT_APP_MAPTILER_API_KEY}`}
     >
       <Marker

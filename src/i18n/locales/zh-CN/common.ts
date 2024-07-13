@@ -1,140 +1,7 @@
 import { type Resources } from "../types";
 
 const messages: Resources["common"] = {
-  login: {
-    title: "登录",
-    emailLabel: "邮箱",
-    passwordLabel: "密码",
-    submitButton: "登录",
-    forgotPasswordButton: "忘记密码？",
-    registerButton: "注册",
-  },
-  register: {
-    title: "注册",
-    submitButton: "注册",
-    loginButton: "登录",
-    checkYourEmailForConfirmation: "请查看您的电子邮件以确认",
-  },
-  resetPassword: {
-    title: "重置密码",
-    emailLabel: "邮箱",
-    resetButton: "重置",
-    checkYourEmailToReset: "请查看您的电子邮件以重置您的密码",
-    checkYourEmail: "请查看您的电子邮件",
-    passwordChangedSuccessfully: "密码已成功更改",
-  },
-  commonValidation: {
-    required: "此字段为必填项",
-    email: "此字段必须是有效的电子邮件地址",
-    passwordConfirm: "密码必须匹配",
-    userMustBeLoggedIn: "用户未登录",
-  },
-  common: {
-    avatarLabel: "头像",
-    userNameLabel: "用户名",
-    fullNameLabel: "全名",
-    avatarUrlLabel: "头像URL",
-    emailLabel: "电子邮件",
-    passwordLabel: "密码",
-    passwordConfirmLabel: "确认密码",
-    submitButton: "提交",
-    address1Label: "地址",
-    address2Label: "地址行2",
-    cityLabel: "城市",
-    stateLabel: "州",
-    zipCodeLabel: "邮政编码",
-    countryLabel: "国家",
-    resetButton: "重置",
-    continueButton: "继续",
-    backButton: "返回",
-    noTranslation: "无翻译",
-    passwordSpecialCharacterValidation: "密码必须包含特殊字符",
-    passwordLengthValidation: "密码长度必须至少为8个字符",
-    passwordUppercaseValidation: "密码必须包含大写字母",
-    passwordLowercaseValidation: "密码必须包含小写字母",
-    passwordNumberValidation: "密码必须包含数字",
-    passwordConfirmationValidation: "密码必须匹配",
-    confirmYourEmail: "确认你的电子邮件",
-    zipCodeValidation: "邮政编码必须是有效的美国邮政编码",
-  },
-  updateProfile: {
-    title: "更新个人资料",
-    description: "更新您的公开个人资料信息",
-    profileUpdatedSuccessfully: "个人资料更新成功",
-  },
-  profileValidation: {
-    usernameLengthValidation: "用户名必须在6到20个字符之间",
-    usernameAlphaNumericValidation: "用户名必须为字母数字",
-    avatarUrlValidation: "头像URL必须是有效的URL",
-    fullNameLengthValidation: "全名必须在6到40个字符之间",
-    avatarFileSizeValidation: "头像文件大小必须小于1MB",
-    avatarFileTypeValidation:
-      "头像文件类型必须是 JPG、JPEG、PNG 或 WEBP 扩展名",
-  },
-  trpcError: {
-    usernameAlreadyExists: "用户名已存在",
-    invalidGeocodingResponse: "地理编码服务无效响应"
-  },
-  dashboard: {
-    title: "仪表板",
-    headingText: "创建或查看您的属性仪表板和指标",
-    createDashboard: "创建仪表板",
-    noDashboardCreated: "未创建仪表板",
-    noDashboardCreatedDescription: "您还没有创建任何仪表板",
-  },
-  dashboardSidenav: {
-    affiliates: "附属机构",
-    settings: "设置",
-    profile: "个人资料",
-    billing: "账单",
-    account: "账户",
-  },
-  settingsPage: {
-    headerDescription: "管理您的账户设置",
-  },
-  profilePage: {
-    headerDescription: "管理您的个人资料设置",
-  },
-  userAccountNav: {
-    dashboard: "仪表板",
-    settings: "设置",
-    billing: "账单",
-    logout: "退出登录",
-  },
-  navbar: {
-    login: "登录",
-    inbox: "收件箱",
-    properties: "房产",
-    automation: "自动化",
-    marketplace: "市场",
-  },
-  languageSelector: {
-    saved: "已保存",
-    changesSaved: "更改已保存",
-    save: "保存",
-  },
-  sidebar: {
-    menu: "菜单",
-    restaurant: "餐厅",
-    QRMenu: "QR菜单",
-    edit: "编辑",
-  },
-  languageToggle: {
-    toggleLanguage: "切换语言",
-  },
-  imageUploadInput: {
-    restore: "恢复",
-  },
-  cropImageModal: {
-    adjustImage: "调整图像",
-    close: "关闭",
-  },
-  colorModeToggle: {
-    toggleTheme: "切换主题",
-    light: "明亮",
-    dark: "深色",
-    system: "系统",
-  },
+  // Landing
   landingPage: {
     backgroundAlt: "首页背景图",
     section1: {
@@ -199,14 +66,173 @@ const messages: Resources["common"] = {
       },
     },
   },
-  // Authenticated pages
+  // Logins
+  login: {
+    title: "登录",
+    emailLabel: "邮箱",
+    passwordLabel: "密码",
+    submitButton: "登录",
+    forgotPasswordButton: "忘记密码？",
+    registerButton: "注册",
+  },
+  register: {
+    title: "注册",
+    submitButton: "注册",
+    loginButton: "登录",
+    checkYourEmailForConfirmation: "请查看您的电子邮件以确认",
+  },
+  resetPassword: {
+    title: "重置密码",
+    emailLabel: "邮箱",
+    resetButton: "重置",
+    checkYourEmailToReset: "请查看您的电子邮件以重置您的密码",
+    checkYourEmail: "请查看您的电子邮件",
+    passwordChangedSuccessfully: "密码已成功更改",
+  },
+
+  // Shared
+  common: {
+    avatarLabel: "头像",
+    userNameLabel: "用户名",
+    fullNameLabel: "全名",
+    avatarUrlLabel: "头像URL",
+    emailLabel: "电子邮件",
+    passwordLabel: "密码",
+    passwordConfirmLabel: "确认密码",
+    submitButton: "提交",
+    address1Label: "地址",
+    address2Label: "地址行2",
+    cityLabel: "城市",
+    stateLabel: "州",
+    zipCodeLabel: "邮政编码",
+    countryLabel: "国家",
+    resetButton: "重置",
+    continueButton: "继续",
+    backButton: "返回",
+    noTranslation: "无翻译",
+    passwordSpecialCharacterValidation: "密码必须包含特殊字符",
+    passwordLengthValidation: "密码长度必须至少为8个字符",
+    passwordUppercaseValidation: "密码必须包含大写字母",
+    passwordLowercaseValidation: "密码必须包含小写字母",
+    passwordNumberValidation: "密码必须包含数字",
+    passwordConfirmationValidation: "密码必须匹配",
+    confirmYourEmail: "确认你的电子邮件",
+    zipCodeValidation: "邮政编码必须是有效的美国邮政编码",
+  },
+  commonValidation: {
+    required: "此字段为必填项",
+    email: "此字段必须是有效的电子邮件地址",
+    passwordConfirm: "密码必须匹配",
+    userMustBeLoggedIn: "用户未登录",
+  },
+
+  // ====== Authenticated Pages ========
+  // Side Nav
+  dashboardSidenav: {
+    affiliates: "附属机构",
+    settings: "设置",
+    profile: "个人资料",
+    billing: "账单",
+    account: "账户",
+  },
+  userAccountNav: {
+    dashboard: "仪表板",
+    settings: "设置",
+    billing: "账单",
+    logout: "退出登录",
+  },
+
+  // Main Nav
+  navbar: {
+    login: "登录",
+    inbox: "收件箱",
+    properties: "房产",
+    automation: "自动化",
+    marketplace: "市场",
+  },
+
+  // Update Profile Page
+  updateProfile: {
+    title: "更新个人资料",
+    description: "更新您的公开个人资料信息",
+    profileUpdatedSuccessfully: "个人资料更新成功",
+  },
+  profileValidation: {
+    usernameLengthValidation: "用户名必须在6到20个字符之间",
+    usernameAlphaNumericValidation: "用户名必须为字母数字",
+    avatarUrlValidation: "头像URL必须是有效的URL",
+    fullNameLengthValidation: "全名必须在6到40个字符之间",
+    avatarFileSizeValidation: "头像文件大小必须小于1MB",
+    avatarFileTypeValidation:
+      "头像文件类型必须是 JPG、JPEG、PNG 或 WEBP 扩展名",
+  },
+  trpcError: {
+    usernameAlreadyExists: "用户名已存在",
+    invalidGeocodingResponse: "地理编码服务无效响应",
+  },
+
+  // Properties Page
+  propertiesPage: {
+    createProperties: "创建属性",
+    enterAddress: "自动填写地址并通过小地图验证。",
+    properties: "属性",
+    propertiesList: "属性列表",
+    propertiesListDescription: "属性列表",
+    propertiesListEmpty: "未找到属性",
+    propertiesListEmptyDescription: "您还没有创建任何属性",
+    propertyDescriptionLengthExceeded: "您已超过属性描述的长度限制40,000",
+  },
   address: {
+    propertyName: "属性名称",
+    propertyDescription: "属性描述",
     addressLine1: "地址",
     addressLine2: "地址行2",
     city: "城市",
     state: "州",
     zip: "邮政编码",
     country: "国家",
+  },
+
+  // Dashboard Page
+  dashboard: {
+    title: "仪表板",
+    headingText: "创建或查看您的属性仪表板和指标",
+    createDashboard: "创建仪表板",
+    noDashboardCreated: "未创建仪表板",
+    noDashboardCreatedDescription: "您还没有创建任何仪表板",
+  },
+  settingsPage: {
+    headerDescription: "管理您的账户设置",
+  },
+  profilePage: {
+    headerDescription: "管理您的个人资料设置",
+  },
+  languageSelector: {
+    saved: "已保存",
+    changesSaved: "更改已保存",
+    save: "保存",
+  },
+  sidebar: {
+    menu: "菜单",
+    restaurant: "餐厅",
+    QRMenu: "QR菜单",
+    edit: "编辑",
+  },
+  languageToggle: {
+    toggleLanguage: "切换语言",
+  },
+  imageUploadInput: {
+    restore: "恢复",
+  },
+  cropImageModal: {
+    adjustImage: "调整图像",
+    close: "关闭",
+  },
+  colorModeToggle: {
+    toggleTheme: "切换主题",
+    light: "明亮",
+    dark: "深色",
+    system: "系统",
   },
   defaultLanguageSelector: {
     changeSavedTitle: "已保存",
@@ -264,9 +290,12 @@ const messages: Resources["common"] = {
     updatedToastDescription: "您的社交媒体链接已成功更新",
   },
   toastCommon: {
-    successTitle: "Success",
-    errorTitle: "Error",
-    errorDescription: "Something went wrong",
+    successTitle: "成功",
+    successDescription: "您的更改已保存",
+    errorTitle: "错误",
+    errorDescription: "出了些问题",
+    errorAddressAutofill: "请自动填写地址",
+    errorMissingAddressFields: "请填写所有地址字段",
   },
   billing: {
     heading: "账单",

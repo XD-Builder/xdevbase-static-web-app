@@ -1,6 +1,5 @@
 "use client";
 import { FormInput } from "@/components/FormInput/FormInput";
-import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { useToast } from "@/components/ui/use-toast";
 import { api } from "@/trpc/react";
@@ -14,50 +13,42 @@ import {
   type AddressFormValues,
 } from "./AddressForm.schema";
 import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
 import { Option } from "@/components/Search/Autocomplete";
 import { AutoComplete } from "@/components/Search/Autocomplete";
 import { MiniMap, MiniMapProps } from "@/components/Map/Minimap";
+import { useStepper } from "@/components/ui/stepper";
+import { StepperFormActions } from "@/components/Stepper/StepperFormActions";
+import { Skeleton } from "@/components/ui/skeleton";
 
-export function AddressForm() {
-  const [autofillValue, setAutofillValue] = useState<Option>();
-  const [minimapProps, setMinimapProps] = useState<MiniMapProps>();
-  // Form related
+export type AddressFormProps = {
+  addressFormValues: AddressFormValues;
+  updateAddressFormValues: (data: AddressFormValues) => void;
+};
+
+export function AddressForm({
+  addressFormValues,
+  updateAddressFormValues,
+}: AddressFormProps) {
+  const { nextStep } = useStepper();
   const { t } = useTranslation();
   const { toast } = useToast();
   const form = useForm<AddressFormValues>({
     resolver: zodResolver(addressValidationSchema(t)),
-    defaultValues: {
-      addressLine1: "",
-      addressLine2: "",
-      city: "",
-      state: "",
-      zip: "",
-      country: "",
-    },
+    defaultValues: addressFormValues,
   });
-
-  const [debouncedValue] = useDebounce(autofillValue, 3000);
-  console.log(
-    "address",
-    autofillValue?.value,
-    "debouncedValue",
-    debouncedValue?.value
-  );
+  const fullAddress = form.watch("fullAddress");
+  const [debounced] = useDebounce(fullAddress, 1000);
 
   const { data } = api.map.geoCode.useQuery(
-    { query: debouncedValue?.value ?? "" },
+    { query: debounced },
     {
-      enabled:
-        debouncedValue &&
-        debouncedValue?.value.length > 6 &&
-        autofillValue?.value == debouncedValue?.value,
+      enabled: debounced.length > 6 && fullAddress === debounced,
       staleTime: 1000 * 60 * 60 * 24,
     }
   );
 
   const options: Option[] =
-    data?.features?.map((feature) => ({
+    data?.features?.map((feature: { properties: { full_address: any; }; }) => ({
       value: feature.properties.full_address,
       label: feature.properties.full_address,
     })) ?? [];
@@ -65,49 +56,62 @@ export function AddressForm() {
   // Move the logic inside useEffect to a separate function
   const updateForm = (value: string) => {
     const matched_feature = data?.features.find(
-      (feature) => feature.properties.full_address === value
+      (feature: { properties: { full_address: string; }; }) => feature.properties.full_address === value
     );
 
     if (matched_feature) {
       const context = matched_feature.properties.context;
+      const geometry = matched_feature.geometry;
 
       const formFieldMapping = {
+        fullAddress: value,
         addressLine1: context.address?.name,
         city: context.neighborhood?.name?.split(" ")[0] || context.place?.name,
         state: context.region?.region_code,
         zip: context.postcode?.name,
         country: context.country?.name,
-      };
-
-      if (matched_feature.geometry) {
-        const [longitude, latitude] = matched_feature.geometry.coordinates;
-        setMinimapProps({
-          longitude,
-          latitude,
-          zoom: 14,
-        });
-        console.log(minimapProps)
-      }
-
+        longitude: geometry?.coordinates[0],
+        latitude: geometry?.coordinates[1],
+      } as AddressFormValues;
       for (const [field, value] of Object.entries(formFieldMapping)) {
         if (value) {
           form.setValue(field as keyof AddressFormValues, value);
         }
       }
+      updateAddressFormValues(formFieldMapping);
     }
   };
 
+  // onSubmit should be triggered if all fields are validated. There is a case
+  // when the user manually types the address without validation. As a result,
+  // there is no geo coordinate associated with the input. We handle this in the
+  // if check.
   const onSubmit = async (data: AddressFormValues) => {
-    console.log("saving the data");
-    const error = { message: "error" };
-    console.log(data);
-
-    if (error) {
+    // missing longitude means the user haven't used autocomplete feature
+    if (!data.longitude) {
+      if (data.addressLine1) {
+        toast({
+          title: t("toastCommon.errorTitle"),
+          description: t("toastCommon.errorAddressAutofill"),
+          variant: "default",
+          duration: 9000,
+        });
+      } else {
+        toast({
+          title: t("toastCommon.errorTitle"),
+          description: t("toastCommon.errorMissingAddressFields"),
+          variant: "default",
+          duration: 9000,
+        });
+      }
+    } else {
+      updateAddressFormValues(data);
+      nextStep();
       toast({
-        title: t("toastCommon.errorTitle"),
-        description: error.message,
-        variant: "destructive",
-        duration: 9000,
+        title: t("toastCommon.successTitle"),
+        description: t("toastCommon.successDescription"),
+        variant: "default",
+        duration: 3000,
       });
     }
   };
@@ -115,9 +119,9 @@ export function AddressForm() {
   return (
     <Form {...form}>
       <form onSubmit={(e) => void form.handleSubmit(onSubmit)(e)}>
-        <div className="mx-auto flex w-full lg:flex-row flex-col flex-1 items-center justify-left gap-4">
-          <div className="flex-grow min-w-[450px] mr-10">
-            <div className="mt-6 mb-10">
+        <div className="mx-auto my-5 flex w-full lg:flex-row flex-col flex-1 items-center justify-center gap-4">
+          <div className="min-w-[450px] m-w-[650px] mr-10">
+            <div className="mb-10">
               <AutoComplete
                 options={options}
                 emptyMessage="No results."
@@ -126,14 +130,13 @@ export function AddressForm() {
                 onValueComplete={(value) => {
                   updateForm(value.value);
                 }}
-                value={autofillValue}
+                value={{ label: fullAddress, value: fullAddress }}
                 onValueChange={(value) => {
-                  setAutofillValue(value);
+                  form.setValue("fullAddress", value.value);
                 }}
                 disabled={false}
               />
             </div>
-
             <FormField
               control={form.control}
               name="addressLine1"
@@ -188,18 +191,19 @@ export function AddressForm() {
                 </FormInput>
               )}
             />
-            <Separator className="my-5" />
           </div>
 
           <div className="w-[500px]">
-            {minimapProps && <MiniMap {...minimapProps} />}
+            {addressFormValues.longitude && addressFormValues.latitude ? (
+              <MiniMap
+                longitude={addressFormValues.longitude}
+                latitude={addressFormValues.latitude}
+                zoom={14}
+              />
+            ): <Skeleton className="h-[500px] w-[500px] animate-none" ><div className="h-full flex flex-col items-center justify-center">Select autofill address to show minimap</div></Skeleton>}
           </div>
         </div>
-
-        <Button loading={form.formState.isSubmitting} type="submit">
-          {t("common.continueButton")}
-        </Button>
-        <div className="mx-auto flex w-full flex-1 items-center justify-left gap-4"></div>
+        <StepperFormActions />
       </form>
     </Form>
   );

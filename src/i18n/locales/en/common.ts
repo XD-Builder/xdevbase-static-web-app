@@ -1,61 +1,5 @@
 const messages = {
-  // Not authenticated page
-  login: {
-    title: "Log in",
-    emailLabel: "Email",
-    passwordLabel: "Password",
-    submitButton: "Log in",
-    forgotPasswordButton: "Forgot your password?",
-    registerButton: "Register",
-  },
-  register: {
-    title: "Register",
-    submitButton: "Register",
-    loginButton: "Log in",
-    checkYourEmailForConfirmation: "Check your email for confirmation",
-  },
-  resetPassword: {
-    title: "Reset Password",
-    emailLabel: "Email",
-    resetButton: "Reset",
-    checkYourEmailToReset: "Check your email to reset your password",
-    checkYourEmail: "Check your email",
-    passwordChangedSuccessfully: "Password changed successfully",
-  },
-  common: {
-    avatarLabel: "Avatar",
-    userNameLabel: "Username",
-    fullNameLabel: "Full Name",
-    avatarUrlLabel: "Avatar URL",
-    emailLabel: "Email",
-    passwordLabel: "Password",
-    passwordConfirmLabel: "Confirm password",
-    submitButton: "Submit",
-    address1Label: "Address",
-    address2Label: "Address Line 2",
-    cityLabel: "City",
-    stateLabel: "State",
-    zipCodeLabel: "Zip Code",
-    countryLabel: "Country",
-    resetButton: "Reset",
-    continueButton: "Continue",
-    backButton: "Back",
-    noTranslation: "No translation",
-    passwordSpecialCharacterValidation: "Password must contain a special character",
-    passwordLengthValidation: "Password must be at least 8 characters long",
-    passwordUppercaseValidation: "Password must contain an uppercase letter",
-    passwordLowercaseValidation: "Password must contain a lowercase letter",
-    passwordNumberValidation: "Password must contain a number",
-    passwordConfirmationValidation: "Passwords must match",
-    confirmYourEmail: "Confirm your email",
-    zipCodeValidation: "Zip code must be a valid US zip code",
-  },
-  commonValidation: {
-    required: "This field is required",
-    email: "This field must be a valid email address",
-    passwordConfirm: "Passwords must match",
-    userMustBeLoggedIn: "User is not logged in."
-  },
+  // Landing
   landingPage: {
     backgroundAlt: "Landing background image",
     section1: {
@@ -118,25 +62,92 @@ const messages = {
     },
   },
 
+  // Logins
+  login: {
+    title: "Log in",
+    emailLabel: "Email",
+    passwordLabel: "Password",
+    submitButton: "Log in",
+    forgotPasswordButton: "Forgot your password?",
+    registerButton: "Register",
+  },
+  register: {
+    title: "Register",
+    submitButton: "Register",
+    loginButton: "Log in",
+    checkYourEmailForConfirmation: "Check your email for confirmation",
+  },
+  resetPassword: {
+    title: "Reset Password",
+    emailLabel: "Email",
+    resetButton: "Reset",
+    checkYourEmailToReset: "Check your email to reset your password",
+    checkYourEmail: "Check your email",
+    passwordChangedSuccessfully: "Password changed successfully",
+  },
+
+  // Shared
+  common: {
+    avatarLabel: "Avatar",
+    userNameLabel: "Username",
+    fullNameLabel: "Full Name",
+    avatarUrlLabel: "Avatar URL",
+    emailLabel: "Email",
+    passwordLabel: "Password",
+    passwordConfirmLabel: "Confirm password",
+    submitButton: "Submit",
+    address1Label: "Address",
+    address2Label: "Address Line 2",
+    cityLabel: "City",
+    stateLabel: "State",
+    zipCodeLabel: "Zip Code",
+    countryLabel: "Country",
+    resetButton: "Reset",
+    continueButton: "Continue",
+    backButton: "Back",
+    noTranslation: "No translation",
+    passwordSpecialCharacterValidation: "Password must contain a special character",
+    passwordLengthValidation: "Password must be at least 8 characters long",
+    passwordUppercaseValidation: "Password must contain an uppercase letter",
+    passwordLowercaseValidation: "Password must contain a lowercase letter",
+    passwordNumberValidation: "Password must contain a number",
+    passwordConfirmationValidation: "Passwords must match",
+    confirmYourEmail: "Confirm your email",
+    zipCodeValidation: "Zip code must be a valid US zip code",
+  },
+  commonValidation: {
+    required: "This field is required",
+    email: "This field must be a valid email address",
+    passwordConfirm: "Passwords must match",
+    userMustBeLoggedIn: "User is not logged in."
+  },
   
-  // Authenticated Page
-  propertiesPage: {
-    createProperties: "Create Properties",
-    enterAddress: "Autofill address and verify via the minimap.",
+  // ====== Authenticated Pages ========
+  // Side Nav
+  dashboardSidenav: {
+    affiliates: "Affiliates",
+    settings: "Settings",
+    profile: "Profile",
+    billing: "Billing",
+    account: "Account"
+  },
+  userAccountNav: {
+    dashboard: "Dashboard",
+    settings: "Settings",
+    billing: "Billing",
+    logout: "Logout",
+  },
+  
+  // Main Nav
+  navbar: {
+    login: "Login",
+    inbox: "Inbox",
     properties: "Properties",
-    propertiesList: "Properties List",
-    propertiesListDescription: "List of properties",
-    propertiesListEmpty: "No properties found",
-    propertiesListEmptyDescription: "You haven't created any properties yet",
+    automation: "Automation",
+    marketplace: "Marketplace",
   },
-  address: {
-    addressLine1: "Address",
-    addressLine2: "Address Line 2",
-    city: "City",
-    state: "State",
-    zip: "Zip",
-    country: "Country",
-  },
+
+  // Update Profile Page
   updateProfile: {
     title: "Update Profile",
     description: "Update your public profile information",
@@ -147,13 +158,39 @@ const messages = {
     usernameAlphaNumericValidation: "Username must be alphanumeric",
     avatarUrlValidation: "Avatar URL must be a valid URL",
     fullNameLengthValidation: "Full name must be between 6 and 40 characters",
-    avatarFileSizeValidation: "Avatar file size must be less than 1MB",
+    avatarFileSizeValidation: "Avatar file size must be less than 5 MB",
     avatarFileTypeValidation: "Avatar file type must be JPG, JPEG, PNG or WEBP extensions",
   },
   trpcError: {
     usernameAlreadyExists: "Username already exists",
     invalidGeocodingResponse: "Invalid response from geocoding service"
   },
+
+  // Properties Page
+  propertiesPage: {
+    createProperties: "Create Properties",
+    enterAddress: "Autofill address and verify via the minimap.",
+    properties: "Properties",
+    propertiesList: "Properties List",
+    propertiesListDescription: "List of properties",
+    propertiesListEmpty: "No properties found",
+    propertiesListEmptyDescription: "You haven't created any properties yet",
+    propertyDescriptionLengthExceeded: "You have exceeded property description length of 40,000",
+  },
+  address: {
+    propertyName: "Property Name",
+    propertyNamePlaceHolder: "A memorable name for your property",
+    propertyDescription: "Property Description",
+    propertyDescriptionPlaceHolder: "A descriptive statement about your property to allow others to view and share.",
+    addressLine1: "Address",
+    addressLine2: "Address Line 2",
+    city: "City",
+    state: "State",
+    zip: "Zip",
+    country: "Country",
+  },
+
+  // Dashboard Page
   dashboard: {
     title: "Dashboard",
     headingText: "Create or view your properties dashboards and metrics",
@@ -161,32 +198,13 @@ const messages = {
     noDashboardCreated: "No Dashboards Created",
     noDashboardCreatedDescription: "You haven't created any dashboard yet",
   },
-  dashboardSidenav: {
-    affiliates: "Affiliates",
-    settings: "Settings",
-    profile: "Profile",
-    billing: "Billing",
-    account: "Account"
-  },
   settingsPage: {
     headerDescription: "Manage your account settings",
   },
   profilePage: {
     headerDescription: "Manage your profile settings",
   },
-  userAccountNav: {
-    dashboard: "Dashboard",
-    settings: "Settings",
-    billing: "Billing",
-    logout: "Logout",
-  },
-  navbar: {
-    login: "Login",
-    inbox: "Inbox",
-    properties: "Properties",
-    automation: "Automation",
-    marketplace: "Marketplace",
-  },
+
   languageSelector: {
     saved: "Saved",
     changesSaved: "Changes have been saved",
@@ -271,8 +289,11 @@ const messages = {
   },
   toastCommon: {
     successTitle: "Success",
+    successDescription: "Your changes have been saved",
     errorTitle: "Error",
     errorDescription: "Something went wrong",
+    errorAddressAutofill: "Please autofill the address",
+    errorMissingAddressFields: "Please fill in all address fields",
   },
   billing: {
     heading: "Billing",
