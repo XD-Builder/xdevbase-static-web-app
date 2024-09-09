@@ -1,8 +1,11 @@
 "use client";
 
+import { AvatarImage } from "@radix-ui/react-avatar";
+import { CircleUser } from "lucide-react";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,9 +15,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { supabase } from "@/server/supabase/supabaseClient";
 import { api } from "@/trpc/react";
-import { CircleUser } from "lucide-react";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { AvatarImage } from "@radix-ui/react-avatar";
 
 export function UserAccountNav() {
   const { data: user } = api.auth.getProfile.useQuery();
@@ -26,9 +26,11 @@ export function UserAccountNav() {
         <div className="flex items-center gap-2">
           {user?.avatarUrl ? (
             <Avatar>
-            <AvatarImage src={user?.avatarUrl} alt="User Avatar" />
-            <AvatarFallback><CircleUser className="h-5 w-5" /></AvatarFallback>
-          </Avatar>
+              <AvatarImage src={user?.avatarUrl} alt="User Avatar" />
+              <AvatarFallback>
+                <CircleUser className="h-5 w-5" />
+              </AvatarFallback>
+            </Avatar>
           ) : (
             <CircleUser className="h-5 w-5" />
           )}

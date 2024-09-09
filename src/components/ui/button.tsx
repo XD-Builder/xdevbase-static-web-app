@@ -1,7 +1,8 @@
+import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
-import { type VariantProps, cva } from "class-variance-authority";
+
+import { Spinner } from "@/components/Loading";
 import { cn } from "@/utils/cn";
-import { Spinner } from "../Loading";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background",
@@ -30,7 +31,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  },
+  }
 );
 
 export interface ButtonProps
@@ -45,7 +46,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         className={cn(
           "relative flex select-none items-center justify-center",
-          buttonVariants({ variant, size, className }),
+          buttonVariants({ variant, size, className })
         )}
         data-loading={loading}
         ref={ref}
@@ -57,7 +58,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {loading ? <span className="opacity-0"> {children}</span> : children}
       </button>
     );
-  },
+  }
 );
 
 Button.displayName = "Button";

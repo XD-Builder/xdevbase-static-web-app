@@ -1,31 +1,31 @@
 "use client";
+import { type ImageProps } from "next/image";
 import { useEffect, useRef, useState } from "react";
 import {
   type FieldPath,
   type FieldValues,
+  useController,
   type UseControllerProps,
   useFormContext,
-  useController,
 } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useFilePicker } from "use-file-picker";
+import { type ImageDimensionRestrictionsConfig } from "use-file-picker/types";
 
-import { type ImageProps } from "next/image";
+import { CropImageModal } from "@/components/CropImageModal/CropImageModal";
+import { Icons } from "@/components/Icons";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
+import { cn } from "@/utils/cn";
 import {
   type FilePickerError,
   getErrorMessagesFromFilePicker,
 } from "@/utils/utils";
-import { type ImageDimensionRestrictionsConfig } from "use-file-picker/types";
-import { cn } from "@/utils/cn";
-import { Button } from "../ui/button";
-import { Icons } from "../Icons";
-import { AspectRatio } from "../ui/aspect-ratio";
-import { CropImageModal } from "../CropImageModal/CropImageModal";
-import { useTranslation } from "react-i18next";
-import { toast } from "../ui/use-toast";
 
 export type ImageUploadProps<
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > = UseControllerProps<TFieldValues, TName> & {
   imageProps?: ImageProps;
   defaultImageUrl?: string;
@@ -41,7 +41,7 @@ export type ImageUploadProps<
 
 export const ImageUploadInput = <
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
   name,
   dimensionsRestrictions,

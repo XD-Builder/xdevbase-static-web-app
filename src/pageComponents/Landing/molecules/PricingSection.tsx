@@ -1,20 +1,21 @@
 "use client";
 
-import React from "react";
-import { useState } from "react";
-import { Icons } from "@/components/Icons";
-import { PricingToggle } from "./PricingToggle";
-import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import { Icons } from "@/components/Icons";
+
+import { PricingToggle } from "./PricingToggle";
 
 /**
  * Defines pricing options for the pricing section.
  * It renders the pricing section using the definitions. The enabled
- * state variable is managed by the pricing toggle component to 
+ * state variable is managed by the pricing toggle component to
  * switch between monthly and yearly pricing, allowing this
  * component to re-render based on the enabled variable.
- * 
- * @returns 
+ *
+ * @returns
  */
 export function PricingSection() {
   const [enabled, setEnabled] = useState(false);
@@ -98,7 +99,9 @@ export function PricingSection() {
             >
               <div className="">
                 <div className="flex flex-col gap-y-2 p-5">
-                  <p className={`text-2xl font-semibold text-[#295D4E] dark:text-[#6bc9a5] dark:opacity-95`}>
+                  <p
+                    className={`text-2xl font-semibold text-[#295D4E] dark:text-[#6bc9a5] dark:opacity-95`}
+                  >
                     {option.name}
                   </p>
                   <p className="text-xs font-medium text-zinc-900 dark:text-primary dark:opacity-85">
@@ -108,7 +111,7 @@ export function PricingSection() {
                     <span className="text-3xl font-[620] text-slate-800 dark:text-primary dark:opacity-95">
                       {enabled ? option.yearlyPrice : option.price}
                       <span className="text-sm font-medium text-zinc-700 dark:text-primary dark:opacity-85">
-                        { index != 2 ? (enabled ? "/year" : "/month") : ""}
+                        {index != 2 ? (enabled ? "/year" : "/month") : ""}
                       </span>
                     </span>
                   </h3>
@@ -124,7 +127,9 @@ export function PricingSection() {
                 {option.features.map((feature, idx) => (
                   <div key={idx} className="flex gap-x-3">
                     <Icons.check className="text-xl text-[#295D4E] dark:text-[#6bc9a5]" />
-                    <p className="text-sm text-zinc-700 dark:text-primary dark:opacity-95">{feature}</p>
+                    <p className="text-sm text-zinc-700 dark:text-primary dark:opacity-95">
+                      {feature}
+                    </p>
                   </div>
                 ))}
                 <Link

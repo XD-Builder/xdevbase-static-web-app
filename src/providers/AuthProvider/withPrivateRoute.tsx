@@ -1,7 +1,7 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+
 import { useUser } from "@/providers/AuthProvider/AuthProvider";
 
 /**
@@ -10,7 +10,7 @@ import { useUser } from "@/providers/AuthProvider/AuthProvider";
  * and the loading is done, then the user is redirected to the login page.
  */
 export const withPrivateRoute = <T extends object>(
-  WrappedComponent: React.FunctionComponent<T>,
+  WrappedComponent: React.FunctionComponent<T>
 ) => {
   const ComponentWithPrivateRoute = (props: T) => {
     const router = useRouter();

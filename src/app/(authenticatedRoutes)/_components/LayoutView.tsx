@@ -1,6 +1,7 @@
 "use client";
 
 import Script from "next/script";
+
 import { Navbar } from "@/components/Navbar/Navbar";
 import { withPrivateRoute } from "@/providers/AuthProvider/withPrivateRoute";
 

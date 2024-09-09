@@ -3,7 +3,7 @@ import { Redis } from "@upstash/redis"; // see below for cloudflare and fastly a
 
 export const mapRatelimiter = new Ratelimit({
   redis: Redis.fromEnv(),
-  limiter: Ratelimit.tokenBucket(10, '24 h', 100),
+  limiter: Ratelimit.tokenBucket(10, "24 h", 100),
   analytics: true,
   /**
    * Optional prefix for the keys used in redis. This is useful if you want to share a redis

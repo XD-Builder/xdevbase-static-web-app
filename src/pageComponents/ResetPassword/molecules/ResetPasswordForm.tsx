@@ -9,8 +9,9 @@ import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
-import { getBaseUrl } from "@/utils/utils";
 import { supabase } from "@/server/supabase/supabaseClient";
+import { getBaseUrl } from "@/utils/utils";
+
 import {
   type RegisterFormValues,
   resetPasswordValidationSchema,

@@ -1,6 +1,7 @@
 import crypto from "crypto";
 import { type listAllSubscriptions } from "lemonsqueezy.ts";
 import { type NextRequest } from "next/server";
+
 import { env } from "@/env.mjs";
 import { supabase } from "@/server/supabase/supabaseClient";
 
@@ -47,15 +48,15 @@ type Payload = {
 export const POST = async (request: NextRequest) => {
   try {
     const text = await request.text();
-    console.log("secret")
+    console.log("secret");
     const hmac = crypto.createHmac(
       "sha256",
-      env.LEMONS_SQUEEZY_SIGNATURE_SECRET,
+      env.LEMONS_SQUEEZY_SIGNATURE_SECRET
     );
     const digest = Buffer.from(hmac.update(text).digest("hex"), "utf8");
     const signature = Buffer.from(
       request.headers.get("x-signature") as string,
-      "utf8",
+      "utf8"
     );
 
     if (!crypto.timingSafeEqual(digest, signature)) {
@@ -89,6 +90,7 @@ export const POST = async (request: NextRequest) => {
       case "subscription_updated":
         // Do something with the subscription here, like syncing to your database
 
+        // eslint-disable-next-line no-case-declarations
         const { error } = await supabase()
           .from("subscriptions")
           .upsert({

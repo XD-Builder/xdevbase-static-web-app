@@ -2,6 +2,7 @@
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
+
 import { env } from "@/env.mjs";
 
 /**

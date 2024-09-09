@@ -1,6 +1,7 @@
 import { useServerTranslation } from "@/i18n";
-import { DashboardHeader } from "../../Dashboard/molecules/Header";
-import { DashboardShell } from "../../Dashboard/molecules/Shell";
+import { DashboardHeader } from "@/pageComponents/Dashboard/molecules/Header";
+import { DashboardShell } from "@/pageComponents/Dashboard/molecules/Shell";
+
 import { ResetPasswordSettingsForm } from "./molecules/ResetPasswordSettingsForm";
 
 export const AccountPage = async () => {

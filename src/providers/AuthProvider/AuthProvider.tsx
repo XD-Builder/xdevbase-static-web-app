@@ -1,15 +1,15 @@
 "use client";
 
+import { type Session, type User } from "@supabase/supabase-js";
 import React, {
-  type ReactNode,
   createContext,
+  type ReactNode,
   useContext,
   useEffect,
   useState,
 } from "react";
 
-import { type Session, type User } from "@supabase/supabase-js";
-import { supabase } from '@/server/supabase/supabaseClient'
+import { supabase } from "@/server/supabase/supabaseClient";
 
 export const AuthContext = createContext<{
   user: User | null;
@@ -44,12 +44,12 @@ const setCookies = (session: Session | null) => {
  * The Auth context provider will then provide those values to all children
  * through useContext(AuthContext) call, which is convenient for wrapped
  * through {@link useUser} hook.
- *  
+ *
  * For more, see https://react.dev/reference/react/useEffect
  * Note: all of the below code are executed on the client side. The sessions are passed
  * in for the first time when the server renders and the auth state changes are listened.
  * This means that if a user is logged, the auth state will change and the listener will
- * execute, leading to a new session, cookie and user being set. 
+ * execute, leading to a new session, cookie and user being set.
  */
 export const AuthProvider = ({
   user: initialUser,
@@ -61,7 +61,7 @@ export const AuthProvider = ({
   children: ReactNode;
 }) => {
   const [userSession, setUserSession] = useState<Session | null>(
-    initialSession,
+    initialSession
   );
   const [user, setUser] = useState<User | null>(initialUser);
   const [isLoading, setIsLoading] = useState(!initialUser);
@@ -69,14 +69,12 @@ export const AuthProvider = ({
   useEffect(() => {
     const client = supabase();
 
-    void client 
-      .auth.getSession()
-      .then(({ data: { session } }) => {
-        setUserSession(session);
-        setUser(session?.user ?? null);
-        setCookies(session);
-        setIsLoading(false);
-      });
+    void client.auth.getSession().then(({ data: { session } }) => {
+      setUserSession(session);
+      setUser(session?.user ?? null);
+      setCookies(session);
+      setIsLoading(false);
+    });
 
     const { data: authListener } = client.auth.onAuthStateChange(
       (_event, session) => {
@@ -84,7 +82,7 @@ export const AuthProvider = ({
         setUser(session?.user ?? null);
         setCookies(session);
         setIsLoading(false);
-      },
+      }
     );
 
     return () => {
@@ -98,11 +96,7 @@ export const AuthProvider = ({
     isLoading,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export const useUser = () => {

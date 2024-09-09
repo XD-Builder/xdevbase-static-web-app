@@ -1,4 +1,8 @@
 "use client";
+import { t } from "i18next";
+import React, { FormEvent, useEffect, useState } from "react";
+import { useDropzone } from "react-dropzone";
+
 import { EmptyPlaceholder } from "@/components/EmptyPlaceholder";
 import { Icons } from "@/components/Icons";
 import { StepperFormActions } from "@/components/Stepper/StepperFormActions";
@@ -6,18 +10,18 @@ import { Button } from "@/components/ui/button";
 import { useStepper } from "@/components/ui/stepper";
 import { useToast } from "@/components/ui/use-toast";
 import { resizeForPropertyImages } from "@/utils/image";
-import { t } from "i18next";
-import React, { FormEvent, useEffect, useState } from "react";
-import { useDropzone } from "react-dropzone";
 
 // Image types
-export type ImageFile = File & { preview: string }
+export type ImageFile = File & { preview: string };
 export type ImageUploadProps = {
   imageFiles: ImageFile[];
   updateImageFiles: (files: ImageFile[]) => void;
-}
+};
 
-export function ImageUpload({imageFiles, updateImageFiles}: ImageUploadProps) {
+export function ImageUpload({
+  imageFiles,
+  updateImageFiles,
+}: ImageUploadProps) {
   const { nextStep } = useStepper();
   const { toast } = useToast();
   const CloseIcon = Icons["close"];
@@ -60,8 +64,10 @@ export function ImageUpload({imageFiles, updateImageFiles}: ImageUploadProps) {
   });
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
-    files.forEach((file) => URL.revokeObjectURL(file.preview))
-    const finalImageFiles = resizedImages.map((file) => Object.assign(file, { preview: URL.createObjectURL(file)}));
+    files.forEach((file) => URL.revokeObjectURL(file.preview));
+    const finalImageFiles = resizedImages.map((file) =>
+      Object.assign(file, { preview: URL.createObjectURL(file) })
+    );
     updateImageFiles(finalImageFiles);
     nextStep();
     toast({

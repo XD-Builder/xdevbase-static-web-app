@@ -6,7 +6,8 @@ const messages = {
       header: "Real Estate Rental & Management",
       headerHighlight: "MarketPlace",
       headerSuffix: "For Everyone",
-      description: "Set up and manage your home, townhouse or apartment for free! Only pay for the services you need.",
+      description:
+        "Set up and manage your home, townhouse or apartment for free! Only pay for the services you need.",
       getStarted: "Get Started",
       learnMore: "Learn More",
       featuredOn: "Featured on",
@@ -18,13 +19,16 @@ const messages = {
       showcaseAlt: "Showcase image",
       featuresTitle: "Our Innovative Solution...",
       businessSuccess: "Your Investment Success!",
-      discoverWhy: "Discover why our platform is perfect for your real estate business.",
+      discoverWhy:
+        "Discover why our platform is perfect for your real estate business.",
       heading1: "Create and automate your",
       heading1Suffix: "property management",
-      heading1Description: "Create properties under our management app, use our automation tools, invite your teams or hire someone from our marketplace to streamline your business.",
+      heading1Description:
+        "Create properties under our management app, use our automation tools, invite your teams or hire someone from our marketplace to streamline your business.",
       heading2: "Track your finance and get paid ",
       heading2Suffix: "on time",
-      heading2Description: "Our payment processing system will facilitate transactions seamless so you can get paid on time. We are working to provide beautifully designed dashboards and invoices for tax purposes.",
+      heading2Description:
+        "Our payment processing system will facilitate transactions seamless so you can get paid on time. We are working to provide beautifully designed dashboards and invoices for tax purposes.",
     },
     pricing: {
       toggle: {
@@ -106,7 +110,8 @@ const messages = {
     continueButton: "Continue",
     backButton: "Back",
     noTranslation: "No translation",
-    passwordSpecialCharacterValidation: "Password must contain a special character",
+    passwordSpecialCharacterValidation:
+      "Password must contain a special character",
     passwordLengthValidation: "Password must be at least 8 characters long",
     passwordUppercaseValidation: "Password must contain an uppercase letter",
     passwordLowercaseValidation: "Password must contain a lowercase letter",
@@ -119,9 +124,9 @@ const messages = {
     required: "This field is required",
     email: "This field must be a valid email address",
     passwordConfirm: "Passwords must match",
-    userMustBeLoggedIn: "User is not logged in."
+    userMustBeLoggedIn: "User is not logged in.",
   },
-  
+
   // ====== Authenticated Pages ========
   // Side Nav
   dashboardSidenav: {
@@ -129,7 +134,7 @@ const messages = {
     settings: "Settings",
     profile: "Profile",
     billing: "Billing",
-    account: "Account"
+    account: "Account",
   },
   userAccountNav: {
     dashboard: "Dashboard",
@@ -137,7 +142,7 @@ const messages = {
     billing: "Billing",
     logout: "Logout",
   },
-  
+
   // Main Nav
   navbar: {
     login: "Login",
@@ -159,11 +164,12 @@ const messages = {
     avatarUrlValidation: "Avatar URL must be a valid URL",
     fullNameLengthValidation: "Full name must be between 6 and 40 characters",
     avatarFileSizeValidation: "Avatar file size must be less than 5 MB",
-    avatarFileTypeValidation: "Avatar file type must be JPG, JPEG, PNG or WEBP extensions",
+    avatarFileTypeValidation:
+      "Avatar file type must be JPG, JPEG, PNG or WEBP extensions",
   },
   trpcError: {
     usernameAlreadyExists: "Username already exists",
-    invalidGeocodingResponse: "Invalid response from geocoding service"
+    invalidGeocodingResponse: "Invalid response from geocoding service",
   },
 
   // Properties Page
@@ -175,13 +181,15 @@ const messages = {
     propertiesListDescription: "List of properties",
     propertiesListEmpty: "No properties found",
     propertiesListEmptyDescription: "You haven't created any properties yet",
-    propertyDescriptionLengthExceeded: "You have exceeded property description length of 40,000",
+    propertyDescriptionLengthExceeded:
+      "You have exceeded property description length of 40,000",
   },
   address: {
     propertyName: "Property Name",
     propertyNamePlaceHolder: "A memorable name for your property",
     propertyDescription: "Property Description",
-    propertyDescriptionPlaceHolder: "A descriptive statement about your property to allow others to view and share.",
+    propertyDescriptionPlaceHolder:
+      "A descriptive statement about your property to allow others to view and share.",
     addressLine1: "Address",
     addressLine2: "Address Line 2",
     city: "City",
@@ -262,19 +270,23 @@ const messages = {
   },
   globalMetadata: {
     title: "XDevBase",
-    description: "Set up your home management system and start managing your home with ease.",
-    keywords: "rental management, real estate, home management, home automation software, home automation solution",
+    description:
+      "Set up your home management system and start managing your home with ease.",
+    keywords:
+      "rental management, real estate, home management, home automation software, home automation solution",
     category: "Restaurant",
     openGraph: {
       title: "XDevBase",
-      description: "Set up your home management system and start managing your home with ease.",
+      description:
+        "Set up your home management system and start managing your home with ease.",
       type: "website",
       siteName: "XDevBase - Set up your home management system",
       locale: "en",
     },
     twitter: {
       title: "XDevBase",
-      description: "Set up your home management system and start managing your home with ease.",
+      description:
+        "Set up your home management system and start managing your home with ease.",
     },
   },
   socialMediaForm: {
@@ -283,9 +295,11 @@ const messages = {
     instagramPlaceholder: "Instagram Link",
     googlePlaceholder: "Google Review Link",
     save: "Save",
-    description: "Add links to your social media to increase the reach of your restaurant.",
+    description:
+      "Add links to your social media to increase the reach of your restaurant.",
     updatedToastTitle: "Social media links updated",
-    updatedToastDescription: "Your social media links have been updated successfully",
+    updatedToastDescription:
+      "Your social media links have been updated successfully",
   },
   toastCommon: {
     successTitle: "Success",
@@ -299,8 +313,10 @@ const messages = {
     heading: "Billing",
     description: "Manage your billing information and subscription plan.",
     cancel: "Cancel",
-    areYouSureYouWantToCancelSubscription: "Are you sure you want to cancel your subscription?",
-    sadToSeeYouGo: "We are sad to see you go :(, if you have any feedback that can help us improve, please write to us at: support@xdevbase.com",
+    areYouSureYouWantToCancelSubscription:
+      "Are you sure you want to cancel your subscription?",
+    sadToSeeYouGo:
+      "We are sad to see you go :(, if you have any feedback that can help us improve, please write to us at: support@xdevbase.com",
     continue: "Continue",
     subscriptionPlan: "Subscription Plan",
     subscriptionDescription: "Allowing customers ",
@@ -311,13 +327,15 @@ const messages = {
     },
     customerPortal: {
       goTo: "Go to your customer portal to manage your subscription.",
-      description: "View payment history, download invoices, and manage subscriptions and payment methods.",
+      description:
+        "View payment history, download invoices, and manage subscriptions and payment methods.",
       title: "Customer portal",
     },
   },
   contactUsCard: {
     title: `Set up your properties or join a property group now.`,
-    subtitle: "We offer a comprehensive solution for streamlined real estate rental management, providing a one-stop shop experience. Additionally, we're developing a marketplace to cater to all your property needs. Our dedicated team is available to assist with any inquiries you may have. Don't hesitate to get in touch with us.",
+    subtitle:
+      "We offer a comprehensive solution for streamlined real estate rental management, providing a one-stop shop experience. Additionally, we're developing a marketplace to cater to all your property needs. Our dedicated team is available to assist with any inquiries you may have. Don't hesitate to get in touch with us.",
     contactUs: "Contact us:",
   },
   affiliates: {
@@ -328,7 +346,8 @@ const messages = {
   notifications: {
     menuNotFound: "Menu not found",
     subscriptionCancelled: "Subscription cancelled",
-    subscriptionCancelledDescription: "Feel free to give us feedback on how can we improve! support@xdevbase.com",
+    subscriptionCancelledDescription:
+      "Feel free to give us feedback on how can we improve! support@xdevbase.com",
     somethingWentWrong: "Something went wrong.",
     tryAgainLater: "Try again later.",
   },

@@ -6,12 +6,13 @@ import resourcesToBackend from "i18next-resources-to-backend";
 import { useRef } from "react";
 import { initReactI18next, useTranslation } from "react-i18next";
 import { z } from "zod";
-import { getOptions, type Language } from "@/i18n/settings";
 import { zodI18nMap } from "zod-i18n-map";
-import zodMessages from "@/i18n/locales/zh-CN/zod";
+
+import messagesEn from "@/i18n/locales/en/common";
 import zodMessagesEn from "@/i18n/locales/en/zod";
 import messages from "@/i18n/locales/zh-CN/common";
-import messagesEn from "@/i18n/locales/en/common";
+import zodMessages from "@/i18n/locales/zh-CN/zod";
+import { getOptions, type Language } from "@/i18n/settings";
 
 export const languageCookieExpirationTimeMs = 1000 * 60 * 60 * 24 * 365;
 
@@ -27,8 +28,8 @@ void i18next
   .use(
     resourcesToBackend(
       (language: string, namespace: string) =>
-        import(`@/i18n/locales/${language}/${namespace}.ts`),
-    ),
+        import(`@/i18n/locales/${language}/${namespace}.ts`)
+    )
   )
   .init({
     ...getOptions(),
@@ -55,7 +56,7 @@ z.setErrorMap(zodI18nMap);
 
 /**
  * I18NextProvider is a provider that initializes the i18next instance with the
- * resources and the language detector. 
+ * resources and the language detector.
  */
 export const I18NextProvider = ({
   children,

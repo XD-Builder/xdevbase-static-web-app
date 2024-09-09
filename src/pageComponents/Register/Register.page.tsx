@@ -1,6 +1,8 @@
 import React from "react";
-import { UserAuthForm } from "./molecules/UserAuthForm";
+
 import { useServerTranslation } from "@/i18n";
+
+import { UserAuthForm } from "./molecules/UserAuthForm";
 
 export const Register = async () => {
   const { t } = await useServerTranslation();

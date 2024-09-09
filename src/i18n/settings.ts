@@ -9,13 +9,13 @@ export type Language = (typeof languages)[number];
  * Get the i18next options.
  * If no params are passed, it will use the default language and namespace.
  * The default language is "en" and the default namespace is "common".
- * 
+ *
  * @param lng language to use
  * @param ns namespace to use
  */
 export function getOptions(
   lng: Language = fallbackLng,
-  ns: Namespace = defaultNamespace,
+  ns: Namespace = defaultNamespace
 ) {
   return {
     supportedLngs: languages,

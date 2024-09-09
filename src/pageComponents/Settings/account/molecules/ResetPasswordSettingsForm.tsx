@@ -17,7 +17,7 @@ import { supabase } from "@/server/supabase/supabaseClient";
 import { type ZodReturnType } from "@/utils/types";
 
 export const resetPasswordSettingsFormValidationSchema = (
-  translate: TFunction,
+  translate: TFunction
 ) =>
   z
     .object({
@@ -28,7 +28,7 @@ export const resetPasswordSettingsFormValidationSchema = (
         .regex(/[a-z]/, translate("common.passwordLowercaseValidation"))
         .regex(
           /[^A-Za-z0-9]/,
-          translate("common.passwordSpecialCharacterValidation"),
+          translate("common.passwordSpecialCharacterValidation")
         ),
       passwordConfirmation: z.string(),
     })

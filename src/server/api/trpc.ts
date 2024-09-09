@@ -1,4 +1,4 @@
-import { TRPCError, initTRPC } from "@trpc/server";
+import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
@@ -8,7 +8,7 @@ import { mapRatelimiter } from "@/utils/rateLimiter";
 
 /**
  * 1. DEFINITION
- * 
+ *
  * This is the actual context you will use in your router. It will be used to process every request
  * that goes through your tRPC endpoint.
  *
@@ -90,31 +90,35 @@ const enforceUserIsAuthed = t.middleware(async ({ ctx, next }) => {
  */
 export const privateProcedure = t.procedure.use(enforceUserIsAuthed);
 
-export const enforceIsAuthedIsRateLimited = t.middleware(async ({ ctx, next }) => {
-  if (!ctx.user) {
-    throw new TRPCError({
-      code: "UNAUTHORIZED",
+export const enforceIsAuthedIsRateLimited = t.middleware(
+  async ({ ctx, next }) => {
+    if (!ctx.user) {
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+      });
+    }
+
+    let key = `${ctx.user.id}-map-request`;
+    const phoneOrEmail = ctx.user.phone || ctx.user.email;
+
+    if (phoneOrEmail) {
+      key = `${key}-${phoneOrEmail}`;
+    }
+    const { success } = await mapRatelimiter.limit(key);
+    if (!success) {
+      throw new TRPCError({
+        code: "TOO_MANY_REQUESTS",
+      });
+    }
+
+    return next({
+      ctx: {
+        user: ctx.user,
+      },
     });
   }
+);
 
-  let key = `${ctx.user.id}-map-request`;
-  const phoneOrEmail = ctx.user.phone || ctx.user.email;
-
-  if (phoneOrEmail) {
-    key = `${key}-${phoneOrEmail}`
-  }
-  const { success } = await mapRatelimiter.limit(key);
-  if (!success) {
-    throw new TRPCError({
-      code: "TOO_MANY_REQUESTS",
-    });
-  }
-
-  return next({
-    ctx: {
-      user: ctx.user,
-    },
-  });
-});
-
-export const privateRateLimitedMapProcedure = privateProcedure.use(enforceIsAuthedIsRateLimited);
+export const privateRateLimitedMapProcedure = privateProcedure.use(
+  enforceIsAuthedIsRateLimited
+);

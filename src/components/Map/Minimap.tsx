@@ -1,7 +1,8 @@
 "use client";
+import "maplibre-gl/dist/maplibre-gl.css";
+
 import * as React from "react";
-import Map, {Marker, ScaleControl} from "react-map-gl/maplibre";
-import 'maplibre-gl/dist/maplibre-gl.css';
+import Map, { Marker, ScaleControl } from "react-map-gl/maplibre";
 
 export type MiniMapProps = {
   longitude: number;

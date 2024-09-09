@@ -6,7 +6,7 @@ import {
 export const uploadUserFiles = async (
   path: string,
   file: Blob,
-  bucket: (typeof storageBucketsNames)[keyof typeof storageBucketsNames] = "user-files",
+  bucket: (typeof storageBucketsNames)[keyof typeof storageBucketsNames] = "user-files"
 ) => {
   const { error, data } = await supabase()
     .storage.from(bucket)
@@ -20,7 +20,7 @@ export const uploadUserFiles = async (
       transform: {
         width: 300,
         height: 300,
-      }
+      },
     });
 
   if (publicUrlError) return { error: publicUrlError };

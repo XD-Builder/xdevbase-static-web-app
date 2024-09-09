@@ -1,7 +1,8 @@
-import { BillingForm } from "./molecules/BillingForm";
-import { DashboardHeader } from "../Dashboard/molecules/Header";
-import { DashboardShell } from "../Dashboard/molecules/Shell";
 import { useServerTranslation } from "@/i18n";
+import { DashboardHeader } from "@/pageComponents/Dashboard/molecules/Header";
+import { DashboardShell } from "@/pageComponents/Dashboard/molecules/Shell";
+
+import { BillingForm } from "./molecules/BillingForm";
 
 export const BillingPage = async () => {
   const { t } = await useServerTranslation();

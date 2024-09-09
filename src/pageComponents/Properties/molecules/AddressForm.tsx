@@ -1,24 +1,25 @@
 "use client";
-import { FormInput } from "@/components/FormInput/FormInput";
-import { Form, FormField } from "@/components/ui/form";
-import { useToast } from "@/components/ui/use-toast";
-import { api } from "@/trpc/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useDebounce } from "use-debounce";
-import {
-  addressValidationSchema,
-  type AddressFormValues,
-} from "./AddressForm.schema";
-import { Input } from "@/components/ui/input";
-import { Option } from "@/components/Search/Autocomplete";
-import { AutoComplete } from "@/components/Search/Autocomplete";
+
+import { FormInput } from "@/components/FormInput/FormInput";
 import { MiniMap, MiniMapProps } from "@/components/Map/Minimap";
-import { useStepper } from "@/components/ui/stepper";
+import { AutoComplete, Option } from "@/components/Search/Autocomplete";
 import { StepperFormActions } from "@/components/Stepper/StepperFormActions";
+import { Form, FormField } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useStepper } from "@/components/ui/stepper";
+import { useToast } from "@/components/ui/use-toast";
+import { api } from "@/trpc/react";
+
+import {
+  type AddressFormValues,
+  addressValidationSchema,
+} from "./AddressForm.schema";
 
 export type AddressFormProps = {
   addressFormValues: AddressFormValues;
@@ -48,7 +49,7 @@ export function AddressForm({
   );
 
   const options: Option[] =
-    data?.features?.map((feature: { properties: { full_address: any; }; }) => ({
+    data?.features?.map((feature: { properties: { full_address: any } }) => ({
       value: feature.properties.full_address,
       label: feature.properties.full_address,
     })) ?? [];
@@ -56,7 +57,8 @@ export function AddressForm({
   // Move the logic inside useEffect to a separate function
   const updateForm = (value: string) => {
     const matched_feature = data?.features.find(
-      (feature: { properties: { full_address: string; }; }) => feature.properties.full_address === value
+      (feature: { properties: { full_address: string } }) =>
+        feature.properties.full_address === value
     );
 
     if (matched_feature) {
@@ -200,7 +202,13 @@ export function AddressForm({
                 latitude={addressFormValues.latitude}
                 zoom={14}
               />
-            ): <Skeleton className="h-[500px] w-[500px] animate-none" ><div className="h-full flex flex-col items-center justify-center">Select autofill address to show minimap</div></Skeleton>}
+            ) : (
+              <Skeleton className="h-[500px] w-[500px] animate-none">
+                <div className="h-full flex flex-col items-center justify-center">
+                  Select autofill address to show minimap
+                </div>
+              </Skeleton>
+            )}
           </div>
         </div>
         <StepperFormActions />

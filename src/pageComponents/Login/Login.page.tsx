@@ -1,12 +1,13 @@
+import { Namespace, TFunction } from "i18next";
 import Link from "next/link";
 import React from "react";
 
-import { UserAuthForm } from "./molecules/UserAuthForm";
-import { useServerTranslation } from "@/i18n";
 import { Separator } from "@/components/ui/separator";
-import { Namespace, TFunction } from "i18next";
+import { useServerTranslation } from "@/i18n";
 
-const ContactUsCard = ({t}: {t: TFunction<Namespace, undefined>}) => {
+import { UserAuthForm } from "./molecules/UserAuthForm";
+
+const ContactUsCard = ({ t }: { t: TFunction<Namespace, undefined> }) => {
   return (
     <div className="max-w-xs rounded-md  p-10 dark:bg-foreground dark:text-black">
       <p className="mb-3 text-lg font-bold">{t("contactUsCard.title")}</p>
@@ -31,7 +32,7 @@ export const Login = async () => {
           <h1 className="text-2xl font-semibold tracking-tight">
             {t("login.title")}
           </h1>
-      </div>
+        </div>
         <UserAuthForm />
         <Separator />
         <div className="flex flex-col items-center justify-center gap-2">
@@ -50,7 +51,7 @@ export const Login = async () => {
           </Link>
         </div>
       </div>
-      <ContactUsCard t={t}/>
+      <ContactUsCard t={t} />
     </div>
   );
 };

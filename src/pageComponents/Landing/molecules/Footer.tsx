@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import Icon from "@/assets/icon.png";
 /**
  * Footer component includes statically rendered footer content.
@@ -33,6 +34,7 @@ export const Footer = () => {
                     href="https://xdevbase.com/about"
                     className="hover:underline"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     What we do
                   </a>
@@ -42,6 +44,7 @@ export const Footer = () => {
                     href="mailto:support@xdevbase.com"
                     className="hover:underline"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     Contact us
                   </a>
@@ -58,6 +61,7 @@ export const Footer = () => {
                     href="https://github.com/XDevBaseVA"
                     className="hover:underline "
                     target="_blank"
+                    rel="noreferrer"
                   >
                     Github
                   </a>
@@ -67,6 +71,7 @@ export const Footer = () => {
                     href="https://discord.gg/zN55Ykdy"
                     className="hover:underline"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     Discord
                   </a>
@@ -83,6 +88,7 @@ export const Footer = () => {
                     href="https://xdevbase.com/privacy-policy"
                     className="hover:underline"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     Privacy Policy
                   </a>
@@ -92,6 +98,7 @@ export const Footer = () => {
                     href="https://xdevbase.com/data-deletion-policy"
                     className="hover:underline"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     Data Deletion Policy
                   </a>
@@ -101,6 +108,7 @@ export const Footer = () => {
                     href="https://tryhards.space/refund-policycy"
                     className="hover:underline"
                     target="_blank"
+                    rel="noreferrer"
                   >
                     Refund Policy
                   </a>
@@ -122,6 +130,7 @@ export const Footer = () => {
               href="https://discord.gg/zN55Ykdy"
               target="_blank"
               className="ms-5 text-gray-500 hover:text-gray-900 dark:hover:text-white"
+              rel="noreferrer"
             >
               <svg
                 className="h-4 w-4"
@@ -138,6 +147,7 @@ export const Footer = () => {
               href="https://twitter.com/xdevbaseva"
               target="_blank"
               className="ms-5 text-gray-500 hover:text-gray-900 dark:hover:text-white"
+              rel="noreferrer"
             >
               <svg
                 className="h-4 w-4"
@@ -158,6 +168,7 @@ export const Footer = () => {
               href="https://github.com/XDevBaseVA"
               target="_blank"
               className="ms-5 text-gray-500 hover:text-gray-900 dark:hover:text-white"
+              rel="noreferrer"
             >
               <svg
                 className="h-4 w-4"

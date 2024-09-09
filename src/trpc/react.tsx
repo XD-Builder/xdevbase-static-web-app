@@ -5,8 +5,9 @@ import { createTRPCReact } from "@trpc/react-query";
 import { useState } from "react";
 
 import { type AppRouter } from "@/server/api/root";
-import { getUrl, transformer } from "./shared";
 import { supabase } from "@/server/supabase/supabaseClient";
+
+import { getUrl, transformer } from "./shared";
 
 /**
  * Create a new TRPC React API used to create clients and provider for
@@ -34,21 +35,24 @@ export const api = createTRPCReact<AppRouter>({
 });
 
 /**
- * Provides query client and trpc client. The wrapped children 
+ * Provides query client and trpc client. The wrapped children
  * will have access to both clients with correct authorization on trpc.
  */
 export function TRPCReactProvider(props: {
   children: React.ReactNode;
   headers: Headers;
 }) {
-  const [queryClient] = useState(() => new QueryClient({
-    defaultOptions: {
-      queries: {
-        /* 24 hours */
-        staleTime: 1000 * 60 * 60 * 24,
-      },
-    },
-  }));
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            /* 24 hours */
+            staleTime: 1000 * 60 * 60 * 24,
+          },
+        },
+      })
+  );
   const [trpcClient] = useState(() =>
     api.createClient({
       transformer,
@@ -72,7 +76,7 @@ export function TRPCReactProvider(props: {
           },
         }),
       ],
-    }),
+    })
   );
 
   return (

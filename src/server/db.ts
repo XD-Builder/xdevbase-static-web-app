@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+
 import { env } from "@/env.mjs";
 
 /**
@@ -12,7 +13,7 @@ const globalForPrisma = globalThis as unknown as {
  * If the globalForPrisma.prisma is set, use it. Otherwise, create a new Prisma client.
  * If the NODE_ENV is development, log the queries, errors and warnings.
  */
-export const db = 
+export const db =
   globalForPrisma.prisma ??
   new PrismaClient({
     log:

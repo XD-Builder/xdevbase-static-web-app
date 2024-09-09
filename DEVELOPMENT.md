@@ -15,7 +15,6 @@ function useServerTranslation(namespace?: Namespace): Promise<{
 }>
 </pre>
 
-
 ## Database
 Supabase provides a web ui and a CLI tool for managing authentication and database. You can get started at https://supabase.com/docs/reference/cli/introduction
 
@@ -53,3 +52,6 @@ The database migration commands start with `supabase migration`. It allows the m
 4. `supabase migration squash` squashes migrations to a single file.
 5. `supabase migration up` applies pending migrations to local database.
 6. `supabase inspect db` helps inspect the database.
+
+### Next Commands
+1. [`next dev`](https://nextjs.org/docs/app/api-reference/cli/next#next-dev-options) command starts the application in development with Hot Module Reloading, error reporting and more. It loads environment variables in the following order: `process.env, .env.development.local, .env.local, .env.development, .env`.

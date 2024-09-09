@@ -1,8 +1,9 @@
+import { TRPCError } from "@trpc/server";
+import { z } from "zod";
+
 import { useServerTranslation } from "@/i18n";
 import { createTRPCRouter, privateProcedure } from "@/server/api/trpc";
 import { asOptionalField } from "@/utils/utils";
-import { TRPCError } from "@trpc/server";
-import { z } from "zod";
 
 export const authRouter = createTRPCRouter({
   getProfile: privateProcedure.query(({ ctx }) => {
@@ -22,7 +23,7 @@ export const authRouter = createTRPCRouter({
     )
     .mutation(async ({ ctx, input }) => {
       const { t } = await useServerTranslation();
-      if (!!input.username) {
+      if (input.username) {
         const existingUsername = await ctx.db.profiles.findUnique({
           where: { username: input.username },
         });

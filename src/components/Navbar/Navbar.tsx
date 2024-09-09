@@ -1,38 +1,40 @@
 "use client";
 
-import React from "react";
-import { UserAccountNav } from "./molecules/UserAccountNav";
-import { MainNav, type NavItem } from "./molecules/MainNav";
-import { cn } from "@/utils/cn";
-import { buttonVariants } from "../ui/button";
 import Link from "next/link";
-import { useUser } from "@/providers/AuthProvider/AuthProvider";
-import { LanguageToggle } from "../LanguageToggle/LanguageToggle";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { TranslatedText } from "../TranslatedText";
+
+import { LanguageToggle } from "@/components/LanguageToggle/LanguageToggle";
+import { TranslatedText } from "@/components/TranslatedText";
+import { buttonVariants } from "@/components/ui/button";
+import { useUser } from "@/providers/AuthProvider/AuthProvider";
+import { cn } from "@/utils/cn";
+
+import { MainNav, type NavItem } from "./molecules/MainNav";
 import { ModeToggle } from "./molecules/ModeToggle";
+import { UserAccountNav } from "./molecules/UserAccountNav";
 
 const navbarItems: NavItem[] = [
   {
     title: <TranslatedText id="navbar.inbox"></TranslatedText>,
     href: "/inbox",
-    icon: "message"
+    icon: "message",
   },
   {
     title: <TranslatedText id="navbar.properties"></TranslatedText>,
     href: "/properties",
-    icon: "home"
+    icon: "home",
   },
   {
     title: <TranslatedText id="navbar.automation"></TranslatedText>,
     href: "/automation",
-    icon: "workflow"
+    icon: "workflow",
   },
   {
     title: <TranslatedText id="navbar.marketplace"></TranslatedText>,
     href: "/marketplace",
-    icon: "store"
-  }
+    icon: "store",
+  },
 ];
 
 /**
@@ -58,7 +60,7 @@ export const Navbar = () => {
               href="/login"
               className={cn(
                 buttonVariants({ variant: "premium", size: "sm" }),
-                "px-4",
+                "px-4"
               )}
             >
               {t("navbar.login")}

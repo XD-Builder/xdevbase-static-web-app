@@ -1,6 +1,6 @@
-import { z } from "zod";
 import * as R from "ramda";
 import { type FileErrors } from "use-file-picker/types";
+import { z } from "zod";
 
 export function asOptionalField<T extends z.ZodTypeAny>(schema: T) {
   return schema.optional().or(z.literal(""));
@@ -24,11 +24,11 @@ export const getErrorMessagesFromFilePicker = (errorObject: FilePickerError) =>
 export type FilePickerError = FileErrors["errors"][number];
 
 export function notEmpty<TValue>(
-  value: TValue | null | undefined,
+  value: TValue | null | undefined
 ): value is TValue {
   return value !== null && value !== undefined;
 }
 
 export const getBaseUrl = () => {
-  return process.env.NEXT_PUBLIC_ROOT_URL; 
+  return process.env.NEXT_PUBLIC_ROOT_URL;
 };

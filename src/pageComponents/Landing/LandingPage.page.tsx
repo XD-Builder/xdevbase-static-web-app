@@ -1,15 +1,17 @@
-import Image from "next/image";
-import { useServerTranslation } from "@/i18n";
-import { Navbar } from "@/components/Navbar/Navbar";
-import { Button } from "@/components/ui/button";
 import { Poppins } from "next/font/google";
+import Image from "next/image";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+
 import heroImage from "@/assets/hero.png";
 import showcase from "@/assets/showcase.png";
-import Link from "next/link";
+import { Navbar } from "@/components/Navbar/Navbar";
+import { Button } from "@/components/ui/button";
+import { useServerTranslation } from "@/i18n";
+import { getServerUser } from "@/utils/auth";
+
 import { Footer } from "./molecules/Footer";
 import { PricingSection } from "./molecules/PricingSection";
-import { redirect } from "next/navigation";
-import { getServerUser } from "@/utils/auth";
 
 const poppins = Poppins({
   weight: ["300", "400", "700"],
@@ -77,6 +79,7 @@ export const LandingPage = async () => {
                 href="https://www.producthunt.com/posts/xdevbase?utm_source=badge-featured&utm_medium=badge&utm_souce=xdevbase"
                 target="_blank"
                 className="group flex w-fit items-center gap-3 rounded-xl bg-landing-text py-3 pl-4 pr-8 text-white hover:bg-black"
+                rel="noreferrer"
               >
                 <span className="rounded-full bg-white px-3 py-1 text-center text-xl font-bold text-landing-text group-hover:text-black">
                   P
@@ -94,6 +97,7 @@ export const LandingPage = async () => {
                 href="https://xdevbase.com/"
                 target="_blank"
                 className="group flex w-fit items-center gap-3 rounded-xl bg-landing-text py-3 pl-4 pr-8 text-white hover:bg-black"
+                rel="noreferrer"
               >
                 <span className="rounded-full bg-white px-3 py-1 text-center text-xl font-bold text-landing-text group-hover:text-black">
                   T

@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { type ZodReturnType } from "@/utils/types";
 
 export const resetPasswordValidationSchema = z.object({

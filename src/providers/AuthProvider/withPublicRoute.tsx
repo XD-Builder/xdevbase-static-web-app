@@ -1,16 +1,15 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
-import { useRouter } from "next/navigation";
-import { useUser } from "@/providers/AuthProvider/AuthProvider";
 import { LoadingScreen } from "@/components/Loading";
+import { useUser } from "@/providers/AuthProvider/AuthProvider";
 
 /**
  * If a user is already logged in, redirect to the home page.
  */
 export const withPublicRoute = <T extends object>(
-  WrappedComponent: React.FunctionComponent<T>,
+  WrappedComponent: React.FunctionComponent<T>
 ) => {
   const ComponentwithPublicRoute = (props: T) => {
     const router = useRouter();

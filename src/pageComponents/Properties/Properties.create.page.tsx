@@ -1,15 +1,17 @@
 "use client";
-import React, { useState } from "react";
-import { AddressForm } from "./molecules/AddressForm";
-import { useTranslation } from "react-i18next";
-import { Step, Stepper, type StepItem } from "@/components/ui/stepper";
 import { Home, MapPinned, Send, SquarePen } from "lucide-react";
-import { PropertyForm } from "./molecules/PropertyForm";
-import { SubmissionForm } from "./molecules/SubmissionForm";
-import { AddressFormValues } from "./molecules/AddressForm.schema";
-import { PropertyFormValues } from "./molecules/PropertyForm.schema";
-import { ImageFile, ImageUpload } from "./molecules/ImageUpload";
 import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import { Step, type StepItem, Stepper } from "@/components/ui/stepper";
+
+import { AddressForm } from "./molecules/AddressForm";
+import { AddressFormValues } from "./molecules/AddressForm.schema";
+import { ImageFile, ImageUpload } from "./molecules/ImageUpload";
+import { PropertyForm } from "./molecules/PropertyForm";
+import { PropertyFormValues } from "./molecules/PropertyForm.schema";
+import { SubmissionForm } from "./molecules/SubmissionForm";
 
 const steps = [
   {

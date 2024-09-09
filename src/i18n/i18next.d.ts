@@ -1,4 +1,5 @@
 import "i18next";
+
 import { type Resources } from "./locales/types";
 
 /**

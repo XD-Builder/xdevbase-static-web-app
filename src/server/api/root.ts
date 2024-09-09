@@ -1,8 +1,9 @@
 import { createTRPCRouter } from "@/server/api/trpc";
+
 import { authRouter } from "./routers/auth";
 import { exampleRouter } from "./routers/example";
-import { paymentsRouter } from "./routers/payments";
 import { mapRouter } from "./routers/map";
+import { paymentsRouter } from "./routers/payments";
 import { propertiesRouter } from "./routers/properties";
 
 /**

@@ -1,35 +1,32 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { cva } from "class-variance-authority"
-import { CheckIcon, Loader2, LucideIcon, X } from "lucide-react"
+import { cva } from "class-variance-authority";
+import { CheckIcon, Loader2, LucideIcon, X } from "lucide-react";
+import * as React from "react";
 
-import { cn } from "@/utils/cn"
-import { Button } from "@/components/ui/button"
-import {
-  Collapsible,
-  CollapsibleContent,
-} from "@/components/ui/collapsible"
+import { Button } from "@/components/ui/button";
+import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
+import { cn } from "@/utils/cn";
 
 // <---------- CONTEXT ---------->
 
 interface StepperContextValue extends StepperProps {
-  clickable?: boolean
-  isError?: boolean
-  isLoading?: boolean
-  isVertical?: boolean
-  stepCount?: number
-  expandVerticalSteps?: boolean
-  activeStep: number
-  initialStep: number
+  clickable?: boolean;
+  isError?: boolean;
+  isLoading?: boolean;
+  isVertical?: boolean;
+  stepCount?: number;
+  expandVerticalSteps?: boolean;
+  activeStep: number;
+  initialStep: number;
 }
 
 const StepperContext = React.createContext<
   StepperContextValue & {
-    nextStep: () => void
-    prevStep: () => void
-    resetSteps: () => void
-    setStep: (step: number) => void
+    nextStep: () => void;
+    prevStep: () => void;
+    resetSteps: () => void;
+    setStep: (step: number) => void;
   }
 >({
   steps: [],
@@ -39,34 +36,34 @@ const StepperContext = React.createContext<
   prevStep: () => {},
   resetSteps: () => {},
   setStep: () => {},
-})
+});
 
 type StepperContextProviderProps = {
-  value: Omit<StepperContextValue, "activeStep">
-  children: React.ReactNode
-}
+  value: Omit<StepperContextValue, "activeStep">;
+  children: React.ReactNode;
+};
 
 const StepperProvider = ({ value, children }: StepperContextProviderProps) => {
-  const isError = value.state === "error"
-  const isLoading = value.state === "loading"
+  const isError = value.state === "error";
+  const isLoading = value.state === "loading";
 
-  const [activeStep, setActiveStep] = React.useState(value.initialStep)
+  const [activeStep, setActiveStep] = React.useState(value.initialStep);
 
   const nextStep = () => {
-    setActiveStep((prev) => prev + 1)
-  }
+    setActiveStep((prev) => prev + 1);
+  };
 
   const prevStep = () => {
-    setActiveStep((prev) => prev - 1)
-  }
+    setActiveStep((prev) => prev - 1);
+  };
 
   const resetSteps = () => {
-    setActiveStep(value.initialStep)
-  }
+    setActiveStep(value.initialStep);
+  };
 
   const setStep = (step: number) => {
-    setActiveStep(step)
-  }
+    setActiveStep(step);
+  };
 
   return (
     <StepperContext.Provider
@@ -83,39 +80,39 @@ const StepperProvider = ({ value, children }: StepperContextProviderProps) => {
     >
       {children}
     </StepperContext.Provider>
-  )
-}
+  );
+};
 
 // <---------- HOOKS ---------->
 
 function usePrevious<T>(value: T): T | undefined {
-  const ref = React.useRef<T>()
+  const ref = React.useRef<T>();
 
   React.useEffect(() => {
-    ref.current = value
-  }, [value])
+    ref.current = value;
+  }, [value]);
 
-  return ref.current
+  return ref.current;
 }
 
 function useStepper() {
-  const context = React.useContext(StepperContext)
+  const context = React.useContext(StepperContext);
 
   if (context === undefined) {
-    throw new Error("useStepper must be used within a StepperProvider")
+    throw new Error("useStepper must be used within a StepperProvider");
   }
 
-  const { children, className, ...rest } = context
+  const { children, className, ...rest } = context;
 
-  const isLastStep = context.activeStep === context.steps.length - 1
-  const hasCompletedAllSteps = context.activeStep === context.steps.length
+  const isLastStep = context.activeStep === context.steps.length - 1;
+  const hasCompletedAllSteps = context.activeStep === context.steps.length;
 
-  const previousActiveStep = usePrevious(context.activeStep)
+  const previousActiveStep = usePrevious(context.activeStep);
 
-  const currentStep = context.steps[context.activeStep]
-  const isOptionalStep = !!currentStep?.optional
+  const currentStep = context.steps[context.activeStep];
+  const isOptionalStep = !!currentStep?.optional;
 
-  const isDisabledStep = context.activeStep === 0
+  const isDisabledStep = context.activeStep === 0;
 
   return {
     ...rest,
@@ -125,88 +122,88 @@ function useStepper() {
     isDisabledStep,
     currentStep,
     previousActiveStep,
-  }
+  };
 }
 
 function useMediaQuery(query: string) {
-  const [value, setValue] = React.useState(false)
+  const [value, setValue] = React.useState(false);
 
   React.useEffect(() => {
     function onChange(event: MediaQueryListEvent) {
-      setValue(event.matches)
+      setValue(event.matches);
     }
 
-    const result = matchMedia(query)
-    result.addEventListener("change", onChange)
-    setValue(result.matches)
+    const result = matchMedia(query);
+    result.addEventListener("change", onChange);
+    setValue(result.matches);
 
-    return () => result.removeEventListener("change", onChange)
-  }, [query])
+    return () => result.removeEventListener("change", onChange);
+  }, [query]);
 
-  return value
+  return value;
 }
 
 // <---------- STEPS ---------->
 
 type StepItem = {
-  id?: string
-  label?: string
-  description?: string
-  icon?: IconType
-  optional?: boolean
-}
+  id?: string;
+  label?: string;
+  description?: string;
+  icon?: IconType;
+  optional?: boolean;
+};
 
 interface StepOptions {
-  orientation?: "vertical" | "horizontal"
-  state?: "loading" | "error"
-  responsive?: boolean
-  checkIcon?: IconType
-  errorIcon?: IconType
-  onClickStep?: (step: number, setStep: (step: number) => void) => void
-  mobileBreakpoint?: string
-  variant?: "circle" | "circle-alt" | "line"
-  expandVerticalSteps?: boolean
-  size?: "sm" | "md" | "lg"
+  orientation?: "vertical" | "horizontal";
+  state?: "loading" | "error";
+  responsive?: boolean;
+  checkIcon?: IconType;
+  errorIcon?: IconType;
+  onClickStep?: (step: number, setStep: (step: number) => void) => void;
+  mobileBreakpoint?: string;
+  variant?: "circle" | "circle-alt" | "line";
+  expandVerticalSteps?: boolean;
+  size?: "sm" | "md" | "lg";
   styles?: {
     /** Styles for the main container */
-    "main-container"?: string
+    "main-container"?: string;
     /** Styles for the horizontal step */
-    "horizontal-step"?: string
+    "horizontal-step"?: string;
     /** Styles for the horizontal step container (button and labels) */
-    "horizontal-step-container"?: string
+    "horizontal-step-container"?: string;
     /** Styles for the vertical step */
-    "vertical-step"?: string
+    "vertical-step"?: string;
     /** Styles for the vertical step container (button and labels) */
-    "vertical-step-container"?: string
+    "vertical-step-container"?: string;
     /** Styles for the vertical step content */
-    "vertical-step-content"?: string
+    "vertical-step-content"?: string;
     /** Styles for the step button container */
-    "step-button-container"?: string
+    "step-button-container"?: string;
     /** Styles for the label and description container */
-    "step-label-container"?: string
+    "step-label-container"?: string;
     /** Styles for the step label */
-    "step-label"?: string
+    "step-label"?: string;
     /** Styles for the step description */
-    "step-description"?: string
-  }
+    "step-description"?: string;
+  };
   variables?: {
-    "--step-icon-size"?: string
-    "--step-gap"?: string
-  }
-  scrollTracking?: boolean
+    "--step-icon-size"?: string;
+    "--step-gap"?: string;
+  };
+  scrollTracking?: boolean;
 }
 interface StepperProps extends StepOptions {
-  children?: React.ReactNode
-  className?: string
-  initialStep: number
-  steps: StepItem[]
+  children?: React.ReactNode;
+  className?: string;
+  initialStep: number;
+  steps: StepItem[];
 }
 
 const VARIABLE_SIZES = {
   sm: "36px",
   md: "40px",
   lg: "44px",
-}
+};
 
 const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
   (props, ref: React.Ref<HTMLDivElement>) => {
@@ -229,35 +226,35 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
       variables,
       scrollTracking = false,
       ...rest
-    } = props
+    } = props;
 
-    const childArr = React.Children.toArray(children)
+    const childArr = React.Children.toArray(children);
 
-    const items = [] as React.ReactElement[]
+    const items = [] as React.ReactElement[];
 
     const footer = childArr.map((child, _index) => {
       if (!React.isValidElement(child)) {
-        throw new Error("Stepper children must be valid React elements.")
+        throw new Error("Stepper children must be valid React elements.");
       }
       if (child.type === Step) {
-        items.push(child)
-        return null
+        items.push(child);
+        return null;
       }
 
-      return child
-    })
+      return child;
+    });
 
-    const stepCount = items.length
+    const stepCount = items.length;
 
     const isMobile = useMediaQuery(
       `(max-width: ${mobileBreakpoint || "768px"})`
-    )
+    );
 
-    const clickable = !!onClickStep
+    const clickable = !!onClickStep;
 
-    const orientation = isMobile && responsive ? "vertical" : orientationProp
+    const orientation = isMobile && responsive ? "vertical" : orientationProp;
 
-    const isVertical = orientation === "vertical"
+    const isVertical = orientation === "vertical";
 
     return (
       <StepperProvider
@@ -308,97 +305,101 @@ const Stepper = React.forwardRef<HTMLDivElement, StepperProps>(
         )}
         {footer}
       </StepperProvider>
-    )
+    );
   }
-)
+);
 
 Stepper.defaultProps = {
   size: "md",
   orientation: "horizontal",
   responsive: true,
-}
+};
 
 const VerticalContent = ({ children }: { children: React.ReactNode }) => {
-  const { activeStep } = useStepper()
+  const { activeStep } = useStepper();
 
-  const childArr = React.Children.toArray(children)
-  const stepCount = childArr.length
+  const childArr = React.Children.toArray(children);
+  const stepCount = childArr.length;
 
   return (
     <>
       {React.Children.map(children, (child, i) => {
         const isCompletedStep =
           (React.isValidElement(child) &&
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (child.props as any).isCompletedStep) ??
-          i < activeStep
-        const isLastStep = i === stepCount - 1
-        const isCurrentStep = i === activeStep
+          i < activeStep;
+        const isLastStep = i === stepCount - 1;
+        const isCurrentStep = i === activeStep;
 
         const stepProps = {
           index: i,
           isCompletedStep,
           isCurrentStep,
           isLastStep,
-        }
+        };
 
         if (React.isValidElement(child)) {
-          return React.cloneElement(child, stepProps)
+          return React.cloneElement(child, stepProps);
         }
-        return null
+        return null;
       })}
     </>
-  )
-}
+  );
+};
 
 const HorizontalContent = ({ children }: { children: React.ReactNode }) => {
-  const { activeStep } = useStepper()
-  const childArr = React.Children.toArray(children)
+  const { activeStep } = useStepper();
+  const childArr = React.Children.toArray(children);
 
   if (activeStep > childArr.length) {
-    return null
+    return null;
   }
 
   return (
     <>
       {React.Children.map(childArr[activeStep], (node) => {
         if (!React.isValidElement(node)) {
-          return null
+          return null;
         }
-        return React.Children.map(node.props.children, (childNode) => childNode)
+        return React.Children.map(
+          node.props.children,
+          (childNode) => childNode
+        );
       })}
     </>
-  )
-}
+  );
+};
 
 // <---------- STEP ---------->
 
 interface StepProps extends React.HTMLAttributes<HTMLLIElement> {
-  label?: string | React.ReactNode
-  description?: string
-  icon?: IconType
-  state?: "loading" | "error"
-  checkIcon?: IconType
-  errorIcon?: IconType
-  isCompletedStep?: boolean
-  isKeepError?: boolean
-  onClickStep?: (step: number, setStep: (step: number) => void) => void
+  label?: string | React.ReactNode;
+  description?: string;
+  icon?: IconType;
+  state?: "loading" | "error";
+  checkIcon?: IconType;
+  errorIcon?: IconType;
+  isCompletedStep?: boolean;
+  isKeepError?: boolean;
+  onClickStep?: (step: number, setStep: (step: number) => void) => void;
 }
 
 interface StepSharedProps extends StepProps {
-  isLastStep?: boolean
-  isCurrentStep?: boolean
-  index?: number
-  hasVisited: boolean | undefined
-  isError?: boolean
-  isLoading?: boolean
+  isLastStep?: boolean;
+  isCurrentStep?: boolean;
+  index?: number;
+  hasVisited: boolean | undefined;
+  isError?: boolean;
+  isLoading?: boolean;
 }
 
 // Props which shouldn't be passed to to the Step component from the user
 interface StepInternalConfig {
-  index: number
-  isCompletedStep?: boolean
-  isCurrentStep?: boolean
-  isLastStep?: boolean
+  index: number;
+  isCompletedStep?: boolean;
+  isCurrentStep?: boolean;
+  isLastStep?: boolean;
 }
 
 interface FullStepProps extends StepProps, StepInternalConfig {}
@@ -419,11 +420,11 @@ const Step = React.forwardRef<HTMLLIElement, StepProps>(
       isKeepError,
       label,
       onClickStep,
-    } = props as FullStepProps
+    } = props as FullStepProps;
 
-    const { isVertical, isError, isLoading, clickable } = useStepper()
+    const { isVertical, isError, isLoading, clickable } = useStepper();
 
-    const hasVisited = isCurrentStep || isCompletedStep
+    const hasVisited = isCurrentStep || isCompletedStep;
 
     const sharedProps = {
       isLastStep,
@@ -442,7 +443,7 @@ const Step = React.forwardRef<HTMLLIElement, StepProps>(
       state,
       errorIcon,
       onClickStep,
-    }
+    };
 
     const renderStep = () => {
       switch (isVertical) {
@@ -451,15 +452,15 @@ const Step = React.forwardRef<HTMLLIElement, StepProps>(
             <VerticalStep ref={ref} {...sharedProps}>
               {children}
             </VerticalStep>
-          )
+          );
         default:
-          return <HorizontalStep ref={ref} {...sharedProps} />
+          return <HorizontalStep ref={ref} {...sharedProps} />;
       }
-    }
+    };
 
-    return renderStep()
+    return renderStep();
   }
-)
+);
 Step.displayName = "Step";
 
 // <---------- HORIZONTAL STEP ---------->
@@ -467,8 +468,8 @@ Step.displayName = "Step";
 // <---------- VERTICAL STEP ---------->
 
 type VerticalStepProps = StepSharedProps & {
-  children?: React.ReactNode
-}
+  children?: React.ReactNode;
+};
 
 const verticalStepVariants = cva(
   [
@@ -492,7 +493,7 @@ const verticalStepVariants = cva(
       },
     },
   }
-)
+);
 
 const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
   (props, ref) => {
@@ -509,7 +510,7 @@ const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
       checkIcon: checkIconProp,
       errorIcon: errorIconProp,
       onClickStep,
-    } = props
+    } = props;
 
     const {
       checkIcon: checkIconContext,
@@ -527,18 +528,18 @@ const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
       setStep,
       isLastStep: isLastStepCurrentStep,
       previousActiveStep,
-    } = useStepper()
+    } = useStepper();
 
-    const opacity = hasVisited ? 1 : 0.8
-    const localIsLoading = isLoading || state === "loading"
-    const localIsError = isError || state === "error"
+    const opacity = hasVisited ? 1 : 0.8;
+    const localIsLoading = isLoading || state === "loading";
+    const localIsError = isError || state === "error";
 
-    const isLastStep = index === steps.length - 1
+    const isLastStep = index === steps.length - 1;
 
     const active =
-      variant === "line" ? isCompletedStep || isCurrentStep : isCompletedStep
-    const checkIcon = checkIconProp || checkIconContext
-    const errorIcon = errorIconProp || errorIconContext
+      variant === "line" ? isCompletedStep || isCurrentStep : isCompletedStep;
+    const checkIcon = checkIconProp || checkIconContext;
+    const errorIcon = errorIconProp || errorIconContext;
 
     const renderChildren = () => {
       if (!expandVerticalSteps) {
@@ -560,7 +561,7 @@ const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
                   node?.scrollIntoView({
                     behavior: "smooth",
                     block: "center",
-                  })
+                  });
                 }
               }}
               className="overflow-hidden data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up"
@@ -568,10 +569,10 @@ const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
               {children}
             </CollapsibleContent>
           </Collapsible>
-        )
+        );
       }
-      return children
-    }
+      return children;
+    };
 
     return (
       <div
@@ -639,9 +640,9 @@ const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
           {renderChildren()}
         </div>
       </div>
-    )
+    );
   }
-)
+);
 
 // <---------- HORIZONTAL STEP ---------->
 
@@ -658,7 +659,7 @@ const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
       styles,
       steps,
       setStep,
-    } = useStepper()
+    } = useStepper();
 
     const {
       index,
@@ -672,18 +673,18 @@ const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
       state,
       checkIcon: checkIconProp,
       errorIcon: errorIconProp,
-    } = props
+    } = props;
 
-    const localIsLoading = isLoading || state === "loading"
-    const localIsError = isError || state === "error"
+    const localIsLoading = isLoading || state === "loading";
+    const localIsError = isError || state === "error";
 
-    const opacity = hasVisited ? 1 : 0.8
+    const opacity = hasVisited ? 1 : 0.8;
 
     const active =
-      variant === "line" ? isCompletedStep || isCurrentStep : isCompletedStep
+      variant === "line" ? isCompletedStep || isCurrentStep : isCompletedStep;
 
-    const checkIcon = checkIconProp || checkIconContext
-    const errorIcon = errorIconProp || errorIconContext
+    const checkIcon = checkIconProp || checkIconContext;
+    const errorIcon = errorIconProp || errorIconContext;
 
     return (
       <div
@@ -745,18 +746,18 @@ const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
           />
         </div>
       </div>
-    )
+    );
   }
-)
+);
 
-VerticalStep.displayName = 'VerticalStep';
-HorizontalStep.displayName = 'HorizontalStep';
+VerticalStep.displayName = "VerticalStep";
+HorizontalStep.displayName = "HorizontalStep";
 
 // <---------- STEP BUTTON CONTAINER ---------->
 
 type StepButtonContainerProps = StepSharedProps & {
-  children?: React.ReactNode
-}
+  children?: React.ReactNode;
+};
 
 const StepButtonContainer = ({
   isCurrentStep,
@@ -771,14 +772,14 @@ const StepButtonContainer = ({
     isLoading: isLoadingContext,
     variant,
     styles,
-  } = useStepper()
+  } = useStepper();
 
-  const currentStepClickable = clickable || !!onClickStep
+  const currentStepClickable = clickable || !!onClickStep;
 
-  const isLoading = isLoadingProp || isLoadingContext
+  const isLoading = isLoadingProp || isLoadingContext;
 
   if (variant === "line") {
-    return null
+    return null;
   }
 
   return (
@@ -805,12 +806,12 @@ const StepButtonContainer = ({
     >
       {children}
     </Button>
-  )
-}
+  );
+};
 
 // <---------- STEP ICON ---------->
 
-type IconType = LucideIcon | React.ComponentType<any> | undefined
+type IconType = LucideIcon | React.ComponentType<any> | undefined;
 
 const iconVariants = cva("", {
   variants: {
@@ -823,23 +824,23 @@ const iconVariants = cva("", {
   defaultVariants: {
     size: "md",
   },
-})
+});
 
 interface StepIconProps {
-  isCompletedStep?: boolean
-  isCurrentStep?: boolean
-  isError?: boolean
-  isLoading?: boolean
-  isKeepError?: boolean
-  icon?: IconType
-  index?: number
-  checkIcon?: IconType
-  errorIcon?: IconType
+  isCompletedStep?: boolean;
+  isCurrentStep?: boolean;
+  isError?: boolean;
+  isLoading?: boolean;
+  isKeepError?: boolean;
+  icon?: IconType;
+  index?: number;
+  checkIcon?: IconType;
+  errorIcon?: IconType;
 }
 
 const StepIcon = React.forwardRef<HTMLDivElement, StepIconProps>(
   (props, ref) => {
-    const { size } = useStepper()
+    const { size } = useStepper();
 
     const {
       isCompletedStep,
@@ -851,22 +852,22 @@ const StepIcon = React.forwardRef<HTMLDivElement, StepIconProps>(
       index,
       checkIcon: CustomCheckIcon,
       errorIcon: CustomErrorIcon,
-    } = props
+    } = props;
 
     const Icon = React.useMemo(
       () => (CustomIcon ? CustomIcon : null),
       [CustomIcon]
-    )
+    );
 
     const ErrorIcon = React.useMemo(
       () => (CustomErrorIcon ? CustomErrorIcon : null),
       [CustomErrorIcon]
-    )
+    );
 
     const Check = React.useMemo(
       () => (CustomCheckIcon ? CustomCheckIcon : CheckIcon),
       [CustomCheckIcon]
-    )
+    );
 
     return React.useMemo(() => {
       if (isCompletedStep) {
@@ -875,13 +876,13 @@ const StepIcon = React.forwardRef<HTMLDivElement, StepIconProps>(
             <div key="icon">
               <X className={cn(iconVariants({ size }))} />
             </div>
-          )
+          );
         }
         return (
           <div key="check-icon">
             <Check className={cn(iconVariants({ size }))} />
           </div>
-        )
+        );
       }
       if (isCurrentStep) {
         if (isError && ErrorIcon) {
@@ -889,19 +890,19 @@ const StepIcon = React.forwardRef<HTMLDivElement, StepIconProps>(
             <div key="error-icon">
               <ErrorIcon className={cn(iconVariants({ size }))} />
             </div>
-          )
+          );
         }
         if (isError) {
           return (
             <div key="icon">
               <X className={cn(iconVariants({ size }))} />
             </div>
-          )
+          );
         }
         if (isLoading) {
           return (
             <Loader2 className={cn(iconVariants({ size }), "animate-spin")} />
-          )
+          );
         }
       }
       if (Icon) {
@@ -909,7 +910,7 @@ const StepIcon = React.forwardRef<HTMLDivElement, StepIconProps>(
           <div key="step-icon">
             <Icon className={cn(iconVariants({ size }))} />
           </div>
-        )
+        );
       }
       return (
         <span
@@ -919,7 +920,7 @@ const StepIcon = React.forwardRef<HTMLDivElement, StepIconProps>(
         >
           {(index || 0) + 1}
         </span>
-      )
+      );
     }, [
       isCompletedStep,
       isCurrentStep,
@@ -932,20 +933,20 @@ const StepIcon = React.forwardRef<HTMLDivElement, StepIconProps>(
       isKeepError,
       ref,
       size,
-    ])
+    ]);
   }
-)
-StepIcon.displayName = "StepIcon"
+);
+StepIcon.displayName = "StepIcon";
 
 // <---------- STEP BUTTON ---------->
 
 // <---------- STEP LABEL ---------->
 
 interface StepLabelProps {
-  isCurrentStep?: boolean
-  opacity: number
-  label?: string | React.ReactNode
-  description?: string | null
+  isCurrentStep?: boolean;
+  opacity: number;
+  label?: string | React.ReactNode;
+  description?: string | null;
 }
 
 const labelVariants = cva("", {
@@ -959,7 +960,7 @@ const labelVariants = cva("", {
   defaultVariants: {
     size: "md",
   },
-})
+});
 
 const descriptionVariants = cva("", {
   variants: {
@@ -972,7 +973,7 @@ const descriptionVariants = cva("", {
   defaultVariants: {
     size: "md",
   },
-})
+});
 
 const StepLabel = ({
   isCurrentStep,
@@ -980,8 +981,8 @@ const StepLabel = ({
   label,
   description,
 }: StepLabelProps) => {
-  const { variant, styles, size, orientation } = useStepper()
-  const shouldRender = !!label || !!description
+  const { variant, styles, size, orientation } = useStepper();
+  const shouldRender = !!label || !!description;
 
   return shouldRender ? (
     <div
@@ -1023,8 +1024,8 @@ const StepLabel = ({
         </span>
       )}
     </div>
-  ) : null
-}
+  ) : null;
+};
 
-export { Stepper, Step, useStepper }
-export type { StepProps, StepperProps, StepItem }
+export { Step, Stepper, useStepper };
+export type { StepItem, StepperProps, StepProps };

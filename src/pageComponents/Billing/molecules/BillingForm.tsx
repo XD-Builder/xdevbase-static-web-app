@@ -1,6 +1,10 @@
 "use client";
 
+import { format } from "date-fns";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
+
+import { Icons } from "@/components/Icons";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,7 +16,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -21,16 +25,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Icons } from "@/components/Icons";
-import { format } from "date-fns";
-import { api } from "@/trpc/react";
-import { useUserSubscription } from "@/shared/hooks/useUserSubscription";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/components/ui/use-toast";
+import { useUserSubscription } from "@/shared/hooks/useUserSubscription";
+import { api } from "@/trpc/react";
 import { cn } from "@/utils/cn";
 import { openLemonSqueezy } from "@/utils/payments";
-import { Skeleton } from "@/components/ui/skeleton";
-import { useTranslation } from "react-i18next";
 
 const CancelButton = () => {
   const { t } = useTranslation();
@@ -98,7 +98,7 @@ export function BillingForm() {
 
   const { toast } = useToast();
   const cancelOrRenewDate = new Date(
-    subscriptionData?.endsAt || subscriptionData?.endsAt || new Date(),
+    subscriptionData?.endsAt || subscriptionData?.endsAt || new Date()
   );
 
   if (isSubscriptionLoading)
@@ -191,7 +191,7 @@ export function BillingForm() {
           <CardContent>{t("billing.customerPortal.description")}</CardContent>
           <CardFooter className="flex flex-col items-start space-y-2 md:flex-row md:justify-between md:space-x-0">
             <div className="flex gap-4">
-              <a href={customerPortalUrl} target="_blank">
+              <a href={customerPortalUrl} target="_blank" rel="noreferrer">
                 <Button className="flex gap-2">
                   {t("billing.customerPortal.title")}
                   <Icons.external size={16} />

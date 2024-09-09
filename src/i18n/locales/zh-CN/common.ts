@@ -1,4 +1,4 @@
-import { type Resources } from "../types";
+import { type Resources } from "@/i18n/locales/types";
 
 const messages: Resources["common"] = {
   // Landing

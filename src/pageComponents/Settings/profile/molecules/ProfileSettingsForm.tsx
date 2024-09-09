@@ -1,16 +1,15 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { isError } from "@tanstack/react-query";
+import { TFunction } from "i18next";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
-import { api } from "@/trpc/react";
 
 import { FormInput } from "@/components/FormInput/FormInput";
+import { ImageUploadInput } from "@/components/ImageUploadInput/ImageUploadInput";
 import { Button } from "@/components/ui/button";
-import { Form, FormField } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
-import { type ZodReturnType } from "@/utils/types";
 import {
   Card,
   CardContent,
@@ -19,14 +18,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { isError } from "@tanstack/react-query";
-import { ImageUploadInput } from "@/components/ImageUploadInput/ImageUploadInput";
-import { IMAGE_FILE_NAMES, SUPPORTED_IMAGE_FORMATS } from "@/utils/constant";
-import { uploadUserFiles } from "@/utils/uploadFile";
-import { assert } from "@/utils/assert";
+import { Form, FormField } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
 import { generateUserImagePath } from "@/server/supabase/storagePath";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { TFunction } from "i18next";
+import { api } from "@/trpc/react";
+import { assert } from "@/utils/assert";
+import { IMAGE_FILE_NAMES, SUPPORTED_IMAGE_FORMATS } from "@/utils/constant";
+import { type ZodReturnType } from "@/utils/types";
+import { uploadUserFiles } from "@/utils/uploadFile";
 
 export const profileSchema = (t: TFunction) =>
   z.object({

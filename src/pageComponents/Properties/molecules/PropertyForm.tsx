@@ -1,19 +1,21 @@
 "use client";
 
-import { StepperFormActions } from "@/components/Stepper/StepperFormActions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+
+import { FormInput } from "@/components/FormInput/FormInput";
+import { StepperFormActions } from "@/components/Stepper/StepperFormActions";
 import { Form, FormField } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useStepper } from "@/components/ui/stepper";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import { Input } from "@/components/ui/input";
-import { FormInput } from "@/components/FormInput/FormInput";
-import { useTranslation } from "react-i18next";
+
 import {
   PropertyFormValues,
   propertyValidationSchema,
 } from "./PropertyForm.schema";
-import { useStepper } from "@/components/ui/stepper";
 
 export type PropertyFormProps = {
   propertyFormValues: PropertyFormValues;
@@ -52,7 +54,8 @@ export function PropertyForm({
               name="propertyName"
               render={({ field }) => (
                 <FormInput label={t("address.propertyName")}>
-                  <Input {...field} 
+                  <Input
+                    {...field}
                     placeholder={t("address.propertyNamePlaceHolder")}
                   />
                 </FormInput>

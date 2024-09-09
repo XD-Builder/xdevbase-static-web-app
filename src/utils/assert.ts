@@ -9,11 +9,11 @@ class ValidationError extends Error {
 }
 const includes = <Collection extends Value, Value>(
   collection: readonly Collection[],
-  value: Value,
+  value: Value
 ): value is Collection => collection.includes(value as Collection);
 
 export function assertPairs<T>(
-  matches: T[] | undefined,
+  matches: T[] | undefined
 ): asserts matches is [T, T] {
   if (!matches || matches.length !== 2) {
     throw new ValidationError(matches, "Invalid matches data");
@@ -29,7 +29,7 @@ export function assert(condition: boolean, message: string): asserts condition {
 export function assertIncluded<Collection extends Value, Value>(
   value: Value,
   collection: readonly Collection[],
-  message: string,
+  message: string
 ): asserts value is Collection {
   if (!includes<Collection, Value>(collection, value)) {
     throw new ValidationError(value, message);

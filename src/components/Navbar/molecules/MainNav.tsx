@@ -1,14 +1,16 @@
 "use client";
 
-import React from "react";
+import { type Route } from "next";
 import Link from "next/link";
 import { usePathname, useSelectedLayoutSegment } from "next/navigation";
-import { cn } from "@/utils/cn";
+import React from "react";
+
 import { Icons } from "@/components/Icons";
-import { MobileNav } from "./MobileNav";
-import { type Route } from "next";
-import { XDevBaseLogo } from "./XDevBaseLogo";
 import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/utils/cn";
+
+import { MobileNav } from "./MobileNav";
+import { XDevBaseLogo } from "./XDevBaseLogo";
 
 export type NavItem = {
   title: string | React.ReactNode;
@@ -41,27 +43,27 @@ export function MainNav({ items, userLoggedIn, children }: MainNavProps) {
         <>
           {items?.length ? (
             <nav className="hidden gap-1 md:flex">
-              {items?.map((item, index) => { 
+              {items?.map((item, index) => {
                 const Icon = Icons[item.icon || "arrowRight"];
                 return (
-                <Link
-                  key={index}
-                  href={item.disabled ? ("#" as Route) : item.href}
-                  className={cn(
-                    buttonVariants({ variant: "ghost", size: "sm" }),
-                    "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-                    item.href.startsWith(`/${segment || ""}`)
-                      ? "text-foreground"
-                      : "text-foreground/60",
-                    item.disabled && "cursor-not-allowed opacity-80",
-                    item.mobileOnly && "md:hidden",
-                    item.href === path ? "bg-accent" : "transparent"
-                  )}
-                >
-                  <Icon className="mr-2 h-4 w-4"/>
-                  {item.title}
-                </Link>
-               );
+                  <Link
+                    key={index}
+                    href={item.disabled ? ("#" as Route) : item.href}
+                    className={cn(
+                      buttonVariants({ variant: "ghost", size: "sm" }),
+                      "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
+                      item.href.startsWith(`/${segment || ""}`)
+                        ? "text-foreground"
+                        : "text-foreground/60",
+                      item.disabled && "cursor-not-allowed opacity-80",
+                      item.mobileOnly && "md:hidden",
+                      item.href === path ? "bg-accent" : "transparent"
+                    )}
+                  >
+                    <Icon className="mr-2 h-4 w-4" />
+                    {item.title}
+                  </Link>
+                );
               })}
             </nav>
           ) : null}

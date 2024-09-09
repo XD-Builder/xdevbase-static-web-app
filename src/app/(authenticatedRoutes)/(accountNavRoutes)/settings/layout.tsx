@@ -18,7 +18,7 @@ const sidebarNavItems = [
     title: <TranslatedText id="dashboardSidenav.billing" />,
     href: "/settings/billing",
     icon: "billing",
-  }
+  },
 ] as const;
 
 function RootLayout({ children }: { children: React.ReactNode }) {

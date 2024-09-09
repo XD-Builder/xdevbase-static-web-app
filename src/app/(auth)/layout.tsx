@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { type PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
+
 import { Icons } from "@/components/Icons";
 import { Navbar } from "@/components/Navbar/Navbar";
 import { Button } from "@/components/ui/button";

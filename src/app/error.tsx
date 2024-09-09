@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
+
 import { Navbar } from "@/components/Navbar/Navbar";
 import { Button } from "@/components/ui/button";
 

@@ -1,6 +1,9 @@
 import Resizer from "react-image-file-resizer";
 
-export const resizeForPropertyImages = (files: File[], setUri: (uri:  File)=> void) => {
+export const resizeForPropertyImages = (
+  files: File[],
+  setUri: (uri: File) => void
+) => {
   files.forEach((file) => {
     Resizer.imageFileResizer(
       file,

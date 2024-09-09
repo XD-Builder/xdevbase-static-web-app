@@ -1,4 +1,7 @@
-import { type Language } from "@/i18n/settings";
+import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
+
+import { Icons } from "@/components/Icons";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -6,9 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Icons } from "@/components/Icons";
-import { useTranslation } from "react-i18next";
-import { useRouter } from "next/navigation";
+import { type Language } from "@/i18n/settings";
 
 type LanguageItem = {
   label: string;

@@ -1,9 +1,10 @@
-import { createTRPCRouter, privateProcedure } from "@/server/api/trpc";
-import { LemonsqueezyClient } from "lemonsqueezy.ts";
-import { env } from "@/env.mjs";
 import { TRPCError } from "@trpc/server";
-import { checkIfSubscribed } from "@/shared/hooks/useUserSubscription";
+import { LemonsqueezyClient } from "lemonsqueezy.ts";
 import { z } from "zod";
+
+import { env } from "@/env.mjs";
+import { createTRPCRouter, privateProcedure } from "@/server/api/trpc";
+import { checkIfSubscribed } from "@/shared/hooks/useUserSubscription";
 
 const client = new LemonsqueezyClient(env.LEMON_SQUEEZY_API_KEY);
 
@@ -13,24 +14,25 @@ const createPremiumCheckoutSchema = z.object({
 
 const dashboardURL = `${env.NEXT_PUBLIC_ROOT_URL}/dashboard`;
 
-const checkoutTranslations: Record<"en" | "zh-CN", LemonsqueezyProductOptions> = {
-  en: {
-    description: "Display your automation Solution to your customers",
-    name: "XDevbase Subscription",
-    receipt_button_text: "Go to subscription",
-    receipt_link_url: dashboardURL,
-    receipt_thank_you_note: "Thank you for your purchase!",
-    redirect_url: dashboardURL,
-  },
-  "zh-CN": {
-    description: "展示您的自动化解决方案给您的客户",
-    name: "XDevbase 订阅",
-    receipt_button_text: "转到订阅",
-    receipt_link_url: dashboardURL,
-    receipt_thank_you_note: "感谢您的购买！",
-    redirect_url: dashboardURL,
-  },
-};
+const checkoutTranslations: Record<"en" | "zh-CN", LemonsqueezyProductOptions> =
+  {
+    en: {
+      description: "Display your automation Solution to your customers",
+      name: "XDevbase Subscription",
+      receipt_button_text: "Go to subscription",
+      receipt_link_url: dashboardURL,
+      receipt_thank_you_note: "Thank you for your purchase!",
+      redirect_url: dashboardURL,
+    },
+    "zh-CN": {
+      description: "展示您的自动化解决方案给您的客户",
+      name: "XDevbase 订阅",
+      receipt_button_text: "转到订阅",
+      receipt_link_url: dashboardURL,
+      receipt_thank_you_note: "感谢您的购买！",
+      redirect_url: dashboardURL,
+    },
+  };
 
 export const paymentsRouter = createTRPCRouter({
   createPremiumCheckout: privateProcedure
@@ -40,8 +42,7 @@ export const paymentsRouter = createTRPCRouter({
       const translations = checkoutTranslations[language];
       const newCheckout = await client.createCheckout({
         checkout_data: {
-          custom: {            
-            // @ts-ignore
+          custom: {
             userId: ctx.user.id,
           },
           name: ctx.user.email || "",
@@ -71,7 +72,6 @@ export const paymentsRouter = createTRPCRouter({
         message: "Subscription not found or not active",
       });
     }
-    // @ts-ignore
     const updateResult = await client.updateSubscription({
       id: subscription.lemonSqueezyId,
       cancelled: true,
@@ -120,7 +120,6 @@ export const paymentsRouter = createTRPCRouter({
       id: subscription.lemonSqueezyId,
     });
 
-    // @ts-ignore
     return subscriptionResult.data.attributes.urls.customer_portal as string;
   }),
 });

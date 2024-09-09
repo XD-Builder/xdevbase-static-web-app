@@ -1,7 +1,10 @@
 import { z } from "zod";
 
-import { createTRPCRouter, privateRateLimitedMapProcedure } from "@/server/api/trpc";
 import { mapboxGeocodingResponseSchema } from "@/components/Map/MapBoxGeoCodingResponse.schema";
+import {
+  createTRPCRouter,
+  privateRateLimitedMapProcedure,
+} from "@/server/api/trpc";
 
 export const mapRouter = createTRPCRouter({
   geoCode: privateRateLimitedMapProcedure

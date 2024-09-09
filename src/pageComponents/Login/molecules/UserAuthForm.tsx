@@ -11,14 +11,15 @@ import { Icons } from "@/components/Icons";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/server/supabase/supabaseClient";
 import { cn } from "@/utils/cn";
+
 import {
   type LoginFormValues,
   loginValidationSchema,
 } from "./UserAuthForm.schema";
-import { Separator } from "@/components/ui/separator";
 
 /**
  * Successful login will be automatically redirected to the dashboard.
@@ -33,7 +34,7 @@ const signInWithOauth = (provider: Provider) => {
 /**
  * Provides a form for user authentication. The form includes email and password fields.
  * It also includes buttons for signing in with Google and GitHub.
- * 
+ *
  * @returns User authentication form with email and password fields.
  */
 export function UserAuthForm() {

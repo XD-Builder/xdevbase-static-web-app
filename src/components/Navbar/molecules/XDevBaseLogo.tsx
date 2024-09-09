@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Icon from "@/assets/icon.png"
+
+import Icon from "@/assets/icon.png";
 
 export const XDevBaseLogo = () => {
   return (

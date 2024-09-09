@@ -1,10 +1,15 @@
 import { useRef, useState } from "react";
-import AvatarEditor from 'react-avatar-editor';
-
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Slider } from "../ui/slider";
-import { Button } from "../ui/button";
+import AvatarEditor from "react-avatar-editor";
 import { useTranslation } from "react-i18next";
+
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Slider } from "@/components/ui/slider";
 
 export interface CropImageModalProps {
   onClose: () => void;

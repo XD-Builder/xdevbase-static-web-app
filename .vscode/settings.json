@@ -1,6 +1,6 @@
 {
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultformatter": "esbenp.prettier-vscode"
   },
   "cSpell.words": [
     "Authed",
@@ -25,9 +25,7 @@
     "UMAMI",
     "xdevbase"
   ],
-  "deno.enablePaths": [
-    "supabase/functions"
-  ],
+  "deno.enablePaths": ["supabase/functions"],
   "deno.lint": true,
   "deno.unstable": true
 }

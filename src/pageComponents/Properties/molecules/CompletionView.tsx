@@ -1,16 +1,15 @@
-import { StepperFormActions } from "@/components/Stepper/StepperFormActions";
-import { useStepper } from "@/components/ui/stepper";
 import { useEffect } from "react";
 
+import { StepperFormActions } from "@/components/Stepper/StepperFormActions";
+import { useStepper } from "@/components/ui/stepper";
+
 export const CompletionView = () => {
-  const {
-    hasCompletedAllSteps,
-  } = useStepper();
+  const { hasCompletedAllSteps } = useStepper();
 
   // if hasCompletedAllSteps, redirect to properties page after 5 seconds
   useEffect(() => {
     if (hasCompletedAllSteps) {
-      // submitting the form to the 
+      // submitting the form to the
       setTimeout(() => {
         window.location.href = "/properties";
       }, 5000);

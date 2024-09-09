@@ -1,11 +1,12 @@
 import { type ReactNode } from "react";
+
 import {
   FormControl,
   FormDescription,
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
+} from "@/components/ui/form";
 
 export type FormInputProps = {
   label?: ReactNode;

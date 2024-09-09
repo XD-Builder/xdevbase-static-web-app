@@ -8,7 +8,6 @@ export const generateUserImagePath = ({
   imageFileName: string;
 }) => `${userId}/images/${imageFileName}`;
 
-
 export const generatePropertiesImagePath = ({
   userId,
   propertyId,
